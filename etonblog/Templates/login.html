@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="col-md-8" id="main">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                    <span>{{ message }}</span>
+                </div>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+        
+        <br>
+        <div class="content-section">
+            <form method="POST" action="">
+                <!-- form.hidden_tag() is another step of password security and encryption -->
+                {{ form.hidden_tag() }}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">Log In</legend>
+                    <div class="form-group">
+                        {{ form.email.label(class="form-control-label") }}
+                        {% if form.email.errors %}
+                            <!-- is-invalid class creates a red border around the textbox -->
+                            {{ form.email(class="form-control form-control-lg is-invalid") }}
+                            <!-- invalid-feedback class makes the error message red instead of black -->
+                            <div class="invalid-feedback">
+                                {% for error in form.email.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.email(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+                    
+                    <div class="form-group">
+                        {{ form.password.label(class="form-control-label") }}
+                        {% if form.password.errors %}
+                            <!-- is-invalid class creates a red border around the textbox -->
+                            {{ form.password(class="form-control form-control-lg is-invalid") }}
+                            <!-- invalid-feedback class makes the error message red instead of black -->
+                            <div class="invalid-feedback">
+                                {% for error in form.password.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.password(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+
+                    <div class="form-check">
+                        {{ form.remember(class="form-check-input") }}
+                        {{ form.remember.label(class="form-check-label") }}
+                    </div>
+                </fieldset>
+
+                <div class="form-group">
+                    {{ form.submit(class="btn btn-outline-info") }}
+                </div>
+
+                <small class="text-muted">
+                    <a href="#">Forgot Password?</a>
+                </small>
+                </form>
+            </div>
+
+            <div class="pt-1">
+                <small class="text-muted">
+                    Need An Account? <a class="ml-2" href="{{ url_for('register') }}">Sign Up Now</a>
+                </small>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block sidebar %}
+    <div class="col-md-4">
+        <div class="google-signin">
+            <div id="my-signin2"></div>
+            <script>
+                function onSuccess(googleUser) {
+                    console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+                }
+                function onFailure(error) {
+                    console.log(error);
+                }
+                function renderButton() {
+                    gapi.signin2.render('my-signin2', {
+                    'scope': 'profile email',
+                    'width': 240,
+                    'height': 50,
+                    'longtitle': true,
+                    'theme': 'dark',
+                    'onsuccess': onSuccess,
+                    'onfailure': onFailure
+                    });
+                }
+            </script>
+
+            <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+        </div>
+    </div>
+{% endblock sidebar %}

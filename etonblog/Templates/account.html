@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="col-md-8" id="main">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">
+          <span>{{ message }}</span>
+        </div>
+      {% endfor %}
+    {% endif %}
+    {% endwith %}
+      
+    <br>
+    <div class="content-section">
+    <div class="media">
+      <!-- image_file is where the user's profile picture is stored, in the project directory (defined in "routes.py") -->
+      <img class="rounded-circle account-img" src="{{ image_file }}">
+      <div class="media-body">
+      <h2 class="account-heading">{{ current_user.username }}</h2>
+      <p class="text-secondary">{{ current_user.email }}</p>
+      </div>
+    </div>
+
+    <!-- very Similar to "register.html" file -->
+    <!-- the enctype attribute specifies how the form-data should be encoded when submitting it to the server -->
+    <form method="POST" action="" enctype="multipart/form-data">
+      {{ form.hidden_tag() }}
+      <!-- update profile picture fieldset -->
+      <fieldset class="form-group">
+        <div class="form-group">
+          {{ form.picture.label() }}
+          {{ form.picture(class="form-control-file") }}
+          
+          {% if form.picture.errors %}
+            {% for error in form.picture.errors %}
+              <span class="text-danger">{{ error }}</span>
+              <br>
+            {% endfor %}
+          {% endif %}
+        </div>
+        
+        <div class="form-group">
+          <!-- "btn-outline-info" class is a button with a light blue outline -->
+          {{ form.submit(class="btn btn-outline-info") }}
+        </div>
+      </fieldset>
+      <br>
+
+      <fieldset class="form-group">
+        <legend class="border-bottom mb-4">Update Profile</legend>
+        <div class="form-group">
+          {{ form.username.label(class="form-control-label") }}
+
+          {% if form.username.errors %}
+            <!-- is-invalid class creates a red border around the textbox -->
+            {{ form.username(class="form-control form-control-lg is-invalid") }}
+            <!-- invalid-feedback class makes the error message red instead of black -->
+            <div class="invalid-feedback">
+                {% for error in form.username.errors %}
+                    <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+          {% else %}
+            {{ form.username(class="form-control form-control-lg") }}
+          {% endif %}
+        </div>
+
+        <div class="form-group">
+          {{ form.email.label(class="form-control-label") }}
+          {% if form.email.errors %}
+            <!-- is-invalid class creates a red border around the textbox -->
+            {{ form.email(class="form-control form-control-lg is-invalid") }}
+            <!-- invalid-feedback class makes the error message red instead of black -->
+            <div class="invalid-feedback">
+              {% for error in form.email.errors %}
+                <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+          {% else %}
+            {{ form.email(class="form-control form-control-lg") }}
+          {% endif %}
+        </div>
+      </fieldset>
+
+      <div class="form-group">
+        <!-- "btn-outline-info" class is a button with a light blue outline -->
+        {{ form.submit(class="btn btn-outline-info") }}
+      </div>
+    </form>
+    </div>
+  </div>
+{% endblock content %}
+
+{% block sidebar %}
+  <div class="col-md-4" id="sidebar">
+    <br>
+    <div class="content-section sidebar position-fixed">
+    <h3>Latest Info</h3>
+    <p class='text-muted'>
+      <ul class="list-group">
+        <li class="list-group-item list-group-item-light">Updates</li>
+        <li class="list-group-item list-group-item-light">Events</li>
+      </ul>
+    </p>
+    </div>
+  </div>
+{% endblock sidebar %}

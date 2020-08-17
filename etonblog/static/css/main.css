@@ -1,0 +1,153 @@
+@charset "UTF-8";
+
+* {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #fafafa; /* all background colour apart from Navbar, Block Content and Sidebar is #fafafa */
+  color: #333;
+  margin-top: 5rem; /* there is 5rem of spacing between Navbar and Block Content */
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #444;
+}
+
+.navbar-dark {
+  background-color: #5f788a; /* the background colour of the Navbar is #5f788a */
+}
+
+.page-header .navbar-nav .nav-link.active {
+  font-weight: 500;
+}
+
+/* this styles the user profile picture on the Navbar */
+.navbar-account-img {
+  width: 42px;
+  height: 42px;
+}
+
+/* physically adjusting the position of the logout button to make it look good */
+.spacing {
+  margin-top: 7px;
+}
+
+.content-section {
+  background: #fff; /* the background colour of Block Content and Sidebar is pure white (#fff) */
+  padding: 20px; /* 20 pixels of padding all around the text, in both Block Content and Sidebar */
+  border: 1px solid #ddd; /* 1 pixel of border around the Sidebar */
+  border-radius: 3px;
+  margin-bottom: 20px;
+}
+
+.content-section.sidebar {
+  background: #fff; /* the background colour of Block Content and Sidebar is pure white (#fff) */
+  padding: 20px; /* 20 pixels of padding all around the text, in both Block Content and Sidebar */
+  border: 1px solid #ddd; /* 1 pixel of border around the Sidebar */
+  border-radius: 3px;
+  margin-bottom: 20px;
+  width: 335px;
+}
+
+.article-metadata p {
+  float: right; /* the date posted is displayed on the right side of a post */
+  padding-right: 50px;
+  padding-top: 5px;
+}
+
+a.article-title {
+  color: #444;
+}
+
+a.article-title:hover {
+  text-decoration: none;
+}
+
+.article-content {
+  white-space: pre-line;
+}
+
+.article-img {
+  height: 65px;
+  width: 65px;
+  margin-right: 16px;
+}
+
+.article-metadata {
+  padding-bottom: 1px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid #e3e3e3; /* 1 pixel of border underneath the author of a post */
+}
+
+.article-metadata a:hover {
+  color: #333; /* when hovering mouse over the author of a post, the text turns from blue to #333 */
+  text-decoration: none;
+}
+
+.article-svg {
+  width: 25px;
+  height: 25px;
+  vertical-align: middle;
+}
+
+.account-img {
+  height: 125px;
+  width: 125px;
+  margin-right: 20px;
+  margin-bottom: 16px;
+}
+
+.account-heading {
+  font-size: 2rem;
+  margin-top: 10px;
+}
+
+footer {
+  text-align: center; /* "Copyright © Simba Shi" appears on the bottom center of a page */
+  margin-right: 15px;
+}
+
+#user-info {
+  padding-top: 20px;
+  padding-right: 500px;
+}
+
+#user-info2 {
+  padding-right: 555px;
+  padding-top: 0;
+}
+
+/* styles the information about a user on user's page */
+#border-around {
+  border: 1px solid #e8e8e8;
+  border-radius: 30px;
+  padding: 30px;
+}
+
+@media (max-width: 760px) {
+  #main {
+    width: 100%;
+  }
+
+  #sidebar {
+    display: none;
+  }
+}
+
+.clearfix {
+  overflow: auto;
+}
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.google-signin {
+  float: right;
+}

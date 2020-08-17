@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head lang="en-GB">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1 shrink-to-fit=no">
+
+    <!-- Google API - Sign in with google button -->
+    <meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- A link to my "main.css" file -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+    <!-- A link to font awesome icons -->
+    <script src="https://kit.fontawesome.com/yourcode.js"></script>
+
+    <!-- If given a title in "routes.py" file, then title. Otherwise, just "Etonblog" -->
+    {% if title %}
+      <title>{{ title }} | Etonians</title>
+    {% else %}
+      <title>Etonians</title>
+    {% endif %}
+  </head>
+
+  <body>
+    <!-- The Navbar is used with the page-header Bootstrap class -->
+    <header class="page-header">
+      <!-- Left side of Navbar -->
+      <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+        <div class="container">
+          <a class="navbar-brand mr-4 mb-1" href="{{ url_for('home') }}"><big>Etonians</big></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarToggle">
+            <div class="navbar-nav mr-auto">
+              <!-- Users would see different items on the Navbar, depending on whether or not they have signed in -->
+              {% if current_user.is_authenticated %}
+                <a class="nav-item nav-link" href="{{ url_for('home') }}">Home</a>
+                <a class="nav-item nav-link" href="{{ url_for('about') }}">About Us</a>
+                <a class="nav-item nav-link" href="{{ url_for('donate') }}">Donate</a>
+              {% else %}
+                <a class="nav-item nav-link" href="{{ url_for('home') }}">Home</a>
+                <a class="nav-item nav-link" href="{{ url_for('about') }}">About</a>
+              {% endif %}
+            </div>
+
+            <!-- Right side of Navbar -->
+            <div class="navbar-nav">
+              {% if current_user.is_authenticated %}
+                <a class="nav-item nav-link spacing" href="{{ url_for('create_post') }}">New Post</a>
+                <a class="nav-item nav-link" href="{{ url_for('account') }}"><img src="{{ image_file }}" class="rounded-circle navbar-account-img"></a>
+                <a class="nav-item nav-link spacing" href="{{ url_for('logout') }}">Log Out</a>
+              {% else %}
+                <a class="nav-item nav-link" href="{{ url_for('login') }}">Log In</a>
+                <a class="nav-item nav-link" href="{{ url_for('register') }}">Register</a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Main body of the webpage -->
+    <main role="main" class="container">
+      <div class="row">
+        <!-- Block content would take up 2/3 of the width (col-md-8) - content varies from pages to pages -->
+        {% block content %}
+        {% endblock content %}
+
+        {% block sidebar %}
+        {% endblock sidebar %}
+      </div>
+    </main>
+
+    <!-- Copyright note -->
+    <footer class="border-top pt-1 mt-4 text-muted">
+      <p><small>Copyright © Simba Shi 2020</small></p>
+    </footer>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>
