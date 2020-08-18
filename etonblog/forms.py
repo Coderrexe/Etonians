@@ -66,7 +66,7 @@ class RequestResetForm(FlaskForm):
     submit = SubmitField("Reset Password")
 
     def validate_email(self, email):
-        email = User.query.filter_by(email=form.email.data)
+        email = User.query.filter_by(email=email.data).first()
         if not email:
             raise ValidationError("No user found.")
 

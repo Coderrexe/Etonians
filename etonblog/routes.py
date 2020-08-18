@@ -2,10 +2,11 @@ import secrets # secrets module is used to generate random hexes for user profil
 import os
 from PIL import Image # PIL (Python Imaging Library) resizes user profile picture to make website run faster
 from flask import render_template, url_for, flash, redirect, request, abort
-from etonblog import app, db, bcrypt
+from etonblog import app, db, bcrypt, mail
 from etonblog.forms import RegistrationForm, LoginForm, UpdateAccountForm, PostForm, RequestResetForm, ResetPasswordForm
 from etonblog.models import User, Post
 from flask_login import login_user, current_user, logout_user, login_required
+from flask_mail import Message
 
 
 @app.route("/home")
@@ -27,6 +28,7 @@ def about():
         image_file = url_for("static", filename=f"profile_pictures/{current_user.image_file}")
     else:
         image_file = None # if current user is not logged in, there will be no profile picture displayed
+
     return render_template("about.html", title="About", image_file=image_file)
 
 
@@ -43,12 +45,13 @@ def register():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode("UTF-8")
         user = User(username=form.username.data, email=form.email.data, password=hashed_password)
         db.session.add(user)
-        db.session.commit() # remember to always commit all changes
+        db.session.commit()
         flash(f"Account successfully created! You can now login.", "success")
         login_user(user, remember=form.remember.data)
         # if the user wanted to access a page that was @loginrequired before logging in, they will be redirected to that page
         next_page = request.args.get("next")
         return redirect(next_page) if next_page else redirect(url_for("home")) # otherwise the user will just be redirected to the home page
+
     return render_template("register.html", title="Register", form=form)
 
 
@@ -71,6 +74,7 @@ def login():
             return redirect(next_page) if next_page else redirect(url_for("home"))
         else:
             flash("Login Unsuccessful. Please check username and password.", "danger")
+
     return render_template("login.html", title="Login", form=form)
 
 
@@ -81,6 +85,7 @@ def donate():
         image_file = url_for("static", filename=f"profile_pictures/{current_user.image_file}")
     else:
         image_file = None
+
     return render_template("donate.html", title="Donate", image_file=image_file)
 
 
@@ -88,7 +93,7 @@ def donate():
 @app.route("/logout/")
 @login_required
 def logout():
-    logout_user() # logout_user is a built in function from flask_login module
+    logout_user()
     return redirect(url_for("login"))
 
 
@@ -143,6 +148,7 @@ def create_post():
         db.session.commit()
         flash("New post successfully created!", "success")
         return redirect(url_for("home"))
+
     image_file = url_for("static", filename=f"profile_pictures/{current_user.image_file}")
     return render_template("create_post.html", title="New Post", form=form, image_file=image_file)
 
@@ -164,6 +170,7 @@ def update_post(post_id):
     image_file = url_for("static", filename=f"profile_pictures/{current_user.image_file}")
     if post.author != current_user: # if a user is trying to update someone else's post, then 403 error
         abort(403)
+
     form = PostForm()
     if form.validate_on_submit():
         post.title = form.title.data # updates the old post title and content with new title and content
@@ -201,14 +208,31 @@ def user_page(username):
     return render_template("user_page.html", posts=posts, user=user, image_file=image_file)
 
 
+# this function is called in reset_request route, and sends an email to the user
+def send_reset_email(user):
+    token = user.get_reset_token()
+    msg = Message("Password Reset Request", sender="noreply@etonians.com", recipients=[user.email])
+    msg.body = f"""To reset your password, visit the following link:
+{url_for("reset_token", token=token, _external=True)}
+
+If you did not make this request, then simply ignore this email and no changes will be made.
+"""
+    mail.send(msg)
+
+
 @app.route("/reset_password", methods=["POST", "GET"])
 @app.route("/reset_password/", methods=["POST", "GET"])
 def reset_request():
     if current_user.is_authenticated:
         return redirect(url_for("home"))
+
     form = RequestResetForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()
+        user = User.query.filter_by(email=form.email.data).first() # finds the user with the email
+        send_reset_email(user)
+        flash("An email has been sent to your email, with instructions to reset your password.", "info")
+        return redirect(url_for("login"))
+
     return render_template("reset_request.html", title="Reset Password", form=form)
 
 
@@ -217,9 +241,22 @@ def reset_request():
 def reset_token(token):
     if current_user.is_authenticated:
         return redirect(url_for("home"))
+
     user = User.verify_reset_token(token)
     if not user:
         flash("That is an invalid or expired token", "warning")
         return redirect(url_for("reset_request"))
+
     form = ResetPasswordForm()
+    if form.validate_on_submit():
+        # it is unsafe to store the user password as plain text
+        hashed_password = bcrypt.generate_password_hash(form.password.data).decode("UTF-8")
+        user.password = hashed_password
+        db.session.commit()
+        flash(f"Your password has been updated!", "success")
+        login_user(user)
+        # if the user wanted to access a page that was @loginrequired before logging in, they will be redirected to that page
+        next_page = request.args.get("next")
+        return redirect(next_page) if next_page else redirect(url_for("home")) # otherwise the user will just be redirected to the home page
+
     return render_template("reset_token.html", title="Reset Password", form=form)
