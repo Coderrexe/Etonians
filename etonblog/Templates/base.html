@@ -1,20 +1,19 @@
 <!DOCTYPE html>
 <html>
   <head lang="en-GB">
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1 shrink-to-fit=no">
 
     <!-- Google API - Sign in with google button -->
     <meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
-
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+    <!-- A link to font awesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Google icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <!-- A link to my "main.css" file -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-
-    <!-- A link to font awesome icons -->
-    <script src="https://kit.fontawesome.com/yourcode.js"></script>
 
     <!-- If given a title in "routes.py" file, then title. Otherwise, just "Etonblog" -->
     {% if title %}
@@ -25,43 +24,55 @@
   </head>
 
   <body>
-    <!-- The Navbar is used with the page-header Bootstrap class -->
-    <header class="page-header">
-      <!-- Left side of Navbar -->
-      <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
-        <div class="container">
-          <a class="navbar-brand mr-4 mb-1" href="{{ url_for('home') }}"><big>Etonians</big></a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarToggle">
-            <div class="navbar-nav mr-auto">
-              <!-- Users would see different items on the Navbar, depending on whether or not they have signed in -->
-              {% if current_user.is_authenticated %}
-                <a class="nav-item nav-link" href="{{ url_for('home') }}">Home</a>
-                <a class="nav-item nav-link" href="{{ url_for('about') }}">About Us</a>
-                <a class="nav-item nav-link" href="{{ url_for('donate') }}">Donate</a>
-              {% else %}
-                <a class="nav-item nav-link" href="{{ url_for('home') }}">Home</a>
-                <a class="nav-item nav-link" href="{{ url_for('about') }}">About</a>
-              {% endif %}
-            </div>
+    <!-- Left side of Navbar -->
+    <nav class="navbar navbar-expand-sm navbar-dark fixed-top nav-scroll">
+      <div class="container">
+        <a href="{{ url_for('home') }}" class="navbar-brand custom-logo"><span>Etonians</span></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="fa fa-bars"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            {% if current_user.is_authenticated %}
+              <li class="nav-item nav-underline ml-2">
+                <a class="nav-link" href="{{ url_for('home') }}">Home</a>
+              </li>
+              <li class="nav-item nav-underline ml-2">
+                <a class="nav-link" href="{{ url_for('about') }}">About</a>
+              </li>
+              <li class="nav-item nav-underline ml-2">
+                <a class="nav-link" href="{{ url_for('donate') }}">Donate</a>
+              </li>
+            {% else %}
+              <li class="nav-item nav-underline ml-2">
+                <a class="nav-link" href="{{ url_for('home') }}">Home</a>
+              </li>
+              <li class="nav-item nav-underline ml-2">
+                <a class="nav-link" href="{{ url_for('about') }}">About</a>
+              </li>
+            {% endif %}
+          </ul>
 
-            <!-- Right side of Navbar -->
-            <div class="navbar-nav">
-              {% if current_user.is_authenticated %}
-                <a class="nav-item nav-link spacing" href="{{ url_for('create_post') }}">New Post</a>
-                <a class="nav-item nav-link" href="{{ url_for('account') }}"><img src="{{ image_file }}" class="rounded-circle navbar-account-img"></a>
-                <a class="nav-item nav-link spacing" href="{{ url_for('logout') }}">Log Out</a>
-              {% else %}
-                <a class="nav-item nav-link" href="{{ url_for('login') }}">Log In</a>
-                <a class="nav-item nav-link" href="{{ url_for('register') }}">Register</a>
-              {% endif %}
-            </div>
-          </div>
+          <ul class="navbar-nav ml-auto">
+            {% if current_user.is_authenticated %}
+              <li class="nav-item nav-underline">
+                <a class="nav-link" href="{{ url_for('create_post') }}">New Post</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#"><img class="rounded-circle navbar-account-img" src="{{ url_for('static', filename='profile_pictures/' + current_user.image_file) }}"></a>
+              </li>
+            {% else %}
+              <li class="nav-item nav-underline">
+                <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+              </li>
+              <li class="nav-item nav-underline">
+                <a class="nav-link" href="{{ url_for('register') }}">Register</a>
+              </li>
+            {% endif %}
+          </ul>
         </div>
-      </nav>
-    </header>
+      </div>
+    </nav>
 
     <!-- Main body of the webpage -->
     <main role="main" class="container">
@@ -75,9 +86,24 @@
       </div>
     </main>
 
-    <!-- Copyright note -->
-    <footer class="border-top pt-1 mt-4 text-muted">
-      <p><small>Copyright © Simba Shi 2020</small></p>
+    <footer class="footer text-center">
+      <div class="container">
+        <div class="row">
+          <div class="logo">
+            <span class="navbar-brand custom-logo">Simba Shi</span>
+          </div>
+
+          <div class="social-icon text-center">
+            <a href="https://www.youtube.com/simbashi" target="_blank"><span><i class="fa fa-youtube"></i></span></a>
+            <a href="https://www.instagram.com/shi.simba" target="_blank"><span><i class="fa fa-instagram"></i></span></a>
+            <a href="https://www.twitter.com/simba_shi" target="_blank"><span><i class="fa fa-twitter"></i></span></a>
+          </div>
+
+          <div class="copy">
+            <h6>Copyright © Simba Shi 2020</h6>
+          </div>
+        </div>
+      </div>
     </footer>
 
     <!-- Optional JavaScript -->

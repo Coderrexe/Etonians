@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
 
 /** General CSS for the whole of About Page **/
@@ -54,6 +55,117 @@ span, a {
   display: inline-block; /* inline-block is basically inline, but also supports margin and padding */
 }
 
+/** Navbar CSS **/
+@media screen and (max-width: 575px) {
+  .navbar .container {
+    max-width: 100%;
+  }
+
+  .navbar .custom-logo {
+    margin-left: 20px;
+    padding: 0 10px;
+    font-size: 16px;
+  }
+
+  .nav-scroll .navbar-toggler span {
+    color: #333 !important;
+  }
+
+  .navbar .navbar-collapse {
+    overflow: hidden;
+    background-color: #111;
+    color: #fff !important;
+    text-align: center;
+    padding: 10px 0;
+    margin: 10px 0;
+  }
+
+  .nav-scroll .navbar-collapse {
+    background-color: #fff !important;
+  }
+}
+
+.navbar .custom-logo {
+  background-color: #1957f3;
+  color: #fff;
+  text-align: center;
+  padding: 0 25px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  line-height: 2;
+  transform: skewX(30deg);
+}
+
+.navbar .custom-logo span {
+  transform: skewX(-30deg);
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-size: 14px;
+  transition: all 0.3s;
+}
+
+.navbar-dark .navbar-nav li a::after {
+  content: "";
+  display: block;
+  width: 0;
+  height: 2px;
+  background: #fff;
+  transition: width 0.3s;
+}
+
+.navbar-dark .navbar-nav li a:hover::after {
+  width: 100%;
+  transition: width 0.3s;
+}
+
+.navbar {
+  padding: 15px 0;
+  background: transparent;
+}
+
+.nav-scroll {
+  background-color: #fff;
+  box-shadow: 0 1px 8px 3px rgba(0, 0, 0, 0.05);
+  transition: all 0.4s;
+}
+
+.nav-scroll .navbar-nav li a {
+  display: inline-block;
+  color: #333 !important;
+}
+
+.nav-scroll .navbar-nav li a::after {
+  content: "";
+  display: block;
+  width: 0;
+  height: 2px;
+  background: #333;
+  transition: width 0.3s;
+}
+
+.nav-scroll .navbar-nav li a:hover::after {
+  width: 100%;
+  transition: width 0.3s;
+}
+
+.navbar .navbar-toggler {
+  border: none;
+}
+
+.navbar .navbar-toggler:focus, .navbar .navbar-toggler:active {
+  outline: none;
+  box-shadow: none;
+}
+
+.navbar .navbar-toggler span {
+  color: #fff;
+}
+
 /** CSS for the first stage of About Page **/
 .cover-bg {
   background-position: center;
@@ -91,6 +203,34 @@ span, a {
   font-family: "Roboto", sans-serif;
 }
 
+@media screen and (max-width: 767px) {
+  .banner .caption h4 {
+    font-size: 21px;
+  }
+
+  .banner .caption h2 {
+    font-size: 60px;
+  }
+
+  .banner .caption p {
+    font-size: 21px;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .banner .caption h4 {
+    font-size: 15px;
+  }
+
+  .banner .caption h2 {
+    font-size: 45px;
+  }
+
+  .banner .caption p {
+    font-size: 15px;
+  }
+}
+
 /* social media icons */
 .banner .caption .social-icon a {
   display: inline-block;
@@ -115,12 +255,13 @@ span, a {
 
 /** CSS for the second stage of About Page **/
 .section-padding {
-  padding: 100px 0;
+  padding: 20px 0;
 }
 
 /* title text for the second stage of About Page */
 .section-title {
   position: relative;
+  margin-top: 60px;
   margin-bottom: 40px;
   width: 100%;
 }
@@ -152,6 +293,7 @@ span, a {
 }
 
 .about .part-text h4 {
+  margin-top: 60px;
   font-size: 24px;
 }
 
@@ -169,7 +311,7 @@ span, a {
   box-shadow: inset 0 0 0 0 #fff; /* box-shadow: x-offset y-offset blur effect spread-radius colour */
   letter-spacing: 1px;
   font-size: 14px;
-  transition: 0.8s all;
+  transition: all 0.8s;
 }
 
 .btn:hover { /* changing the x-offset, giving the button a nice "swipe" animation */
@@ -242,15 +384,9 @@ span, a {
   background-color: #1957f3;
   color: #fff;
   text-align: center;
-  text-transform: uppercase;
   padding: 0 25px;
   letter-spacing: 1px;
   line-height: 2;
-  transform: skewX(30deg);
-}
-
-.footer .logo .custom-logo span {
-  transform: skewX(-30deg);
 }
 
 .footer .social-icon {
@@ -266,7 +402,7 @@ span, a {
   border-radius: 50%;
   margin-right: 10px;
   background-color: #252525;
-  transition: 0.5s all;
+  transition: all 0.5s;
 }
 
 .footer .social-icon a:hover {

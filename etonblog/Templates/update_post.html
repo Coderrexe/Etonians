@@ -11,7 +11,6 @@
     {% endif %}
     {% endwith %}
 
-    <br>
     <div class="content-section">
       <form method="POST" action="">
         {{ form.hidden_tag() }}
@@ -29,7 +28,7 @@
                 {% else %}
                     {{ form.title(class="form-control form-control-lg") }}
                 {% endif %}
-            <ul>
+            <ul class="ml-4">
               <li><small class="text-muted">Must include a title.</small></li>
               <li><small class="text-muted">Must be less than 100 characters long.</small></li>
             </ul>
@@ -44,7 +43,7 @@
               {% endfor %}
             {% else %}
               {{ form.content(class="form-control", rows="7", cols="100") }}
-              <ul>
+              <ul class="ml-4">
                 <li><small class="text-muted">This field must not be empty.</small></li>
               </ul>
             {% endif %}
@@ -61,7 +60,6 @@
 
 {% block sidebar %}
   <div class="col-md-4" id="sidebar">
-    <br>
     <div class="content-section sidebar position-fixed">
       <h3>Latest Info</h3>
       <p class='text-muted'>

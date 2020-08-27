@@ -11,7 +11,6 @@
     {% endif %}
     {% endwith %}
     
-    <br>
     <div class="content-section">
       <form method="POST" action="">
         {{ form.hidden_tag() }}
@@ -20,15 +19,15 @@
           <div class="form-group">
             {{ form.title.label(class="form-control-label") }}
             {% if form.title.errors %}
-                {{ form.title(class="form-control form-control-lg is-invalid") }}
-                <div class="invalid-feedback">
-                    {% for error in form.title.errors %}
-                            <span>{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                {% else %}
-                    {{ form.title(class="form-control form-control-lg") }}
-                {% endif %}
+              {{ form.title(class="form-control form-control-lg is-invalid") }}
+              <div class="invalid-feedback">
+                {% for error in form.title.errors %}
+                  <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+            {% else %}
+              {{ form.title(class="form-control form-control-lg") }}
+            {% endif %}
             <ul class="ml-4">
               <li><small class="text-muted">Must include a title.</small></li>
               <li><small class="text-muted">Must be less than 100 characters long.</small></li>
@@ -61,7 +60,6 @@
 
 {% block sidebar %}
   <div class="col-md-4" id="sidebar">
-    <br>
     <div class="content-section sidebar position-fixed">
       <h3>Latest Info</h3>
       <p class='text-muted'>
