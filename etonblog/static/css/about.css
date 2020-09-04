@@ -325,7 +325,7 @@ span, a {
 }
 
 .features .features-box:hover {
-  box-shadow: -1px 3px 10px 0 rgba(0, 0, 0, 0.06)
+  box-shadow: -7px 7px 10px 0 rgba(0, 0, 0, 0.1)
 }
 
 .features .box {

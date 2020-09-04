@@ -1,13 +1,12 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField
-from wtforms.fields.html5 import EmailField # EmailField makes it easier to enter an email address on mobile
+from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from wtforms.fields.html5 import EmailField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from flask_login import current_user
 from etonblog.models import User
 
 
-# registration form and login form
 class RegistrationForm(FlaskForm):
     username = StringField("Username", validators=[DataRequired(), Length(min=2, max=20, message="Must be between 2 and 20 characters long.")])
     email = EmailField("Email", validators=[DataRequired(), Email(message="Email is not valid.")])
@@ -53,12 +52,6 @@ class UpdateAccountForm(FlaskForm):
             email = User.query.filter_by(email=email.data).first()
             if email:
                 raise ValidationError("This email is already associated with another account.")
-
-
-class PostForm(FlaskForm):
-    title = StringField("Title", validators=[DataRequired(), Length(max=100)])
-    content = TextAreaField("Content", validators=[DataRequired()])
-    submit = SubmitField("Post")
 
 
 class RequestResetForm(FlaskForm):

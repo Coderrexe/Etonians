@@ -121,12 +121,12 @@ body {
   color: #fff;
 }
 
-.content-section {
+.post, .content-section {
   background-color: rgb(255, 255, 255); /* the background colour of Block Content and Sidebar is pure white (#fff) */
   padding: 20px; /* 20 pixels of padding all around the text, in both Block Content and Sidebar */
-  border: 1px solid #ddd; /* 1 pixel of border around the Sidebar */
+  border: 1px solid #ddd;
   border-radius: 3px;
-  margin-bottom: 20px;
+  margin-bottom: 35px;
 }
 
 .content-section.sidebar {
@@ -157,12 +157,27 @@ body {
   box-shadow: -1px 3px 10px 0 rgba(0, 0, 0, 0.2);
 }
 
+.article-metadata .dropdown-button {
+  display: inline-block;
+  font-size: 1.5em;
+  vertical-align: middle;
+  padding: 0;
+}
+
+.article-metadata .dropdown-text {
+  display: inline-block;
+  font-size: 1em;
+  vertical-align: middle;
+  margin-top: 5px;
+  padding: 0;
+}
+
 .article-metadata .dropdown .dropdown-btn {
   color: rgb(122, 122, 122);
 }
 
 .article-metadata .dropdown .dropdown-btn::after {
-    content: none;
+  content: none;
 }
 
 .article-metadata .dropdown .dropdown-btn .material-icons {
@@ -178,7 +193,9 @@ a.article-title:hover {
 }
 
 .article-content {
+  margin-top: 33px;
   white-space: pre-line;
+  line-height: 23px;
 }
 
 .article-img {
@@ -202,6 +219,23 @@ a.article-title:hover {
   width: 25px;
   height: 25px;
   vertical-align: middle;
+}
+
+.post .bottom-text {
+  border-top: 1px solid #ddd;
+  margin-top: 25px;
+}
+
+.post .bottom-text .row {
+  padding-top: 15px;
+}
+
+.post .bottom-text .row span {
+  color: rgb(117, 117, 117);
+}
+
+.post .bottom-text .row p {
+  display: inline;
 }
 
 .account-img {
@@ -231,6 +265,29 @@ a.article-title:hover {
   border: 1px solid #e8e8e8;
   border-radius: 30px;
   padding: 30px;
+}
+
+.post-bar {
+  border: 1px solid #ddd;
+  background-color: #fff;
+  margin-bottom: 20px;
+}
+
+.post-bar .container .btn-back {
+  position: absolute;
+  font-size: 35px;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  margin-left: 15px;
+  font-weight: 600;
+}
+
+.post-bar .container .btn-text {
+  margin-left: 30px;
+  margin-top: 17px;
+  font-size: 22px;
+  font-weight: 550;
 }
 
 @media (max-width: 760px) {

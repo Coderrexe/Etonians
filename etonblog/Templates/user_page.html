@@ -29,12 +29,12 @@
               <big><big>{{ post.author.username }}</big></big>
               <p class="text-muted">{{ post.date_posted.strftime("%d/%m/%Y") }}</p>
             </div>
-            <h3><a class="article-title" href="{{ url_for('post', post_id=post.id) }}" title="view this post">{{ post.title }}</a></h3>
+            <h3><a class="article-title" href="{{ url_for('posts.post', post_id=post.id) }}" title="view this post">{{ post.title }}</a></h3>
             <br>
             <p class="article-content">{{ post.content }}</p>
             {% if current_user == post.author %}
               <div>
-                <button type="button" class="btn btn-info btn-sm mt-2"><a href="{{ url_for('update_post', post_id=post.id) }}" style="text-decoration: none; color: #fff">Update</a></button>
+                <button type="button" class="btn btn-info btn-sm mt-2"><a href="{{ url_for('posts.update_post', post_id=post.id) }}" style="text-decoration: none; color: #fff">Update</a></button>
                 <button type="button" class="btn btn-warning btn-sm mt-2" style="text-decoration: none; color: rgb(0, 0, 0)" data-toggle="modal" data-target="#deleteModal">Delete</button>
               </div>
 
@@ -55,7 +55,7 @@
                     
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <form action="{{ url_for('delete_post', post_id=post.id) }}" method="POST">
+                      <form action="{{ url_for('posts.delete_post', post_id=post.id) }}" method="POST">
                         <input class="btn btn-danger" type="submit" value="Delete Post">
                       </form>
                     </div>
@@ -70,9 +70,9 @@
     {% for page_number in posts.iter_pages(left_edge=2, right_edge=2, left_current=2, right_current=3) %}
         {% if page_number %}
           {% if posts.page == page_number %}
-            <a class="btn btn-info mb-2 mt-2" href="{{ url_for('user_page', username=user.username, page=page_number) }}">{{ page_number }}</a>
+            <a class="btn btn-info mb-2 mt-2" href="{{ url_for('users.user_page', username=user.username, page=page_number) }}">{{ page_number }}</a>
           {% else %}
-            <a class="btn btn-outline-info mb-2 mt-2" href="{{ url_for('home', username=user.username, page=page_number) }}">{{ page_number }}</a>
+            <a class="btn btn-outline-info mb-2 mt-2" href="{{ url_for('main.home', username=user.username, page=page_number) }}">{{ page_number }}</a>
           {% endif %}
         {% else %}
           ...
