@@ -7,3 +7,13 @@ $(window).scroll(function() {
         $(".navbar-js").removeClass("nav-scroll");
     }
 });
+
+// const likeBtn = document.getElementById("likes");
+
+// function incrementValue() {
+//     var value = parseInt(likeBtn.value, 10);
+//     value = isNaN(value) ? 0 : value;
+//     value++;
+//     likeBtn.value = value;
+//     document.write(value);
+// }

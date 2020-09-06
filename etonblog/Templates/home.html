@@ -70,11 +70,12 @@
         <div class="bottom-text">
           <div class="row align-items-center">
             <div class="col-6 text-center">
-              <a href="{{ url_for('posts.post', post_id=post.id) }}"><span class="material-icons-outlined">thumb_up</span></a>
+              <button type="button" class="btn"><span class="material-icons-outlined">thumb_up</span></a>
               <p>Like</p>
             </div>
             <div class="col-6 text-center">
               <a href="{{ url_for('posts.post', post_id=post.id) }}"><span class="material-icons-outlined">comment</span></a>
+              <p>Comment</p>
             </div>
           </div>
         </div>

@@ -15,11 +15,11 @@ body {
   margin-top: 5rem; /* there is 5rem of spacing between Navbar and Block Content */
 }
 
-.col-md-8 {
+#main {
   margin-top: 25px;
 }
 
-.col-md-4 {
+#sidebar {
   margin-top: 25px;
 }
 
@@ -138,6 +138,7 @@ body {
   width: 335px;
 }
 
+/** Posts CSS **/
 .article-metadata .post-author {
   font-size: 25px;
 }
@@ -230,14 +231,40 @@ a.article-title:hover {
   padding-top: 15px;
 }
 
-.post .bottom-text .row span {
+.post .bottom-text .row button {
+  padding: 0;
+  border: none;
+  background: none;
+}
+
+.post .bottom-text .row button:focus, .post .bottom-text .row button:active {
+  padding: 0;
+  border: none;
+  background: none;
+  outline: none;
+  box-shadow: none;
+}
+
+.post .bottom-text .row span.material-icons-outlined {
+  display: inline-block;
   color: rgb(117, 117, 117);
+  font-size: 1.5em;
+  vertical-align: middle;
+  margin-bottom: 0;
+  padding: 0;
 }
 
 .post .bottom-text .row p {
-  display: inline;
+  display: inline-block;
+  color: rgb(117, 117, 117);
+  font-size: 1em;
+  vertical-align: middle;
+  margin-left: 5px;
+  margin-bottom: 0;
+  padding: 0;
 }
 
+/** Account page CSS **/
 .account-img {
   height: 125px;
   width: 125px;
@@ -267,6 +294,7 @@ a.article-title:hover {
   padding: 30px;
 }
 
+/** View post bar CSS **/
 .post-bar {
   border: 1px solid #ddd;
   background-color: #fff;
@@ -362,4 +390,97 @@ a.article-title:hover {
   font-weight: 400;
   letter-spacing: 2px;
   margin-bottom: 0;
+}
+
+/** 404 error page CSS **/
+.error-404 {
+  background: linear-gradient(0deg, #fff, #03a9f4);
+}
+
+.error-404 .sky {
+  position: relative;
+  widows: 100%;
+  height: 60vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.error-404 .sky h2 {
+  font-size: 16em;
+  color: #fff;
+}
+
+.error-404 .sky h2 span {
+  display: inline-block;
+  animation: animate 2s ease-in-out infinite;
+}
+
+.error-404 .sky h2 span:nth-child(even) {
+  animation-delay: -1s;
+}
+
+@keyframes animate {
+  0%, 100% {
+    transform: translateY(-50px);
+  }
+
+  50% {
+    transform: translateY(50px);
+  }
+}
+
+.error-404 .sky .grass {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 20px;
+  background: url("../images/grass.png");
+  background-position: bottom;
+  animation: animateGrass 0.2s linear infinite;
+}
+
+@keyframes animateGrass {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: -94px 0;
+  }
+}
+
+.error-404 .sky .plane {
+  position: absolute;
+  bottom: 200px;
+  left: 100px;
+  top: 10px;
+  max-width: 300px;
+  transform: scaleX(-1);
+}
+
+.error-404 .field {
+  padding: 100px;
+  height: 40vh;
+  background: #6e2308;
+  box-shadow: inset 0 20px 10px #51680c;
+  text-align: center;
+}
+
+.error-404 .field h2 {
+  color: #fff;
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+.error-404 .field a {
+  background: #fff;
+  color: #000;
+  width: 160px;
+  height: 50px;
+  line-height: 50px;
+  border-radius: 50px;
+  display: inline-block;
+  text-decoration: none;
+  font-size: 20px;
 }
