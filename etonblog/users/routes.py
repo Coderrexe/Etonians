@@ -121,7 +121,7 @@ def reset_token(token):
 
     user = User.verify_reset_token(token)
     if not user:
-        flash("That is an invalid or expired token", "warning")
+        flash("That is an invalid or expired token.", "warning")
         return redirect(url_for("users.reset_request"))
 
     form = ResetPasswordForm()

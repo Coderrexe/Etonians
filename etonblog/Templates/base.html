@@ -62,7 +62,7 @@
               <a class="nav-link" href="{{ url_for('users.logout') }}">Logout</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#"><img class="rounded-circle navbar-account-img" src="{{ url_for('static', filename='profile_pictures/' + current_user.image_file) }}"></a>
+              <a class="nav-link" href="{{ url_for('users.account') }}"><img class="rounded-circle navbar-account-img" src="{{ url_for('static', filename='profile_pictures/' + current_user.image_file) }}"></a>
             </li>
           {% else %}
             <li class="nav-item nav-underline">

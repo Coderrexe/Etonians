@@ -7,6 +7,8 @@
         "**/__pycache__": true,
         "**/site.db": true,
         "**/venv": true,
+        "**/profile_pictures": false,
+        "**/images/": false
     },
     "python.linting.pylintEnabled": false,
     "editor.showUnused": true
