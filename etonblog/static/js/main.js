@@ -1,19 +1,36 @@
-$(window).scroll(function() {
-    let scroll = $(window).scrollTop();
-
-    if (scroll >= 10) {
-        $(".navbar-js").addClass("nav-scroll");
-    } else {
-        $(".navbar-js").removeClass("nav-scroll");
-    }
+$(document).ready(function() {
+    $("#navbar-toggler").click(function() {
+        $("ul").toggleClass("navbar-show");
+    });
 });
 
-// const likeBtn = document.getElementById("likes");
+const navbar = () => {
+    const navbarToggler = document.getElementById("navbar-toggler");
+    const nav = document.querySelector(".nav-links");
+    const navLinks = document.querySelectorAll(".nav-links li");
+    const main = document.querySelector("main");
 
-// function incrementValue() {
-//     var value = parseInt(likeBtn.value, 10);
-//     value = isNaN(value) ? 0 : value;
-//     value++;
-//     likeBtn.value = value;
-//     document.write(value);
-// }
+    // toggles navbar on mobile devices
+    navbarToggler.addEventListener("click", () => {
+        nav.classList.toggle("nav-toggled");
+        main.classList.toggle("darken");
+
+        // animates navbar links on mobile devices
+        navLinks.forEach((link, index) => {
+            if (link.style.animation) {
+                link.style.animation = ``;
+            } else {
+                link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`;
+            }
+        });
+
+        // navbar toggler animation
+        navbarToggler.classList.toggle("toggle");
+    });
+}
+
+const app = () => {
+    navbar();
+};
+
+app();

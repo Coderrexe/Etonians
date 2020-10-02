@@ -24,20 +24,21 @@ def create_post():
     return render_template("create_post.html", title="New Post", form=form, image_file=image_file)
 
 
-@posts.route("/post/<int:post_id>")
-@posts.route("/post/<int:post_id>/")
+@posts.route("/post/<int:post_id>", methods=["POST", "GET"])
+@posts.route("/post/<int:post_id>/", methods=["POST", "GET"])
 @login_required
 def post(post_id): # every post has a unique ID
     post = Post.query.get_or_404(post_id)
     form = CommentForm()
+    comments = Comment.query.all()
     if form.validate_on_submit():
-        comment = Comment(content=form.content.data)
+        comment = Comment(title=form.title.data, content=form.content.data)
         db.session.add(comment)
         db.session.commit()
-        return redirect(url_for("main.home"))
+        return redirect(url_for("posts.post", post_id=post.id))
     
     image_file = url_for("static", filename=f"profile_pictures/{current_user.image_file}")
-    return render_template("post.html", title=post.title, post=post, image_file=image_file)
+    return render_template("post.html", title=post.title, form=form, post=post, image_file=image_file)
 
 
 @posts.route("/post/<int:post_id>/update", methods=["POST", "GET"])

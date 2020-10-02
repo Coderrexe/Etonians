@@ -1,0 +1,61 @@
+@charset "UTF-8";
+
+/* Footer section css */
+.footer {
+  background-color: #212121;
+  padding: 80px 0;
+  margin-top: 40px;
+}
+
+.footer .logo {
+  width: 100%;
+  margin-bottom: 30px;
+  margin-top: 0;
+}
+
+.footer .logo .custom-logo {
+  background-color: #1957f3;
+  color: #fff;
+  text-align: center;
+  padding: 0 25px;
+  letter-spacing: 1px;
+  line-height: 2;
+}
+
+.footer .social-icon {
+  margin: 0 auto;
+  width: 100%
+}
+
+.footer .social-icon a {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+  background-color: #252525;
+  transition: all 0.5s;
+}
+
+.footer .social-icon a:hover {
+  background-color: #1957f3;
+}
+
+.footer .social-icon a i {
+  color: #fff;
+  font-size: 14px;
+}
+
+.footer .copy {
+  width: 100%;
+  padding-top: 30px;
+}
+
+.footer .copy h6 {
+  color: #999;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 2px;
+  margin-bottom: 0;
+}
