@@ -11,5 +11,5 @@
         "**/images/": false
     },
     "python.linting.pylintEnabled": false,
-    "editor.showUnused": true
+    "editor.showUnused": true,
 }

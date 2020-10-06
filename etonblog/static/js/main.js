@@ -1,9 +1,3 @@
-$(document).ready(function() {
-    $("#navbar-toggler").click(function() {
-        $("ul").toggleClass("navbar-show");
-    });
-});
-
 const navbar = () => {
     const navbarToggler = document.getElementById("navbar-toggler");
     const nav = document.querySelector(".nav-links");

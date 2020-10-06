@@ -11,6 +11,14 @@
     {% endif %}
     {% endwith %}
 
+    <h4>Filter by Block: </h4>
+    <a href="{{ url_for('main.home', filter_year_group='All') }}" class="btn btn-outline-info">All</a>
+    <a href="{{ url_for('main.home', filter_year_group='F') }}" class="btn btn-outline-info">F</a>
+    <a href="{{ url_for('main.home', filter_year_group='E') }}" class="btn btn-outline-info">E</a>
+    <a href="{{ url_for('main.home', filter_year_group='D') }}" class="btn btn-outline-info">D</a>
+    <a href="{{ url_for('main.home', filter_year_group='C') }}" class="btn btn-outline-info">C</a>
+    <a href="{{ url_for('main.home', filter_year_group='B') }}" class="btn btn-outline-info">B</a>
+
     <!-- displays the posts -->
     {% for post in posts.items %}
       <section class="post">

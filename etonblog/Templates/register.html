@@ -10,7 +10,8 @@
       {% endfor %}
     {% endif %}
     {% endwith %}
-    <div class="content-section">
+
+    <div class="content-section register-login-form">
       <form method="POST" action="">
         <!-- form.hidden_tag() is another step of password security and encryption -->
         {{ form.hidden_tag() }}
@@ -30,8 +31,8 @@
             {% else %}
               {{ form.username(class="form-control form-control-lg") }}
               <ul class="ml-4">
-                <!-- text-muted message is displayed below the field as smaller characters -->
-                <li><small class="text-muted">Must be 2 to 20 characters long.</small></li>
+                <li><small class="text-muted">You don't have to use your real name.</small></li>
+                <li><small class="text-muted">Must be between 2 and 20 characters long.</small></li>
               </ul>
             {% endif %}
           </div>
@@ -49,6 +50,9 @@
               </div>
             {% else %}
                 {{ form.email(class="form-control form-control-lg") }}
+                <ul class="ml-4">
+                  <li><small class="text-muted">Your Eton College email.</small></li>
+                </ul>
             {% endif %}
           </div>
 
@@ -87,7 +91,8 @@
             {% endif %}
           </div>
 
-          <div class="form-group pt-2">
+          <div class="form-group pt-2 year-group-select">
+            <label>Your Block</label>
             <select class="form-control form-control-lg" name="year-group">
               <option value="F">F</option>
               <option value="E">E</option>
@@ -108,12 +113,12 @@
           {{ form.submit(class="btn btn-outline-info") }}
         </div>
       </form>
-    </div>
-
-    <div class="pt-1">
-      <small class="text-muted">
-        Already Have An Account? <a class="ml-2" href="{{ url_for('users.login') }}">Sign In</a>
-      </small>
+      
+      <div class="pt-1">
+        <small class="text-muted">
+          Already Have An Account? <a class="ml-2" href="{{ url_for('users.login') }}">Sign In</a>
+        </small>
+      </div>
     </div>
   </div>
 {% endblock content %}

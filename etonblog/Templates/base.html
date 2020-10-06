@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/posts.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/register_login.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
 
   <!-- If given a title in "routes.py" file, then title. Otherwise, just "Etonblog" -->
@@ -24,19 +25,22 @@
 <body>
   <nav>
     <div class="logo">
-      <h4>Etonians</h4>
+      {% if current_user.is_authenticated %}
+        <a href="{{ url_for('main.home') }}">Etonians</a>
+      {% else %}
+        <a href="{{ url_for('users.login') }}"><h4>Etonians</h4></a>
+      {% endif %}
     </div>
 
     <ul class="nav-links">
       {% if current_user.is_authenticated %}
+        <li><a href="{{ url_for('posts.create_post') }}">New Post</a></li>
         <li><a href="{{ url_for('main.home') }}">Home</a></li>
         <li><a href="{{ url_for('main.about') }}">About</a></li>
-        <li><a href="{{ url_for('main.donate') }}">Donate</a></li>
         <li><a href="{{ url_for('users.account') }}">Account</a></li>
         <li><a href="{{ url_for('users.logout') }}">Logout</a></li>
       {% else %}
         <li><a href="{{ url_for('main.about') }}">About</a></li>
-        <li><a href="{{ url_for('main.donate') }}">Donate</a></li>
         <li><a href="{{ url_for('users.login') }}">Login</a></li>
         <li><a href="{{ url_for('users.register') }}">Register</a></li>
       {% endif %}
@@ -62,10 +66,6 @@
 
   <footer class="footer text-center">
     <div class="row">
-      <div class="logo">
-        <span class="navbar-brand custom-logo">Simba Shi</span>
-      </div>
-
       <div class="social-icon text-center">
         <a href="https://www.youtube.com/simbashi" target="_blank"><span><i class="fa fa-youtube"></i></span></a>
         <a href="https://www.instagram.com/shi.simba" target="_blank"><span><i class="fa fa-instagram"></i></span></a>
