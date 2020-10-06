@@ -5,17 +5,25 @@
     {% if messages %}
       {% for category, message in messages %}
         <div class="alert alert-{{ category }}">
-            <span>{{ message }}</span>
+          <span>{{ message }}</span>
         </div>
       {% endfor %}
     {% endif %}
     {% endwith %}
 
+    <h4>Filter by Block: </h4>
+    <a href="{{ url_for('main.home', filter_year_group='All') }}" class="btn btn-outline-info">All</a>
+    <a href="{{ url_for('main.home', filter_year_group='F') }}" class="btn btn-outline-info">F</a>
+    <a href="{{ url_for('main.home', filter_year_group='E') }}" class="btn btn-outline-info">E</a>
+    <a href="{{ url_for('main.home', filter_year_group='D') }}" class="btn btn-outline-info">D</a>
+    <a href="{{ url_for('main.home', filter_year_group='C') }}" class="btn btn-outline-info">C</a>
+    <a href="{{ url_for('main.home', filter_year_group='B') }}" class="btn btn-outline-info">B</a>
+
     <!-- displays the posts -->
     {% for post in posts.items %}
       <section class="post">
         <article class="media">
-          <a href="{{ url_for('users.user_page', username=post.author.username) }}"><img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pictures/' + post.author.image_file) }}"></a>
+          <a href="{{ url_for('users.user_page', username=post.author.username) }}"><img class="article-img" src="{{ url_for('static', filename='profile_pictures/' + post.author.image_file) }}"></a>
           <div class="media-body">
             <div class="article-metadata">
               <a class="mr-2 post-author" href="{{ url_for('users.user_page', username=post.author.username) }}">{{ post.author.username }}</a>
@@ -27,8 +35,8 @@
 
                 {% if current_user == post.author %}
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <a class="dropdown-item" href="{{ url_for('posts.update_post', post_id=post.id) }}"><span class="material-icons-outlined dropdown-button">edit</span><p class="pt-3 dropdown-text">Edit</p></a>
-                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#deleteModal"><span class="material-icons-outlined dropdown-button">delete</span><p class="pt-3 dropdown-text">Delete</p></a>
+                    <a class="dropdown-item" href="{{ url_for('posts.update_post', post_id=post.id) }}"><span class="material-icons-outlined">edit</span><p>Edit</p></a>
+                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#deleteModal"><span class="material-icons-outlined">delete</span><p>Delete</p></a>
                   </div>
 
                   <!-- Bootstrap Modal -->
@@ -57,7 +65,7 @@
                   </div>
                 {% else %}
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <a href="#" class="dropdown-item"><span class="material-icons-outlined dropdown-button">report</span><p class="pt-3 dropdown-text">Report</p></a>
+                    <a href="#" class="dropdown-item"><span class="material-icons-outlined">report</span><p>Report</p></a>
                   </div>
                 {% endif %}
               </div>
@@ -68,15 +76,13 @@
         </article>
 
         <div class="bottom-text">
-          <div class="row align-items-center">
-            <div class="col-6 text-center">
-              <button type="button" class="btn"><span class="material-icons-outlined">thumb_up</span></a>
-              <p>Like</p>
-            </div>
-            <div class="col-6 text-center">
-              <a href="{{ url_for('posts.post', post_id=post.id) }}"><span class="material-icons-outlined">comment</span></a>
-              <p>Comment</p>
-            </div>
+          <div class="button-container">
+            <label><span class="material-icons-outlined">thumb_up</span></label>
+            <p>Upvote</p>
+          </div>
+          <div class="button-container">
+            <a href="{{ url_for('posts.post', post_id=post.id) }}"><span class="material-icons-outlined">comment</span></a>
+            <p>Reply</p>
           </div>
         </div>
       </section>
@@ -98,7 +104,7 @@
 
 {% block sidebar %}
   <div class="col-md-4" id="sidebar">
-    <div class="content-section sidebar position-fixed">
+    <div class="content-section sidebar">
       <h3>Latest Info</h3>
       <p class='text-muted'>
         <ul class="list-group">

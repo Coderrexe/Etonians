@@ -3,11 +3,11 @@
   <div class="col-md-8" id="main">
     {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
-        {% for category, message in messages %}
-            <div class="alert alert-{{ category }}">
-                <span>{{ message }}</span>
-            </div>
-        {% endfor %}
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">
+          <span>{{ message }}</span>
+        </div>
+      {% endfor %}
     {% endif %}
     {% endwith %}
     
@@ -60,12 +60,12 @@
 
 {% block sidebar %}
   <div class="col-md-4" id="sidebar">
-    <div class="content-section sidebar position-fixed">
+    <div class="content-section sidebar">
       <h3>Latest Info</h3>
       <p class='text-muted'>
         <ul class="list-group">
-            <li class="list-group-item list-group-item-light">Updates</li>
-            <li class="list-group-item list-group-item-light">Events</li>
+          <li class="list-group-item list-group-item-light">Updates</li>
+          <li class="list-group-item list-group-item-light">Events</li>
         </ul>
       </p>
     </div>

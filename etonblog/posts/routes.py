@@ -14,7 +14,7 @@ posts = Blueprint("posts", __name__)
 def create_post():
     form = PostForm()
     if form.validate_on_submit():
-        post = Post(title=form.title.data, content=form.content.data, author=current_user)
+        post = Post(title=form.title.data, content=form.content.data, author=current_user, year_group=current_user.year_group)
         db.session.add(post)
         db.session.commit()
         flash("New post successfully created!", "success")
@@ -24,24 +24,25 @@ def create_post():
     return render_template("create_post.html", title="New Post", form=form, image_file=image_file)
 
 
-@posts.route("/post/<int:post_id>")
-@posts.route("/post/<int:post_id>/")
+@posts.route("/post/id/<int:post_id>", methods=["POST", "GET"])
+@posts.route("/post/id/<int:post_id>/", methods=["POST", "GET"])
 @login_required
 def post(post_id): # every post has a unique ID
     post = Post.query.get_or_404(post_id)
     form = CommentForm()
+    comments = Comment.query.all()
     if form.validate_on_submit():
-        comment = Comment(content=form.content.data)
+        comment = Comment(title=form.title.data, content=form.content.data)
         db.session.add(comment)
         db.session.commit()
-        return redirect(url_for("main.home"))
+        return redirect(url_for("posts.post", post=post))
     
     image_file = url_for("static", filename=f"profile_pictures/{current_user.image_file}")
-    return render_template("post.html", title=post.title, post=post, image_file=image_file)
+    return render_template("post.html", title=post.title, form=form, post=post, image_file=image_file)
 
 
-@posts.route("/post/<int:post_id>/update", methods=["POST", "GET"])
-@posts.route("/post/<int:post_id>/update/", methods=["POST", "GET"])
+@posts.route("/post/id/<int:post_id>/edit", methods=["POST", "GET"])
+@posts.route("/post/id/<int:post_id>/edit/", methods=["POST", "GET"])
 @login_required
 def update_post(post_id):
     post = Post.query.get_or_404(post_id)
@@ -63,8 +64,8 @@ def update_post(post_id):
     return render_template("update_post.html", title="Update Post", form=form, image_file=image_file)
 
 
-@posts.route("/post/<int:post_id>/delete", methods=["POST"])
-@posts.route("/post/<int:post_id>/delete/", methods=["POST"])
+@posts.route("/post/id/<int:post_id>/delete", methods=["POST"])
+@posts.route("/post/id/<int:post_id>/delete/", methods=["POST"])
 def delete_post(post_id):
     post = Post.query.get_or_404(post_id)
     if current_user != post.author: # if the user tries to delete someone else's post, then 403 error

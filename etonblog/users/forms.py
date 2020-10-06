@@ -8,7 +8,7 @@ from etonblog.models import User
 
 
 class RegistrationForm(FlaskForm):
-    username = StringField("Username", validators=[DataRequired(), Length(min=2, max=20, message="Must be between 2 and 20 characters long.")])
+    username = StringField("Nickname", validators=[DataRequired(), Length(min=2, max=20, message="Must be between 2 and 20 characters long.")])
     email = EmailField("Email", validators=[DataRequired(), Email(message="Email is not valid.")])
     password = PasswordField("Password", validators=[DataRequired(), Length(min=8, message="Must be at least 8 characters long.")])
     confirm_password = PasswordField("Confirm Password", validators=[DataRequired(), EqualTo("password", message="Passwords must match.")])

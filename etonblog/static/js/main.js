@@ -1,19 +1,30 @@
-$(window).scroll(function() {
-    let scroll = $(window).scrollTop();
+const navbar = () => {
+    const navbarToggler = document.getElementById("navbar-toggler");
+    const nav = document.querySelector(".nav-links");
+    const navLinks = document.querySelectorAll(".nav-links li");
+    const main = document.querySelector("main");
 
-    if (scroll >= 10) {
-        $(".navbar-js").addClass("nav-scroll");
-    } else {
-        $(".navbar-js").removeClass("nav-scroll");
-    }
-});
+    // toggles navbar on mobile devices
+    navbarToggler.addEventListener("click", () => {
+        nav.classList.toggle("nav-toggled");
+        main.classList.toggle("darken");
 
-// const likeBtn = document.getElementById("likes");
+        // animates navbar links on mobile devices
+        navLinks.forEach((link, index) => {
+            if (link.style.animation) {
+                link.style.animation = ``;
+            } else {
+                link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`;
+            }
+        });
 
-// function incrementValue() {
-//     var value = parseInt(likeBtn.value, 10);
-//     value = isNaN(value) ? 0 : value;
-//     value++;
-//     likeBtn.value = value;
-//     document.write(value);
-// }
+        // navbar toggler animation
+        navbarToggler.classList.toggle("toggle");
+    });
+}
+
+const app = () => {
+    navbar();
+};
+
+app();

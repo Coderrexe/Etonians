@@ -8,6 +8,7 @@ from etonblog.users.utils import save_picture, send_reset_email
 users = Blueprint("users", __name__)
 
 
+@users.route("/", methods=["GET", "POST"])
 @users.route("/register", methods=["GET", "POST"])
 @users.route("/register/", methods=["GET", "POST"])
 def register():
@@ -19,7 +20,8 @@ def register():
     if form.validate_on_submit():
         # it is unsafe to store the user password as plain text
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode("UTF-8")
-        user = User(username=form.username.data, email=form.email.data, password=hashed_password)
+        year_group = request.form["year-group"]
+        user = User(username=form.username.data, email=form.email.data, password=hashed_password, year_group=year_group)
         db.session.add(user)
         db.session.commit()
         flash(f"Account successfully created! You can now login.", "success")
@@ -31,7 +33,6 @@ def register():
     return render_template("register.html", title="Register", form=form)
 
 
-@users.route("/", methods=["GET", "POST"])
 @users.route("/login", methods=["GET", "POST"])
 @users.route("/login/", methods=["GET", "POST"])
 def login():

@@ -12,11 +12,12 @@ def load_user(user_id):
 
 # SQLAlchemy models
 class User(db.Model, UserMixin):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     username = db.Column(db.String(20), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     image_file = db.Column(db.String(20), nullable=False, default="default.jpg")
     password = db.Column(db.String(60), nullable=False)
+    year_group = db.Column(db.String(1), nullable=False)
     # backref allows "author" attribute to be accessed when displaying info about a post
     posts = db.relationship("Post", backref="author", lazy=True)
     comments = db.relationship("Comment", backref="author", lazy=True)
@@ -35,15 +36,16 @@ class User(db.Model, UserMixin):
         return User.query.get(user_id)
 
     def __repr__(self): # __repr__ function shows how the data for a user will be displayed when called
-        return f"User('{self.username}', '{self.email}', '{self.image_file}')"
+        return f"User('{self.username}', '{self.email}', '{self.image_file}', '{self.year_group}')"
 
 
 class Post(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     title = db.Column(db.String(100), nullable=False)
     date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     content = db.Column(db.Text, nullable=False)
-    # sets up a reference with posts(variable defined in class User)
+    year_group = db.Column(db.String(1), nullable=False)
+    # sets up a reference with posts (variable defined in class User)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     comments = db.relationship("Comment", backref="post", lazy=True)
 
@@ -52,11 +54,12 @@ class Post(db.Model):
 
 
 class Comment(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    title = db.Column(db.String(100))
     date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    content = db.Column(db.String(200), nullable=False)
+    content = db.Column(db.String(500), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     post_id = db.Column(db.Integer, db.ForeignKey("post.id"), nullable=False)
 
     def __repr__(self):
-        return f"Comment('{self.date_posted}')"
+        return f"Comment('{self.title}', '{self.date_posted}')"

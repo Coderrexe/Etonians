@@ -2,18 +2,17 @@
 <html>
 <head lang="en-GB">
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1 shrink-to-fit=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
-  <!-- Google API - Sign in with google button -->
-  <meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
-  <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <!-- A link to font awesome icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <!-- Google icons -->
   <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
-  <!-- A link to my "main.css" file -->
+  
   <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/posts.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/register_login.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
 
   <!-- If given a title in "routes.py" file, then title. Otherwise, just "Etonblog" -->
   {% if title %}
@@ -24,63 +23,39 @@
 </head>
 
 <body>
-  <!-- Left side of Navbar -->
-  <nav class="navbar navbar-expand-sm navbar-dark fixed-top nav-scroll">
-    <div class="container">
-      <a href="{{ url_for('main.home') }}" class="navbar-brand custom-logo"><span>Etonians</span></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="fa fa-bars"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          {% if current_user.is_authenticated %}
-            <li class="nav-item nav-underline ml-2">
-              <a class="nav-link" href="{{ url_for('main.home') }}">Home</a>
-            </li>
-            <li class="nav-item nav-underline ml-2">
-              <a class="nav-link" href="{{ url_for('main.about') }}">About</a>
-            </li>
-            <li class="nav-item nav-underline ml-2">
-              <a class="nav-link" href="{{ url_for('main.donate') }}">Donate</a>
-            </li>
-          {% else %}
-            <li class="nav-item nav-underline ml-2">
-              <a class="nav-link" href="{{ url_for('main.home') }}">Home</a>
-            </li>
-            <li class="nav-item nav-underline ml-2">
-              <a class="nav-link" href="{{ url_for('main.about') }}">About</a>
-            </li>
-          {% endif %}
-        </ul>
+  <nav>
+    <div class="logo">
+      {% if current_user.is_authenticated %}
+        <a href="{{ url_for('main.home') }}">Etonians</a>
+      {% else %}
+        <a href="{{ url_for('users.login') }}"><h4>Etonians</h4></a>
+      {% endif %}
+    </div>
 
-        <ul class="navbar-nav ml-auto">
-          {% if current_user.is_authenticated %}
-            <li class="nav-item nav-underline">
-              <a class="nav-link" href="{{ url_for('posts.create_post') }}">New Post</a>
-            </li>
-            <li class="nav-item nav-underline">
-              <a class="nav-link" href="{{ url_for('users.logout') }}">Logout</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('users.account') }}"><img class="rounded-circle navbar-account-img" src="{{ url_for('static', filename='profile_pictures/' + current_user.image_file) }}"></a>
-            </li>
-          {% else %}
-            <li class="nav-item nav-underline">
-              <a class="nav-link" href="{{ url_for('users.login') }}">Login</a>
-            </li>
-            <li class="nav-item nav-underline">
-              <a class="nav-link" href="{{ url_for('users.register') }}">Register</a>
-            </li>
-          {% endif %}
-        </ul>
-      </div>
+    <ul class="nav-links">
+      {% if current_user.is_authenticated %}
+        <li><a href="{{ url_for('posts.create_post') }}">New Post</a></li>
+        <li><a href="{{ url_for('main.home') }}">Home</a></li>
+        <li><a href="{{ url_for('main.about') }}">About</a></li>
+        <li><a href="{{ url_for('users.account') }}">Account</a></li>
+        <li><a href="{{ url_for('users.logout') }}">Logout</a></li>
+      {% else %}
+        <li><a href="{{ url_for('main.about') }}">About</a></li>
+        <li><a href="{{ url_for('users.login') }}">Login</a></li>
+        <li><a href="{{ url_for('users.register') }}">Register</a></li>
+      {% endif %}
+    </ul>
+
+    <div id="navbar-toggler">
+      <div class="navbar-toggler-line1"></div>
+      <div class="navbar-toggler-line2"></div>
+      <div class="navbar-toggler-line3"></div>
     </div>
   </nav>
 
   <!-- Main body of the webpage -->
   <main role="main" class="container">
     <div class="row">
-      <!-- Block content would take up 2/3 of the width (col-md-8) - content varies from pages to pages -->
       {% block content %}
       {% endblock content %}
 
@@ -90,31 +65,25 @@
   </main>
 
   <footer class="footer text-center">
-    <div class="container">
-      <div class="row">
-        <div class="logo">
-          <span class="navbar-brand custom-logo">Simba Shi</span>
-        </div>
+    <div class="row">
+      <div class="social-icon text-center">
+        <a href="https://www.youtube.com/simbashi" target="_blank"><span><i class="fa fa-youtube"></i></span></a>
+        <a href="https://www.instagram.com/shi.simba" target="_blank"><span><i class="fa fa-instagram"></i></span></a>
+        <a href="https://www.twitter.com/simba_shi" target="_blank"><span><i class="fa fa-twitter"></i></span></a>
+      </div>
 
-        <div class="social-icon text-center">
-          <a href="https://www.youtube.com/simbashi" target="_blank"><span><i class="fa fa-youtube"></i></span></a>
-          <a href="https://www.instagram.com/shi.simba" target="_blank"><span><i class="fa fa-instagram"></i></span></a>
-          <a href="https://www.twitter.com/simba_shi" target="_blank"><span><i class="fa fa-twitter"></i></span></a>
-        </div>
-
-        <div class="copy">
-          <h6>Copyright © Simba Shi 2020</h6>
-        </div>
+      <div class="copy">
+        <h6>Copyright © Simba Shi 2020</h6>
       </div>
     </div>
   </footer>
 
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  
   <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
 </html>

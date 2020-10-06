@@ -1,0 +1,160 @@
+@charset "UTF-8";
+
+/** Posts CSS **/
+.post, .content-section {
+  background-color: rgb(255, 255, 255); /* the background colour of Block Content and Sidebar is pure white (#fff) */
+  padding: 20px; /* 20 pixels of padding all around the text, in both Block Content and Sidebar */
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  margin-bottom: 35px;
+}
+
+.content-section.sidebar {
+  background-color: rgb(236, 236, 236);; /* the background colour of Block Content and Sidebar is pure white (#fff) */
+  padding: 20px; /* 20 pixels of padding all around the text, in both Block Content and Sidebar */
+  border: 1px solid #ddd; /* 1 pixel of border around the Sidebar */
+  border-radius: 3px;
+  margin-bottom: 20px;
+  position: sticky;
+  top: 16vh;
+}
+
+.article-metadata .post-author {
+  font-size: 25px;
+}
+
+.article-metadata p {
+  display: inline-block;
+  font-size: 15px;
+  margin-left: 20px;
+}
+
+.article-metadata .dropdown {
+  float: right;
+  margin-top: 5px;
+}
+
+.article-metadata .dropdown-menu {
+  box-shadow: -1px 3px 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+.article-metadata .dropdown-menu a span {
+  display: inline-block;
+  font-size: 1.5em;
+  vertical-align: middle;
+  padding: 0;
+}
+
+.article-metadata .dropdown-menu a p {
+  display: inline-block;
+  font-size: 1em;
+  vertical-align: middle;
+  margin-top: 18px;
+  padding: 0;
+}
+
+.article-metadata .dropdown .dropdown-btn {
+  color: rgb(122, 122, 122);
+}
+
+.article-metadata .dropdown .dropdown-btn::after {
+  content: none;
+}
+
+.article-metadata .dropdown .dropdown-btn .material-icons {
+  color: rgb(94, 94, 94)
+}
+
+a.article-title {
+  color: #444;
+}
+
+a.article-title:hover {
+  text-decoration: none;
+}
+
+.article-content {
+  margin-top: 33px;
+  white-space: pre-line;
+  line-height: 23px;
+}
+
+.article-img {
+  height: 65px;
+  width: 65px;
+  margin-right: 16px;
+  border-radius: 50%;
+}
+
+.article-metadata {
+  padding-bottom: 1px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid #e3e3e3; /* 1 pixel of border underneath the author of a post */
+}
+
+.article-metadata a:hover {
+  color: #333; /* when hovering mouse over the author of a post, the text turns from blue to #333 */
+  text-decoration: none;
+}
+
+.article-svg {
+  width: 25px;
+  height: 25px;
+  vertical-align: middle;
+}
+
+.post .bottom-text {
+  border-top: 1px solid #ddd;
+  margin-top: 25px;
+  display: flex;
+  justify-content: space-evenly;
+  padding-top: 10px;
+}
+
+.post .bottom-text .button-container {
+  padding-top: 15px;
+  display: flex;
+}
+
+.post .bottom-text .button-container label, .post .bottom-text .button-container a {
+  color: rgb(117, 117, 117);
+}
+
+.post .bottom-text .button-container p {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+/** View post bar CSS **/
+.post-bar {
+  border: 1px solid #ddd;
+  background-color: #fff;
+  margin-bottom: 20px;
+}
+
+.post-bar .container .btn-back {
+  position: absolute;
+  font-size: 35px;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  margin-left: 15px;
+  font-weight: 600;
+}
+
+.post-bar .container .btn-text {
+  margin-left: 30px;
+  margin-top: 17px;
+  font-size: 22px;
+  font-weight: 550;
+}
+
+.comment-container {
+  border-top: 1px solid #ddd;
+}
+
+.comment-container img {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+}

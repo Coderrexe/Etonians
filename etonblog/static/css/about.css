@@ -1,5 +1,6 @@
 @charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap');
 
 /** General CSS for the whole of About Page **/
 * {
@@ -67,8 +68,8 @@ span, a {
     font-size: 16px;
   }
 
-  .nav-scroll .navbar-toggler span {
-    color: #333 !important;
+  .nav-scroll .navbar-toggler div {
+    background-color: #333 !important;
   }
 
   .navbar .navbar-collapse {
@@ -78,6 +79,10 @@ span, a {
     text-align: center;
     padding: 10px 0;
     margin: 10px 0;
+  }
+
+  .navbar .navbar-collapse ul li a:hover {
+    color: #3498db !important;
   }
 
   .nav-scroll .navbar-collapse {
@@ -109,23 +114,44 @@ span, a {
   transition: all 0.3s;
 }
 
-.navbar-dark .navbar-nav li a::after {
-  content: "";
-  display: block;
-  width: 0;
-  height: 2px;
-  background: #fff;
-  transition: width 0.3s;
-}
+@media screen and (min-width: 576px) {
+  .navbar-dark .navbar-nav li a::after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 2px;
+    background: #fff;
+    transition: width 0.3s;
+  }
 
-.navbar-dark .navbar-nav li a:hover::after {
-  width: 100%;
-  transition: width 0.3s;
+  .navbar-dark .navbar-nav li a:hover::after {
+    width: 100%;
+    transition: width 0.3s;
+  }
+
+  .nav-scroll .navbar-nav li a::after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 2px;
+    background: #333;
+    transition: width 0.3s;
+  }
+  
+  .nav-scroll .navbar-nav li a:hover::after {
+    width: 100%;
+    transition: width 0.3s;
+  }
 }
 
 .navbar {
   padding: 15px 0;
   background: transparent;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1030;
 }
 
 .nav-scroll {
@@ -139,20 +165,7 @@ span, a {
   color: #333 !important;
 }
 
-.nav-scroll .navbar-nav li a::after {
-  content: "";
-  display: block;
-  width: 0;
-  height: 2px;
-  background: #333;
-  transition: width 0.3s;
-}
-
-.nav-scroll .navbar-nav li a:hover::after {
-  width: 100%;
-  transition: width 0.3s;
-}
-
+/* deletes the border around the navbar toggler */
 .navbar .navbar-toggler {
   border: none;
 }
@@ -162,8 +175,25 @@ span, a {
   box-shadow: none;
 }
 
-.navbar .navbar-toggler span {
-  color: #fff;
+.navbar .navbar-toggler div {
+  width: 25px;
+  height: 3px;
+  background-color: #fff;
+  margin: 5px;
+  transition: all 0.3s ease;
+}
+
+/* navbar toggler animation */
+.navbar .toggle .navbar-toggler-line1 {
+  transform: rotate(-45deg) translate(-5px, 6px)
+}
+
+nav .toggle .navbar-toggler-line2 {
+  opacity: 0;
+}
+
+nav .toggle .navbar-toggler-line3 {
+  transform: rotate(45deg) translate(-5px, -6px)
 }
 
 /** CSS for the first stage of About Page **/
@@ -372,21 +402,7 @@ span, a {
 /* footer section css */
 .footer {
   background-color: #212121;
-  padding: 80px 0;
-}
-
-.footer .logo {
-  width: 100%;
-  margin-bottom: 30px;
-}
-
-.footer .logo .custom-logo {
-  background-color: #1957f3;
-  color: #fff;
-  text-align: center;
-  padding: 0 25px;
-  letter-spacing: 1px;
-  line-height: 2;
+  padding: 50px 0;
 }
 
 .footer .social-icon {
