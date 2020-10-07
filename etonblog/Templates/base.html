@@ -28,7 +28,7 @@
       {% if current_user.is_authenticated %}
         <a href="{{ url_for('main.home') }}">Etonians</a>
       {% else %}
-        <a href="{{ url_for('users.login') }}"><h4>Etonians</h4></a>
+        <a href="{{ url_for('users.login') }}">Etonians</a>
       {% endif %}
     </div>
 

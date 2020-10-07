@@ -1,7 +1,9 @@
 @charset "UTF-8";
 
-.content-section.register-login-form {
-  width: 85%;
-  margin-left: auto;
-  margin-right: auto;
+@media screen and (min-width: 500px) {
+  .content-section.register-login-form {
+    width: 85%;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
