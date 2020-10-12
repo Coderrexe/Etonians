@@ -18,7 +18,7 @@
         <fieldset class="form-group">
           <legend class="border-bottom mb-4">Join Today</legend>
           <div class="form-group">
-            {{ form.username.label(class="form-control-label") }}
+            {{ form.username.label }}
             {% if form.username.errors %}
               <!-- is-invalid class creates a red border around the textbox -->
               {{ form.username(class="form-control form-control-lg is-invalid") }}
@@ -38,7 +38,7 @@
           </div>
 
           <div class="form-group pt-2">
-            {{ form.email.label(class="form-control-label") }}
+            {{ form.email.label }}
             {% if form.email.errors %}
               <!-- is-invalid class creates a red border around the textbox -->
               {{ form.email(class="form-control form-control-lg is-invalid") }}
@@ -57,7 +57,7 @@
           </div>
 
           <div class="form-group">
-            {{ form.password.label(class="form-control-label") }}
+            {{ form.password.label }}
             {% if form.password.errors %}
               <!-- is-invalid class creates a red border around the textbox -->
               {{ form.password(class="form-control form-control-lg is-invalid") }}
@@ -76,7 +76,7 @@
           </div>
 
           <div class="form-group pt-2">
-            {{ form.confirm_password.label(class="form-control-label") }}
+            {{ form.confirm_password.label }}
             {% if form.confirm_password.errors %}
               <!-- is-invalid class creates a red border around the textbox -->
               {{ form.confirm_password(class="form-control form-control-lg is-invalid") }}
@@ -103,7 +103,7 @@
           </div>
           
           <div class="form-check">
-              {{ form.remember(class="form-check-input")}}
+              {{ form.remember(class="form-check-input") }}
               {{ form.remember.label(class="form-check-label") }}
           </div>
         </fieldset>

@@ -10,13 +10,14 @@ main = Blueprint("main", __name__)
 @login_required
 def home():
     page = request.args.get("page", 1, type=int)
-    filter_year_group = request.args.get("filter_year_group", "All", type=str)
+    posts = []
 
-    if filter_year_group == "All":
-        posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=1)
-    else:
-        posts = Post.query.order_by(Post.date_posted.desc()).filter_by(year_group=filter_year_group).paginate(page=page, per_page=1)
+    for post in Post.query.all():
+        if current_user.year_group in post.filter_year_group:
+            posts.append(post)
 
+    posts = posts[::-1]
+    
     image_file = url_for("static", filename=f"profile_pictures/{current_user.image_file}")
     return render_template("home.html", posts=posts, image_file=image_file)
 

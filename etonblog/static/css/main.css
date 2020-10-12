@@ -20,20 +20,6 @@ body {
   margin-top: 20px;
 }
 
-/** Account page CSS **/
-.account-img {
-  height: 125px;
-  width: 125px;
-  margin-right: 20px;
-  margin-bottom: 16px;
-  border-radius: 50%;
-}
-
-.account-heading {
-  font-size: 2rem;
-  margin-top: 10px;
-}
-
 @media (max-width: 760px) {
   #main {
     width: 100%;

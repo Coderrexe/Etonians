@@ -17,7 +17,7 @@
         <fieldset class="form-group">
           <legend class="border-bottom mb-4">Create a New Post</legend>
           <div class="form-group">
-            {{ form.title.label(class="form-control-label") }}
+            {{ form.title.label }}
             {% if form.title.errors %}
               {{ form.title(class="form-control form-control-lg is-invalid") }}
               <div class="invalid-feedback">
@@ -35,7 +35,7 @@
           </div>
 
           <div class="form-group">
-            {{ form.content.label(class="form-control-label")}}
+            {{ form.content.label }}
             {% if form.content.errors %}
               {{ form.content(class="form-control form-control-lg is-invalid", rows="7", cols="100") }}
               {% for error in errors %}
@@ -47,6 +47,30 @@
                 <li><small class="text-muted">This field must not be empty.</small></li>
               </ul>
             {% endif %}
+          </div>
+
+          <div class="filter_year_group">
+            <h5>Which Blocks can see this post?</h5>
+            <div class="filter_year_group_choice">
+              <input type="checkbox" value="F" name="filter_year_group">
+              <label>F Block</label>
+            </div>
+            <div class="filter_year_group_choice">
+              <input type="checkbox" value="E" name="filter_year_group">
+              <label>E Block</label>
+            </div>
+            <div class="filter_year_group_choice">
+              <input type="checkbox" value="D" name="filter_year_group">
+              <label>D Block</label>
+            </div>
+            <div class="filter_year_group_choice">
+              <input type="checkbox" value="C" name="filter_year_group">
+              <label>C Block</label>
+            </div>
+            <div class="filter_year_group_choice">
+              <input type="checkbox" value="B" name="filter_year_group">
+              <label>B Block</label>
+            </div>
           </div>
         </fieldset>
         

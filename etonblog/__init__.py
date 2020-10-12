@@ -15,7 +15,7 @@ login_manager = LoginManager(app)
 # if a user tries to go to a page that is @login_required, they will be directed to the login_view, which I set to be the login page
 login_manager.login_view = "users.login"
 login_manager.login_message_category = "info" # this sets the flash message "Please login to view this page" to be light blue
-mail = Mail()
+mail = Mail(app)
 
 from etonblog.users.routes import users
 from etonblog.posts.routes import posts

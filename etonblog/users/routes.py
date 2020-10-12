@@ -41,6 +41,7 @@ def login():
         return redirect(url_for("main.home"))
     
     form = LoginForm()
+    
     if form.validate_on_submit():
         # checks if this user is in the database - returns a boolean value
         user = User.query.filter_by(email=form.email.data).first()
@@ -49,8 +50,9 @@ def login():
             # if the user wanted to access a page that was @loginrequired before logging in, they will be redirected to that page
             next_page = request.args.get("next")
             return redirect(next_page) if next_page else redirect(url_for("main.home"))
-        else:
-            flash("Login Unsuccessful. Please check username and password.", "danger")
+    
+    if form.is_submitted() and not form.validate_on_submit():
+        flash("Login Unsuccessful. Please check username and password.", "danger")
 
     return render_template("login.html", title="Login", form=form)
 
@@ -74,13 +76,11 @@ def account():
             current_user.image_file = picture_file # updates the profile picture
         # updates different fields
         current_user.username = form.username.data
-        current_user.email = form.email.data
         db.session.commit()
         flash("Your profile has been updated!", "success")
         return redirect(url_for("users.account"))
     elif request.method == "GET": # if the user simply loaded the page
-        form.username.data = current_user.username # The boxes should already filled with the current user data
-        form.email.data = current_user.email
+        form.username.data = current_user.username
 
     image_file = url_for("static", filename=f"profile_pictures/{current_user.image_file}")
     return render_template("account.html", image_file=image_file, form=form)

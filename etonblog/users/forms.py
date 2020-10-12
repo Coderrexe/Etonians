@@ -28,15 +28,15 @@ class RegistrationForm(FlaskForm):
 
 
 class LoginForm(FlaskForm):
-    email = EmailField("Email", validators=[DataRequired(), Email(message="Email is not valid.")])
-    password = PasswordField("Password", validators=[DataRequired(), Length(min=8, message="Must be at least 8 characters long.")])
+    email = EmailField("Email", validators=[DataRequired()])
+    password = PasswordField("Password", validators=[DataRequired()])
     remember = BooleanField("Remember Me")
     submit = SubmitField("Log In")
 
 
 class UpdateAccountForm(FlaskForm):
     username = StringField("Username", validators=[DataRequired(), Length(min=2, max=20)])
-    email = EmailField("Email", validators=[DataRequired(), Email()])
+    password = PasswordField("Password", validators=[DataRequired()])
     picture = FileField("Update Profile Picture", validators=[FileAllowed(["jpg", "jpeg", "png", "gif"])])
     submit = SubmitField("Update")
 

@@ -17,17 +17,17 @@
         <fieldset class="form-group">
           <legend class="border-bottom mb-4">Update Post</legend>
           <div class="form-group">
-            {{ form.title.label(class="form-control-label") }}
+            {{ form.title.label }}
             {% if form.title.errors %}
-                {{ form.title(class="form-control form-control-lg is-invalid") }}
-                <div class="invalid-feedback">
-                    {% for error in form.title.errors %}
-                            <span>{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                {% else %}
-                    {{ form.title(class="form-control form-control-lg") }}
-                {% endif %}
+              {{ form.title(class="form-control form-control-lg is-invalid") }}
+              <div class="invalid-feedback">
+                {% for error in form.title.errors %}
+                  <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+            {% else %}
+              {{ form.title(class="form-control form-control-lg") }}
+            {% endif %}
             <ul class="ml-4">
               <li><small class="text-muted">Must include a title.</small></li>
               <li><small class="text-muted">Must be less than 100 characters long.</small></li>
@@ -35,7 +35,7 @@
           </div>
 
           <div class="form-group">
-            {{ form.content.label(class="form-control-label")}}
+            {{ form.content.label }}
             {% if form.content.errors %}
               {{ form.content(class="form-control form-control-lg is-invalid", rows="7", cols="100") }}
               {% for error in errors %}

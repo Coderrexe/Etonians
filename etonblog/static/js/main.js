@@ -1,8 +1,3 @@
-$(window).scroll(function() {
-    const body = document.querySelector("body");
-    body.scrollLeft = 0;
-});
-
 const navbar = () => {
     const navbarToggler = document.getElementById("navbar-toggler");
     const nav = document.querySelector(".nav-links");

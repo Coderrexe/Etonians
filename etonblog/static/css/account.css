@@ -1,0 +1,32 @@
+@charset "UTF-8";
+
+/** Account page CSS **/
+.account-img {
+  height: 125px;
+  width: 125px;
+  margin-right: 20px;
+  margin-bottom: 16px;
+  border-radius: 50%;
+}
+
+.account-heading {
+  font-size: 2rem;
+  margin-top: 10px;
+}
+
+.form-group .picture-input {
+  width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.form-group label[for="file"] {
+  display: inline-block;
+}
+
+.form-group .picture-input:focus + label, .form-group .picture-input + label:hover {
+  cursor: pointer;
+}

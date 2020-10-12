@@ -14,11 +14,19 @@ posts = Blueprint("posts", __name__)
 def create_post():
     form = PostForm()
     if form.validate_on_submit():
-        post = Post(title=form.title.data, content=form.content.data, author=current_user, year_group=current_user.year_group)
-        db.session.add(post)
-        db.session.commit()
-        flash("New post successfully created!", "success")
-        return redirect(url_for("main.home"))
+        filter_year_group_list = request.form.getlist("filter_year_group")
+        filter_year_group = ""
+        
+        if filter_year_group_list:
+            for year_group in filter_year_group_list:
+                filter_year_group += year_group
+            post = Post(title=form.title.data, content=form.content.data, author=current_user, year_group=current_user.year_group, filter_year_group=filter_year_group)
+            db.session.add(post)
+            db.session.commit()
+            flash("New post successfully created!", "success")
+            return redirect(url_for("main.home"))
+        else:
+            flash("Tick at least one of the year group boxes to proceed.", "danger")
 
     image_file = url_for("static", filename=f"profile_pictures/{current_user.image_file}")
     return render_template("create_post.html", title="New Post", form=form, image_file=image_file)
@@ -64,8 +72,8 @@ def update_post(post_id):
     return render_template("update_post.html", title="Update Post", form=form, image_file=image_file)
 
 
-@posts.route("/post/id/<int:post_id>/delete", methods=["POST"])
-@posts.route("/post/id/<int:post_id>/delete/", methods=["POST"])
+@posts.route("/post/id/<int:post_id>/delete", methods=["POST", "GET"])
+@posts.route("/post/id/<int:post_id>/delete/", methods=["POST", "GET"])
 def delete_post(post_id):
     post = Post.query.get_or_404(post_id)
     if current_user != post.author: # if the user tries to delete someone else's post, then 403 error

@@ -45,12 +45,13 @@ class Post(db.Model):
     date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     content = db.Column(db.Text, nullable=False)
     year_group = db.Column(db.String(1), nullable=False)
+    filter_year_group = db.Column(db.String(5), nullable=False)
     # sets up a reference with posts (variable defined in class User)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     comments = db.relationship("Comment", backref="post", lazy=True)
 
     def __repr__(self): # __repr__ function shows how the data for a post will be displayed when called
-        return f"Post('{self.title}', '{self.date_posted}')"
+        return f"Post('{self.title}', '{self.date_posted}', '{self.year_group}', '{self.filter_year_group}')"
 
 
 class Comment(db.Model):

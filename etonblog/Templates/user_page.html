@@ -30,7 +30,6 @@
             <p class="text-muted">{{ post.date_posted.strftime("%d/%m/%Y") }}</p>
           </div>
           <h3><a class="article-title" href="{{ url_for('posts.post', post_id=post.id) }}" title="view this post">{{ post.title }}</a></h3>
-          <br>
           <p class="article-content">{{ post.content }}</p>
           {% if current_user == post.author %}
             <div>

@@ -38,8 +38,8 @@
         
               {% if current_user == post.author %}
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                  <a class="dropdown-item" href="{{ url_for('posts.update_post', post_id=post.id) }}"><span class="material-icons">edit</span><p class="pt-3">Edit</p></a>
-                  <a class="dropdown-item" href="#" data-toggle="modal" data-target="#deleteModal"><span class="material-icons">delete</span><p class="pt-3">Delete</p></a>
+                  <a class="dropdown-item" href="{{ url_for('posts.update_post', post_id=post.id) }}"><span class="material-icons-outlined">edit</span><p>Edit</p></a>
+                  <a class="dropdown-item" href="#" data-toggle="modal" data-target="#deleteModal"><span class="material-icons-outlined">delete</span><p>Delete</p></a>
                 </div>
         
                 <!-- Bootstrap Modal -->
@@ -68,7 +68,7 @@
                 </div>
               {% else %}
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                  <a href="#" class="dropdown-item"><span class="material-icons">report</span><p class="pt-3">Report</p></a>
+                  <a href="#" class="dropdown-item"><span class="material-icons-outlined">report</span><p>Report</p></a>
                 </div>
               {% endif %}
             </div>
@@ -103,7 +103,7 @@
                   {{ form.hidden_tag() }}
                   <fieldset class="form-group">
                     <div class="form-group">
-                      {{ form.title.label(class="form-control-label") }}
+                      {{ form.title.label }}
                       {% if form.title.errors %}
                         {{ form.title(class="form-control form-control-lg is-invalid") }}
                         <div class="invalid-feedback">
@@ -120,7 +120,7 @@
                     </div>
           
                     <div class="form-group">
-                      {{ form.content.label(class="form-control-label")}}
+                      {{ form.content.label }}
                       {% if form.content.errors %}
                         {{ form.content(class="form-control form-control-lg is-invalid", rows="7", cols="100") }}
                         {% for error in errors %}

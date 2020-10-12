@@ -17,9 +17,9 @@
         {{ form.hidden_tag() }}
         <fieldset class="form-group">
           <legend class="border-bottom mb-4">Reset Password</legend>
-          <p>We will send a message to your email with instructions to reset your password.</p>
+          <p class="reset-password-text">We will send a message to your email with instructions to reset your password.</p>
           <div class="form-group">
-            {{ form.email.label(class="form-control-label") }}
+            {{ form.email.label }}
             {% if form.email.errors %}
               <!-- is-invalid class creates a red border around the textbox -->
               {{ form.email(class="form-control form-control-lg is-invalid") }}
@@ -39,12 +39,11 @@
             {{ form.submit(class="btn btn-outline-info") }}
         </div>
       </form>
-    </div>
-
-    <div class="pt-1">
-      <small class="text-muted">
-        Need An Account? <a class="ml-2" href="{{ url_for('users.register') }}">Sign Up Now</a>
-      </small>
+      <div class="pt-1">
+        <small class="text-muted">
+          Need An Account? <a class="ml-2" href="{{ url_for('users.register') }}">Sign Up Now</a>
+        </small>
+      </div>
     </div>
   </div>
 {% endblock content %}

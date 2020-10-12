@@ -8,8 +8,10 @@
         "**/site.db": false,
         "**/venv": true,
         "**/profile_pictures": false,
-        "**/images/": false
+        "**/images/": false,
+        "**/dist/": true
     },
     "python.linting.pylintEnabled": false,
     "editor.showUnused": true,
+    "compile-hero.disable-compile-files-on-did-save-code": false,
 }
