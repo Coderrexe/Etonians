@@ -1,11 +1,6 @@
-$(window).scroll(function() {
-    let scroll = $(window).scrollTop();
-
-    if (scroll >= 10) {
-        $(".navbar-js").addClass("nav-scroll");
-    } else {
-        $(".navbar-js").removeClass("nav-scroll");
-    }
+window.addEventListener("scroll", function() {
+    let navbarJs = document.querySelector(".navbar-js");
+    navbarJs.classList.toggle("nav-scroll", window.scrollY > 0);
 });
 
 const navbar = () => {
@@ -16,8 +11,4 @@ const navbar = () => {
     });
 };
 
-const app = () => {
-    navbar();
-};
-
-app();
+navbar();

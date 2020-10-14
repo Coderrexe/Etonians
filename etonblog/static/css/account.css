@@ -14,7 +14,7 @@
   margin-top: 10px;
 }
 
-.form-group .picture-input {
+.form-group #file {
   width: 0.1px;
 	height: 0.1px;
 	opacity: 0;
@@ -23,10 +23,23 @@
 	z-index: -1;
 }
 
-.form-group label[for="file"] {
-  display: inline-block;
+.form-group label[for="file"] i {
+  font-size: 45px;
+  margin-left: 10px;
+  color: rgb(95, 95, 95);
 }
 
-.form-group .picture-input:focus + label, .form-group .picture-input + label:hover {
+.form-group label[for="file"] p {
+  display: inline-block;
+  color: rgb(95, 95, 95);
+  margin-left: 5px;
+  margin-bottom: 0;
+}
+
+.form-group #file:focus + label, .form-group #file + label:hover {
   cursor: pointer;
+}
+
+fieldset.form-group {
+  margin-top: 35px;
 }

@@ -23,8 +23,4 @@ const navbar = () => {
     });
 };
 
-const app = () => {
-    navbar();
-};
-
-app();
+navbar();

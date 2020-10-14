@@ -1,6 +1,7 @@
+import os
 from flask import render_template, url_for, flash, redirect, request, Blueprint
 from flask_login import login_user, current_user, logout_user, login_required
-from etonblog import db, bcrypt
+from etonblog import app, db, bcrypt
 from etonblog.models import User, Post
 from etonblog.users.forms import RegistrationForm, LoginForm, UpdateAccountForm, RequestResetForm, ResetPasswordForm
 from etonblog.users.utils import save_picture, send_reset_email
@@ -71,10 +72,11 @@ def logout():
 def account():
     form = UpdateAccountForm()
     if form.validate_on_submit():
-        if form.picture.data: # profile picture is not a required field (users can just use the default picture)
-            picture_file = save_picture(form.picture.data)
-            current_user.image_file = picture_file # updates the profile picture
-        # updates different fields
+        if request.files:
+            profile_picture = request.files["profile-picture"]
+            picture_file = save_picture(profile_picture)
+            current_user.image_file = picture_file
+        
         current_user.username = form.username.data
         db.session.commit()
         flash("Your profile has been updated!", "success")

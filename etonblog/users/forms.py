@@ -1,5 +1,4 @@
 from flask_wtf import FlaskForm
-from flask_wtf.file import FileField, FileAllowed
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.fields.html5 import EmailField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
@@ -35,9 +34,7 @@ class LoginForm(FlaskForm):
 
 
 class UpdateAccountForm(FlaskForm):
-    username = StringField("Username", validators=[DataRequired(), Length(min=2, max=20)])
-    password = PasswordField("Password", validators=[DataRequired()])
-    picture = FileField("Update Profile Picture", validators=[FileAllowed(["jpg", "jpeg", "png", "gif"])])
+    username = StringField("Change Username", validators=[DataRequired(), Length(min=2, max=20)])
     submit = SubmitField("Update")
 
     # validate_username and validate_email functions will be automatically called
@@ -46,12 +43,6 @@ class UpdateAccountForm(FlaskForm):
             user = User.query.filter_by(username=username.data).first()
             if user:
                 raise ValidationError("This username is already used by another account. Please choose another one.")
-
-    def validate_email(self, email):
-        if email.data != current_user.email:
-            email = User.query.filter_by(email=email.data).first()
-            if email:
-                raise ValidationError("This email is already associated with another account.")
 
 
 class RequestResetForm(FlaskForm):
