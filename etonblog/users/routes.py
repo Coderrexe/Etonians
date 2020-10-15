@@ -72,11 +72,13 @@ def logout():
 def account():
     form = UpdateAccountForm()
     if form.validate_on_submit():
-        if request.files:
+        try:
             profile_picture = request.files["profile-picture"]
             picture_file = save_picture(profile_picture)
             current_user.image_file = picture_file
-        
+        except:
+            pass
+
         current_user.username = form.username.data
         db.session.commit()
         flash("Your profile has been updated!", "success")
