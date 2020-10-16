@@ -1,3 +1,11 @@
+function historyBack() {
+    if (document.referrer != window.location.href) {
+        history.back();
+    } else {
+        window.location.replace("/home/");
+    }
+}
+
 const navbar = () => {
     const navbarToggler = document.getElementById("navbar-toggler");
     const nav = document.querySelector(".nav-links");
@@ -21,6 +29,6 @@ const navbar = () => {
         // navbar toggler animation
         navbarToggler.classList.toggle("toggle");
     });
-};
+}
 
 navbar();

@@ -40,10 +40,14 @@ def post(post_id): # every post has a unique ID
     form = CommentForm()
     comments = Comment.query.all()
     if form.validate_on_submit():
-        comment = Comment(title=form.title.data, content=form.content.data)
-        db.session.add(comment)
-        db.session.commit()
-        return redirect(url_for("posts.post", post=post))
+        try:
+            comment = Comment(title=form.title.data, content=form.content.data)
+            db.session.add(comment)
+            db.session.commit()
+            return redirect(url_for("posts.post", post=post))
+        except:
+            db.session.rollback()
+            flash("Something went wrong. Try again later.", "danger")
     
     image_file = url_for("static", filename=f"profile_pictures/{current_user.image_file}")
     return render_template("post.html", title=post.title, form=form, post=post, image_file=image_file)

@@ -9,6 +9,6 @@ const navbar = () => {
     navbarToggler.addEventListener("click", () => {
         navbarToggler.classList.toggle("toggle");
     });
-};
+}
 
 navbar();
