@@ -128,26 +128,30 @@ a.article-title:hover {
 
 /** View post bar CSS **/
 .post-bar {
-  border: 1px solid #ddd;
   background-color: #fff;
-  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  padding: 10px;
 }
 
-.post-bar .container .btn-back {
+.post-bar a i {
+  color: #1da1f2;
+  font-size: 25px;
+  padding: 10px;
+  border-radius: 50%;
+}
+
+.post-bar a i:hover {
+  background-color: #dceefa;
+  transition: all 0.1s ease-out;
+}
+
+.post-bar span {
   position: absolute;
-  font-size: 35px;
-  top: 50%;
-  left: 50%;
-  transform: translateX(-50%) translateY(-50%);
-  margin-left: 15px;
-  font-weight: 600;
-}
-
-.post-bar .container .btn-text {
-  margin-left: 30px;
-  margin-top: 17px;
-  font-size: 22px;
-  font-weight: 550;
+  top: 5%;
+  transform: translateY(-5%);
+  font-size: 21px;
+  padding-left: 30px;
+  color: #333;
 }
 
 /** Comment CSS **/

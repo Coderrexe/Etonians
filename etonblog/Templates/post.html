@@ -12,16 +12,8 @@
     {% endwith %}
 
     <div class="post-bar">
-      <div class="container">
-        <div class="row">
-          <div class="col-1">
-            <a href="javascript:historyBack()"><span class="material-icons btn-back">keyboard_backspace</span></a>
-          </div>
-          <div class="col-11">
-            <p class="btn-text">Post by {{ post.author.username }}</p>
-          </div>
-        </div>
-      </div>
+      <a href="javascript:historyBack()"><i class="fas fa-arrow-left"></i></a>
+      <span class="btn-text">Back</span>
     </div>
 
     <section class="post">

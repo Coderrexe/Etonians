@@ -5,7 +5,7 @@ nav {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  min-height: 13vh;
+  height: 13vh;
   background-color: #fff;
   position: fixed;
   top: 0;

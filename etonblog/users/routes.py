@@ -18,8 +18,13 @@ def register():
         return redirect(url_for("main.home"))
 
     form = RegistrationForm()
+
     if form.validate_on_submit():
-        # it is unsafe to store the user password as plain text
+        user_email = form.email.data
+        if "etoncollege.org.uk" not in user_email.split("@", maxsplit=1):
+            flash("You must have an Eton College email to register for an account", "danger")
+            return redirect(url_for("users.register"))
+        
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode("UTF-8")
         year_group = request.form["year-group"]
         user = User(username=form.username.data, email=form.email.data, password=hashed_password, year_group=year_group)
@@ -27,6 +32,7 @@ def register():
         db.session.commit()
         flash(f"Account successfully created! You can now login.", "success")
         login_user(user, remember=form.remember.data)
+
         # if the user wanted to access a page that was @loginrequired before logging in, they will be redirected to that page
         next_page = request.args.get("next")
         return redirect(next_page) if next_page else redirect(url_for("main.home")) # otherwise the user will just be redirected to the home page
