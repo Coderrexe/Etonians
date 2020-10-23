@@ -40,6 +40,16 @@ span, a {
 }
 
 /** Navbar CSS **/
+.navbar {
+  padding: 15px 0;
+  background: transparent;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1030;
+}
+
 @media screen and (max-width: 575px) {
   .navbar .container {
     max-width: 100%;
@@ -88,7 +98,11 @@ span, a {
   transform: skewX(-30deg);
 }
 
-.navbar-dark .navbar-nav .nav-link {
+.navbar-dark .navbar-nav .nav-item {
+  margin-left: 10px;
+}
+
+.navbar-dark .navbar-nav .nav-item .nav-link {
   color: #fff;
   font-weight: 700;
   letter-spacing: 1px;
@@ -125,16 +139,6 @@ span, a {
     width: 100%;
     transition: width 0.3s;
   }
-}
-
-.navbar {
-  padding: 15px 0;
-  background: transparent;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1030;
 }
 
 .nav-scroll {

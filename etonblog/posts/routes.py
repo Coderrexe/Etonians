@@ -38,19 +38,15 @@ def create_post():
 def post(post_id): # every post has a unique ID
     post = Post.query.get_or_404(post_id)
     form = CommentForm()
-    comments = Comment.query.all()
+    comments = Comment.query.filter_by(post=post)
     if form.validate_on_submit():
-        try:
-            comment = Comment(title=form.title.data, content=form.content.data)
-            db.session.add(comment)
-            db.session.commit()
-            return redirect(url_for("posts.post", post=post))
-        except:
-            db.session.rollback()
-            flash("Something went wrong. Try again later.", "danger")
+        comment = Comment(title=form.title.data, content=form.content.data, author=current_user, post=post)
+        db.session.add(comment)
+        db.session.commit()
+        return redirect(url_for("posts.post", post_id=post_id))
     
     image_file = url_for("static", filename=f"profile_pictures/{current_user.image_file}")
-    return render_template("post.html", title=post.title, form=form, post=post, image_file=image_file)
+    return render_template("post.html", title=post.title, form=form, post=post, comments=comments, image_file=image_file)
 
 
 @posts.route("/post/id/<int:post_id>/edit", methods=["POST", "GET"])
@@ -82,6 +78,9 @@ def delete_post(post_id):
     post = Post.query.get_or_404(post_id)
     if current_user != post.author: # if the user tries to delete someone else's post, then 403 error
         abort(403)
+    for comment in Comment.query.filter_by(post_id=post.id):
+        db.session.delete(comment)
+        db.session.commit()
     db.session.delete(post)
     db.session.commit()
     return redirect(url_for("main.home"))

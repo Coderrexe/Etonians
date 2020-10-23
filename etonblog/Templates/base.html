@@ -35,11 +35,10 @@
 
     <ul class="nav-links">
       {% if current_user.is_authenticated %}
-        <li><a href="{{ url_for('posts.create_post') }}">New Post</a></li>
-        <li><a href="{{ url_for('main.home') }}">Home</a></li>
-        <li><a href="{{ url_for('main.about') }}">About</a></li>
-        <li><a href="{{ url_for('users.account') }}">Account</a></li>
-        <li><a href="{{ url_for('users.logout') }}">Logout</a></li>
+        <li><a href="{{ url_for('posts.create_post') }}"><i class="far fa-edit"></i></a></li>
+        <li><a href="{{ url_for('main.home') }}"><i class="far fa-home"></i></a></li>
+        <li><a href="{{ url_for('main.about') }}"><i class="far fa-info-circle"></i></a></li>
+        <li><a href="{{ url_for('users.account') }}"><i class="far fa-user-circle"></i></a></li>
       {% else %}
         <li><a href="{{ url_for('main.about') }}">About</a></li>
         <li><a href="{{ url_for('users.login') }}">Login</a></li>

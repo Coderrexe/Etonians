@@ -19,7 +19,7 @@ nav {
 nav .logo {
   text-transform: uppercase;
   letter-spacing: 5px;
-  font-size: 23px;
+  font-size: 25px;
   font-weight: 600;
 }
 
@@ -37,16 +37,14 @@ nav .nav-links {
 }
 
 nav .nav-links li a {
-  color: #111;
+  color: rgb(95, 95, 95);
   text-decoration: none;
-  letter-spacing: 1px;
-  font-weight: bold;
-  font-size: 14px;
+  font-size: 23px;
 }
 
 nav .nav-links a:hover {
-  color: #3498db !important;
-  transition: all 0.2s;
+  color: #50b7f5 !important;
+  transition: all 0.2s ease-out;
 }
 
 nav #navbar-toggler {

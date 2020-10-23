@@ -31,7 +31,7 @@ def save_picture(form_picture):
 # this function is called in reset_request route, and sends an email to the user
 def send_reset_email(user):
     token = user.get_reset_token()
-    msg = Message("Password Reset Request", sender="noreply@etonians.com", recipients=[user.email])
+    msg = Message("Password Reset Request", sender="noreply@etonians.co.uk", recipients=[user.email])
     msg.body = f"""To reset your password, visit the following link:
 {url_for("users.reset_token", token=token, _external=True)}
 

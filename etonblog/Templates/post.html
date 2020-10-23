@@ -142,7 +142,7 @@
 
       {% for comment in comments %}
         <div class="comment-container">
-          <img src="{{ url_for('static', filename='profile_pictures/' + post.author.image_file) }}">
+          <img src="{{ url_for('static', filename='profile_pictures/' + comment.author.image_file) }}">
           <span>{{ comment.author.username }}</span>
           <p>{{ comment.title }}</p>
           <p>{{ comment.content }}</p>

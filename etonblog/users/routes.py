@@ -22,7 +22,7 @@ def register():
     if form.validate_on_submit():
         user_email = form.email.data
         if "etoncollege.org.uk" not in user_email.split("@", maxsplit=1):
-            flash("You must have an Eton College email to register for an account", "danger")
+            flash("You must have an Eton College email to register for an account.", "danger")
             return redirect(url_for("users.register"))
         
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode("UTF-8")
