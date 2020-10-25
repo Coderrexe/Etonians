@@ -33,8 +33,16 @@ def send_reset_email(user):
     token = user.get_reset_token()
     msg = Message("Password Reset Request", sender="noreply@etonians.co.uk", recipients=[user.email])
     msg.body = f"""To reset your password, visit the following link:
+    
 {url_for("users.reset_token", token=token, _external=True)}
 
 If you did not make this request, simply ignore this email and no changes will be made.
 """
     mail.send(msg)
+
+
+# def verify_email(user):
+#     token = user.get_reset_token()
+#     msg = Message("Verify your email", sender="noreply@etonians.co.uk", recipients=[user.email])
+#     msg.body = f"{url_for('main.home', token=token, _external=True)}"
+#     mail.send(msg)

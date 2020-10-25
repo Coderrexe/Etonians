@@ -5,7 +5,6 @@ from etonblog.models import Post
 main = Blueprint("main", __name__)
 
 
-@main.route("/home")
 @main.route("/home/")
 @login_required
 def home():
@@ -22,7 +21,6 @@ def home():
     return render_template("home.html", posts=posts, image_file=image_file)
 
 
-@main.route("/about")
 @main.route("/about/")
 def about():
     if current_user.is_authenticated:
@@ -33,7 +31,6 @@ def about():
     return render_template("about.html", title="About", image_file=image_file)
 
 
-@main.route("/donate")
 @main.route("/donate/")
 def donate():
     if current_user.is_authenticated:

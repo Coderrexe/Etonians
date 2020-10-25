@@ -21,6 +21,15 @@
 
 .article-metadata .post-author {
   font-size: 25px;
+  color:  #1da1f2;
+  padding: 10px;
+  border-radius: 50%;
+}
+
+.article-metadata .post-author:hover {
+  color: #1da1f2;
+  background-color: #dceefa;
+  transition: all 0.2s ease-out;
 }
 
 .article-metadata p {
@@ -157,12 +166,36 @@ a.article-title:hover {
 /** Comment CSS **/
 .comment-container {
   border-top: 1px solid #ddd;
+  margin-top: 20px;
+  padding-top: 15px;
 }
 
 .comment-container img {
-  width: 25px;
-  height: 25px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
+}
+
+.comment-container a {
+  font-size: 22px;
+  color: #1da1f2;
+  padding: 10px;
+  border-radius: 50%;
+  text-decoration: none;
+}
+
+.comment-container a:hover {
+  background-color: #dceefa;
+  transition: all 0.2s ease-out;
+}
+
+.comment-container p.comment-title {
+  padding-left: 50px;
+  font-size: 22px;
+}
+
+.comment-container p.comment-content {
+  padding-left: 50px;
 }
 
 /** Create post CSS **/
