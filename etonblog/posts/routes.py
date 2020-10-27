@@ -1,7 +1,9 @@
+from datetime import datetime
 from flask import render_template, url_for, flash, redirect, request, abort, Blueprint
 from flask_login import current_user, login_required
 from etonblog import db
 from etonblog.models import Post, Comment
+from etonblog.utils import convert_date
 from etonblog.posts.forms import PostForm
 from etonblog.comments.forms import CommentForm
 
@@ -45,8 +47,10 @@ def post(post_id): # every post has a unique ID
         flash("Your reply has successfully been created!", "success")
         return redirect(url_for("posts.post", post_id=post_id))
     
+    current_time = datetime.utcnow()
     image_file = url_for("static", filename=f"profile_pictures/{current_user.image_file}")
-    return render_template("post.html", title=post.title, form=form, post=post, comments=comments, image_file=image_file)
+
+    return render_template("post.html", title=post.title, form=form, post=post, comments=comments, current_time=current_time, convert_date=convert_date, image_file=image_file)
 
 
 @posts.route("/post/id/<int:post_id>/edit/", methods=["POST", "GET"])

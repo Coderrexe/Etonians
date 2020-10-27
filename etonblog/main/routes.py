@@ -1,6 +1,8 @@
+from datetime import datetime
 from flask import render_template, url_for, request, Blueprint
 from flask_login import current_user, login_required
 from etonblog.models import Post
+from etonblog.utils import convert_date
 
 main = Blueprint("main", __name__)
 
@@ -17,8 +19,10 @@ def home():
 
     posts = posts[::-1]
     
+    current_time = datetime.utcnow()
     image_file = url_for("static", filename=f"profile_pictures/{current_user.image_file}")
-    return render_template("home.html", posts=posts, image_file=image_file)
+
+    return render_template("home.html", posts=posts, image_file=image_file, current_time=current_time, convert_date=convert_date)
 
 
 @main.route("/about/")

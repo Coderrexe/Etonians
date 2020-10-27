@@ -22,7 +22,7 @@
         <div class="media-body">
           <div class="article-metadata">
             <a class="mr-2 post-author" href="{{ url_for('users.user_page', username=post.author.username) }}">{{ post.author.username }}</a>
-            <p class="text-muted">{{ post.date_posted.strftime("%d/%m/%Y") }}</p>
+            <p class="text-muted">{{ convert_date(current_time, post.date_posted) }}</p>
             <div class="dropdown">
               <a class="dropdown-btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="material-icons">more_vert</span>
