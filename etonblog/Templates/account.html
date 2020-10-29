@@ -25,7 +25,7 @@
       <form method="POST" action="" enctype="multipart/form-data">
         {{ form.hidden_tag() }}
         <div class="form-group">
-          <input type="file" accept=".png, .jpg, .jpeg, .gif" id="file" name="profile-picture" onchange="this.form.submit()">
+          <input type="file" accept=".png, .jpg, .jpeg, .gif" id="file" name="profile-picture" onchange="form.submit()">
           <label for="file">
             <i class="fas fa-images"></i>
             <p>Click to change your profile picture</p>
@@ -53,7 +53,7 @@
 
         <div class="form-group">
           <!-- "btn-outline-info" class is a button with a light blue outline -->
-          {{ form.submit(class="btn btn-outline-info") }}
+          {{ form.submit_button(class="btn btn-outline-info") }}
         </div>
       </form>
     </div>

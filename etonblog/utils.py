@@ -1,24 +1,18 @@
-def convert_date(current_time, date_posted):
-    split_by_comma = str(current_time - date_posted).split(",")
-    split_by_colon = str(current_time - date_posted).split(":")
+from etonblog import db
 
-    if len(split_by_comma) > 1:
-        return split_by_comma[0] + " ago"
-    else:
-        if int(split_by_colon[0]) > 0:
-            if split_by_colon[0] != "1":
-                return split_by_colon[0] + " hours ago"
-            else:
-                return "1 hour ago"
-        else:
-            if int(split_by_colon[1]) > 0:
-                if int(split_by_colon[1]) < 10:
-                    minutes = int(split_by_colon[1])
-                    if minutes == 1:
-                        return "1 minute ago"
-                    else:
-                        return str(minutes) + " minutes ago"
-                else:
-                    return split_by_colon[1] + " minutes ago"
-            else:
-                return "Just now"
+def convert_date(current_time, date_posted):
+    time_delta = current_time - date_posted
+
+    if time_delta.days > 0:
+        return str(time_delta.days) + " days ago"
+
+    if time_delta.seconds > 3600:
+        return str(time_delta.seconds//3600) + " hours ago"
+
+    if time_delta.seconds > 119:
+        return str(time_delta.seconds//60) + " minutes ago"
+
+    if time_delta.seconds > 59:
+        return str(time_delta.seconds//60) + " minute ago"
+        
+    return "Just now"

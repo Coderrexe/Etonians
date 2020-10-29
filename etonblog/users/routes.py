@@ -1,10 +1,11 @@
 import os
 from flask import render_template, url_for, flash, redirect, request, Blueprint
 from flask_login import login_user, current_user, logout_user, login_required
+
 from etonblog import app, db, bcrypt
 from etonblog.models import User, Post
 from etonblog.users.forms import RegistrationForm, LoginForm, UpdateAccountForm, RequestResetForm, ResetPasswordForm
-from etonblog.users.utils import save_picture, send_reset_email
+from etonblog.users.utils import save_picture, send_reset_email, send_verify_email
 
 users = Blueprint("users", __name__)
 
@@ -27,6 +28,7 @@ def register():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode("UTF-8")
         year_group = request.form["year-group"]
         user = User(username=form.username.data, email=form.email.data, password=hashed_password, year_group=year_group)
+
         db.session.add(user)
         db.session.commit()
         flash(f"Account successfully created! You can now login.", "success")

@@ -1,10 +1,13 @@
 import os
 import secrets
+import random
 from PIL import Image
 from flask import url_for
 from flask_mail import Message
 from flask_login import current_user
-from etonblog import app, mail
+
+from etonblog import app, db, mail
+from etonblog.models import EmailVerificationCode
 
 
 def save_picture(form_picture):
@@ -41,8 +44,17 @@ If you did not make this request, simply ignore this email and no changes will b
     mail.send(msg)
 
 
-# def verify_email(user):
-#     token = user.get_reset_token()
-#     msg = Message("Verify your email", sender="noreply@etonians.co.uk", recipients=[user.email])
-#     msg.body = f"{url_for('main.home', token=token, _external=True)}"
-#     mail.send(msg)
+def send_verify_email(user_email):
+    verification_code = random.randrange(100000, 999999)
+    verification_code_list = EmailVerificationCode.query.all()
+
+    while verification_code in verification_code_list:
+        verification_code = random.randrange(100000, 999999)
+
+    db.session.add(verification_code)
+    db.session.commit()
+
+    msg = Message("Verify your email", sender="noreply@etonians.co.uk", recipients=[user_email])
+    msg.body = f"{verification_code}"
+
+    mail.send(msg)

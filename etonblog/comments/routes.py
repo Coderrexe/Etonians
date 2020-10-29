@@ -1,5 +1,6 @@
 from flask import render_template, url_for, redirect, request, flash, abort, Blueprint
 from flask_login import current_user, login_required
+
 from etonblog import db
 from etonblog.models import Comment
 from etonblog.comments.forms import CommentForm

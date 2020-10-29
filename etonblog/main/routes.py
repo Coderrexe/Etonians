@@ -1,6 +1,7 @@
 from datetime import datetime
 from flask import render_template, url_for, request, Blueprint
 from flask_login import current_user, login_required
+
 from etonblog.models import Post
 from etonblog.utils import convert_date
 

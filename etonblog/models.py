@@ -1,6 +1,7 @@
 from datetime import datetime
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from flask_login import UserMixin
+
 from etonblog import app, db, login_manager
 
 
@@ -21,6 +22,7 @@ class User(db.Model, UserMixin):
     # backref allows "author" attribute to be accessed when displaying info about a post
     posts = db.relationship("Post", backref="author", lazy=True)
     comments = db.relationship("Comment", backref="author", lazy=True)
+    upvotes = db.relationship("Upvote", backref="author", lazy=True)
 
     def get_reset_token(self, expires_sec=1800):
         s = Serializer(app.config["SECRET_KEY"], expires_sec)
@@ -49,6 +51,7 @@ class Post(db.Model):
     # sets up a reference with posts (variable defined in class User)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     comments = db.relationship("Comment", backref="post", lazy=True)
+    upvotes = db.relationship("Upvote", backref="post", lazy=True)
 
     def __repr__(self): # __repr__ function shows how the data for a post will be displayed when called
         return f"Post('{self.title}', '{self.date_posted}', '{self.year_group}', '{self.filter_year_group}')"
@@ -64,3 +67,22 @@ class Comment(db.Model):
 
     def __repr__(self):
         return f"Comment('{self.title}', '{self.date_posted}')"
+
+
+class Upvote(db.Model):
+    # user cannot upvote a post twice so user_id, post_id together appear uniquely in this table
+    __table_args__ = (
+        db.UniqueConstraint("user_id", "post_id"),
+    )
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    post_id = db.Column(db.Integer, db.ForeignKey("post.id"), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+
+    def __repr__(self):
+        return f"Upvote('{self.post_id}', '{self.user_id}')"
+
+
+class EmailVerificationCode(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    value = db.Column(db.Integer, nullable=False)
