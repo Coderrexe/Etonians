@@ -20,7 +20,7 @@ def edit_comment(comment_id):
         comment.title = form.title.data
         comment.content = form.content.data
         db.session.commit()
-        flash("Your reply has successfully been edited!", "success")
+        flash("Your reply has successfully been edited!", category="success")
         return redirect(url_for("posts.post", post_id=comment.post.id))
     elif request.method == "GET":
         form.title.data = comment.title
@@ -35,6 +35,7 @@ def edit_comment(comment_id):
 def delete_comment(comment_id):
     comment = Comment.query.get_or_404(comment_id)
     post_id = comment.post.id
+
     if current_user != comment.author:
         abort(403)
 

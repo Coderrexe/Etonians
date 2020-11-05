@@ -25,10 +25,10 @@ def create_post():
             post = Post(title=form.title.data, content=form.content.data, author=current_user, year_group=current_user.year_group, filter_year_group=filter_year_group)
             db.session.add(post)
             db.session.commit()
-            flash("New post successfully created!", "success")
+            flash("New post successfully created!", category="success")
             return redirect(url_for("main.home"))
         else:
-            flash("Tick at least one of the year group boxes to proceed.", "danger")
+            flash("Tick at least one of the year group boxes to proceed.", category="danger")
 
     image_file = url_for("static", filename=f"profile_pictures/{current_user.image_file}")
     return render_template("create_post.html", title="New Post", form=form, image_file=image_file)
@@ -45,7 +45,7 @@ def post(post_id): # every post has a unique ID
         comment = Comment(title=form.title.data, content=form.content.data, author=current_user, post=post)
         db.session.add(comment)
         db.session.commit()
-        flash("Your reply has successfully been created!", "success")
+        flash("Your reply has successfully been created!", category="success")
         return redirect(url_for("posts.post", post_id=post_id))
     
     current_time = datetime.utcnow()
@@ -58,7 +58,6 @@ def post(post_id): # every post has a unique ID
 @login_required
 def update_post(post_id):
     post = Post.query.get_or_404(post_id)
-    image_file = url_for("static", filename=f"profile_pictures/{current_user.image_file}")
     if post.author != current_user: # if a user is trying to update someone else's post, then 403 error
         abort(403)
 
@@ -67,12 +66,13 @@ def update_post(post_id):
         post.title = form.title.data # updates the old post title and content with new title and content
         post.content = form.content.data
         db.session.commit()
-        flash("Your post has been successfully updated!", "success")
+        flash("Your post has been successfully updated!", category="success")
         return redirect(url_for("main.home"))
     elif request.method == "GET": # if the user simply loads the page
         form.title.data = post.title # the boxes are already filled in with the non-updated post title and content
         form.content.data = post.content
 
+    image_file = url_for("static", filename=f"profile_pictures/{current_user.image_file}")
     return render_template("update_post.html", title="Update Post", form=form, image_file=image_file)
 
 

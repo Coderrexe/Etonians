@@ -45,16 +45,18 @@ If you did not make this request, simply ignore this email and no changes will b
 
 
 def send_verify_email(user_email):
-    verification_code = random.randrange(100000, 999999)
+    number = random.randrange(100000, 999999)
     verification_code_list = EmailVerificationCode.query.all()
 
-    while verification_code in verification_code_list:
-        verification_code = random.randrange(100000, 999999)
+    while number in verification_code_list:
+        number = random.randrange(100000, 999999)
+
+    verification_code = EmailVerificationCode(value=number)
 
     db.session.add(verification_code)
     db.session.commit()
 
     msg = Message("Verify your email", sender="noreply@etonians.co.uk", recipients=[user_email])
-    msg.body = f"{verification_code}"
+    msg.body = f"{verification_code.value}"
 
     mail.send(msg)

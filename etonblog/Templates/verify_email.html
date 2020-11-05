@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="col-12" id="main">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">
+          <span>{{ message }}</span>
+        </div>
+      {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <div class="content-section register-login-form">
+      <form method="POST" action="">
+        <!-- form.hidden_tag() is another step of password security and encryption -->
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group mt-0">
+          <legend class="border-bottom mb-4">Verify Email</legend>
+          <div class="form-group">
+            {{ form.username.label }}
+            {% if form.username.errors %}
+              <!-- is-invalid class creates a red border around the textbox -->
+              {{ form.username(class="form-control form-control-lg is-invalid") }}
+              <!-- invalid-feedback class makes the error message red instead of black -->
+              <div class="invalid-feedback">
+                {% for error in form.username.errors %}
+                  <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+            {% else %}
+              {{ form.username(class="form-control form-control-lg") }}
+              <ul class="ml-4">
+                <li><small class="text-muted">Enter your username again.</small></li>
+              </ul>
+            {% endif %}
+          </div>
+          <div class="form-group">
+            {{ form.verification_code.label }}
+            {% if form.verification_code.errors %}
+              <!-- is-invalid class creates a red border around the textbox -->
+              {{ form.verification_code(class="form-control form-control-lg is-invalid") }}
+              <!-- invalid-feedback class makes the error message red instead of black -->
+              <div class="invalid-feedback">
+                {% for error in form.verification_code.errors %}
+                  <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+            {% else %}
+              {{ form.verification_code(class="form-control form-control-lg") }}
+              <ul class="ml-4">
+                <li><small class="text-muted">Enter the verification code we sent to your email.</small></li>
+              </ul>
+            {% endif %}
+          </div>
+        </fieldset>
+
+        <!-- "btn-outline-info" class is a button with a light blue outline -->
+        <div class="form-group">
+          {{ form.submit_button(class="btn btn-outline-info") }}
+        </div>
+      </form>
+      
+      <div class="pt-1">
+        <small class="text-muted">
+          Already Have An Account? <a class="ml-2" href="{{ url_for('users.login') }}">Sign In</a>
+        </small>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

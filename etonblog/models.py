@@ -41,6 +41,19 @@ class User(db.Model, UserMixin):
         return f"User('{self.username}', '{self.email}', '{self.image_file}', '{self.year_group}')"
 
 
+class EmailVerificationCode(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    value = db.Column(db.Integer, nullable=False)
+
+
+class TemporaryUser(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    username = db.Column(db.String(20), nullable=False)
+    email = db.Column(db.String(120), nullable=False)
+    password = db.Column(db.String(60), nullable=False)
+    year_group = db.Column(db.String(1), nullable=False)
+
+
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     title = db.Column(db.String(100), nullable=False)
@@ -70,7 +83,7 @@ class Comment(db.Model):
 
 
 class Upvote(db.Model):
-    # user cannot upvote a post twice so user_id, post_id together appear uniquely in this table
+    # one user cannot upvote a post twice so user_id, post_id together appear uniquely in this table
     __table_args__ = (
         db.UniqueConstraint("user_id", "post_id"),
     )
@@ -81,8 +94,3 @@ class Upvote(db.Model):
 
     def __repr__(self):
         return f"Upvote('{self.post_id}', '{self.user_id}')"
-
-
-class EmailVerificationCode(db.Model):
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    value = db.Column(db.Integer, nullable=False)
