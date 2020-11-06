@@ -34,13 +34,13 @@ def register():
         send_verify_email(user.email)
 
         flash("An email has been sent to you, containing a verification code.", category="info")
-        return redirect(url_for("users.verify_email"))
+        return redirect(url_for("users.verify_email", username=user.username))
 
     return render_template("register.html", title="Register", form=form)
 
 
-@users.route("/register/verify/", methods=["POST", "GET"])
-def verify_email():
+@users.route("/register/verify/user/<string:username>/", methods=["POST", "GET"])
+def verify_email(username):
     if current_user.is_authenticated:
         return redirect(url_for("main.home"))
     
@@ -49,7 +49,7 @@ def verify_email():
         verification_code_list = EmailVerificationCode.query.all()
         for verification_code in verification_code_list:
             if form.verification_code.data == verification_code.value:
-                user_info = TemporaryUser.query.filter_by(username=form.username.data).first()
+                user_info = TemporaryUser.query.filter_by(username=username).first()
                 user = User(username=user_info.username, email=user_info.email, password=user_info.password, year_group=user_info.year_group)
 
                 db.session.add(user)         
@@ -84,8 +84,6 @@ def login():
             # if the user wanted to access a page that was @loginrequired before logging in, they will be redirected to that page
             next_page = request.args.get("next")
             return redirect(next_page) if next_page else redirect(url_for("main.home"))
-
-    if form.is_submitted() and not form.validate_on_submit():
         flash("Login Unsuccessful. Please check username and password.", category="danger")
 
     return render_template("login.html", title="Login", form=form)

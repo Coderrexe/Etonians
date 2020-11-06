@@ -70,7 +70,7 @@
         <div class="bottom-text">
           <div class="button-container">
             <label><span class="material-icons-outlined">thumb_up</span></label>
-            <p>Upvote {{ post.upvotes | count }}</p>
+            <button id="like-post">{{ post.upvotes | count }}</button>
           </div>
           <div class="button-container">
             <a href="{{ url_for('posts.post', post_id=post.id) }}"><span class="material-icons-outlined">comment</span></a>

@@ -22,7 +22,7 @@
       </div>
 
       <!-- the enctype attribute specifies how the form-data should be encoded when submitting it to the server -->
-      <form method="POST" action="" enctype="multipart/form-data">
+      <form method="POST" action="" enctype="multipart/form-data" autocomplete="off">
         {{ form.hidden_tag() }}
         <div class="form-group">
           <input type="file" accept=".png, .jpg, .jpeg, .gif" id="file" name="profile-picture" onchange="form.submit()">

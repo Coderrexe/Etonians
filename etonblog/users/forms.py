@@ -28,7 +28,6 @@ class RegistrationForm(FlaskForm):
 
 
 class VerifyEmailForm(FlaskForm):
-    username = StringField(label="Nickname", validators=[DataRequired(), Length(min=2, max=20, message="Must be between 2 and 20 characters long.")])
     verification_code = IntegerField(label="Verification Code", validators=[DataRequired()])
     submit_button = SubmitField(label="Register Account")
 
