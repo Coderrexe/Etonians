@@ -51,6 +51,13 @@ class UpdateAccountForm(FlaskForm):
                 raise ValidationError(message="This username is already used by another account. Please choose another one.")
 
 
+class UpdateAccountPasswordForm(FlaskForm):
+    old_password = PasswordField(label="Your Old Password", validators=[DataRequired()])
+    new_password = PasswordField(label="Your New Password", validators=[DataRequired(), Length(min=8, message="Must be at least 8 characters long.")])
+    confirm_new_password = PasswordField(label="Confirm New Password", validators=[DataRequired(), EqualTo("new_password", message="Passwords must match.")])
+    submit_button = SubmitField(label="Change Password")
+
+
 class RequestResetForm(FlaskForm):
     email = EmailField(label="Email", validators=[DataRequired(), Email(message="Email is not valid.")])
     submit = SubmitField(label="Reset Password")
@@ -58,7 +65,7 @@ class RequestResetForm(FlaskForm):
     def validate_email(self, email):
         email = User.query.filter_by(email=email.data).first()
         if not email:
-            raise ValidationError(message="No user found.")
+            raise ValidationError(message="This email is not registered with any accounts on Etonians.")
 
 
 class ResetPasswordForm(FlaskForm):

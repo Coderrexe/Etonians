@@ -4,7 +4,7 @@ from flask_login import login_user, current_user, logout_user, login_required
 
 from etonblog import db, bcrypt
 from etonblog.models import User, Post, EmailVerificationCode, TemporaryUser
-from etonblog.users.forms import RegistrationForm, VerifyEmailForm, LoginForm, UpdateAccountForm, RequestResetForm, ResetPasswordForm
+from etonblog.users.forms import RegistrationForm, VerifyEmailForm, LoginForm, UpdateAccountForm, UpdateAccountPasswordForm, RequestResetForm, ResetPasswordForm
 from etonblog.users.utils import save_picture, send_reset_email, send_verify_email
 
 users = Blueprint("users", __name__)
@@ -64,7 +64,6 @@ def verify_email(username):
                 return redirect(next_page) if next_page else redirect(url_for("main.home"))
 
         flash("Incorrect verification code.", category="danger")
-        return redirect(url_for("users.verify_email"))
 
     return render_template("verify_email.html", form=form)
 
@@ -114,7 +113,24 @@ def account():
         form.username.data = current_user.username
 
     image_file = url_for("static", filename=f"profile_pictures/{current_user.image_file}")
-    return render_template("account.html", image_file=image_file, form=form)
+    return render_template("account.html", title="Your Account", image_file=image_file, form=form)
+
+
+@users.route("/account/update_password/", methods=["POST", "GET"])
+@login_required
+def update_password():
+    form = UpdateAccountPasswordForm()
+    if form.validate_on_submit():
+        if bcrypt.check_password_hash(current_user.password, form.old_password.data):
+            hashed_password = bcrypt.generate_password_hash(form.new_password.data).decode("UTF-8")
+            current_user.password = hashed_password
+            db.session.commit()
+            flash("Your password has successfully been updated!", category="success")
+            return redirect(url_for("users.account"))
+        else:
+            flash("Your old password is incorrect.", category="danger")
+    
+    return render_template("update_password.html", title="Update Password", form=form)
 
 
 @users.route("/user/<string:username>/")
@@ -131,13 +147,15 @@ def user_page(username):
 @users.route("/reset_password/", methods=["POST", "GET"])
 def reset_request():
     if current_user.is_authenticated:
+        send_reset_email(current_user)
+        flash("An email has been sent to you, with instructions to reset your password.", category="info")
         return redirect(url_for("main.home"))
 
     form = RequestResetForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first() # finds the user with the email
         send_reset_email(user)
-        flash("An email has been sent to your email, with instructions to reset your password.", category="info")
+        flash("An email has been sent to you, with instructions to reset your password.", category="info")
         return redirect(url_for("users.login"))
 
     return render_template("reset_request.html", title="Reset Password", form=form)
@@ -145,9 +163,6 @@ def reset_request():
 
 @users.route("/reset_password/<token>/", methods=["POST", "GET"])
 def reset_token(token):
-    if current_user.is_authenticated:
-        return redirect(url_for("main.home"))
-
     user = User.verify_reset_token(token)
     if not user:
         flash("That is an invalid or expired token.", category="warning")
