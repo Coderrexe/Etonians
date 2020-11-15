@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-  <div class="col-md-8" id="main">
+  <div class="col-12" id="main">
     {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
       {% for category, message in messages %}
@@ -71,11 +71,11 @@
       <div class="bottom-text">
         <div class="button-container">
           <label><span class="material-icons-outlined">thumb_up</span></label>
-          <p>Upvote</p>
+          <p>{{ post.upvotes | count }}</p>
         </div>
         <div class="button-container">
           <a href="#" data-toggle="modal" data-target="#commentModal"><span class="material-icons-outlined">comment</span></a>
-          <p>Reply</p>
+          <p>{{ post.comments | count }}</p>
         </div>
 
         <div class="modal fade" id="commentModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="commentModalLabel" aria-hidden="true">
@@ -174,17 +174,3 @@
     </section>
   </div>
 {% endblock content %}
-
-{% block sidebar %}
-  <div class="col-md-4" id="sidebar">
-    <div class="content-section sidebar">
-      <h3>Latest Info</h3>
-      <p class='text-muted'>
-        <ul class="list-group">
-          <li class="list-group-item list-group-item-light">Updates</li>
-          <li class="list-group-item list-group-item-light">Events</li>
-        </ul>
-      </p>
-    </div>
-  </div>
-{% endblock sidebar %}

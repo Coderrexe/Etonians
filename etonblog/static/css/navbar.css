@@ -1,5 +1,5 @@
 @charset "UTF-8";
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap");
 
 nav {
   display: flex;
@@ -13,7 +13,7 @@ nav {
   left: 0;
   z-index: 1030;
   box-shadow: 0 1px 8px 3px rgba(95, 69, 69, 0.15);
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 
 nav .logo {
@@ -36,10 +36,17 @@ nav .nav-links {
   padding-top: 13px;
 }
 
-nav .nav-links li a {
+nav .nav-links li a.navbar-link-lg {
   color: rgb(95, 95, 95);
   text-decoration: none;
   font-size: 23px;
+}
+
+nav .nav-links li a.navbar-link-sm {
+  color: rgb(95, 95, 95);
+  text-decoration: none;
+  font-size: 16px;
+  letter-spacing: 0.5px;
 }
 
 nav .nav-links a:hover {
@@ -54,7 +61,7 @@ nav #navbar-toggler {
 nav #navbar-toggler div {
   width: 25px;
   height: 3px;
-  background-color: #111;
+  background-color: rgb(95, 95, 95);
   margin: 5px;
   transition: all 0.3s ease;
 }
@@ -98,7 +105,7 @@ nav #navbar-toggler div {
   }
 
   nav .toggle .navbar-toggler-line1 {
-    transform: rotate(-45deg) translate(-5px, 6px)
+    transform: rotate(-45deg) translate(-5px, 6px);
   }
   
   nav .toggle .navbar-toggler-line2 {
@@ -106,7 +113,7 @@ nav #navbar-toggler div {
   }
   
   nav .toggle .navbar-toggler-line3 {
-    transform: rotate(45deg) translate(-5px, -6px)
+    transform: rotate(45deg) translate(-5px, -6px);
   }
 
   .darken {

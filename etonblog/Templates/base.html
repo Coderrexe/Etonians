@@ -24,59 +24,61 @@
 </head>
 
 <body>
-  <nav>
-    <div class="logo">
-      {% if current_user.is_authenticated %}
-        <a href="{{ url_for('main.home') }}">Etonians</a>
-      {% else %}
-        <a href="{{ url_for('users.login') }}">Etonians</a>
-      {% endif %}
-    </div>
-
-    <ul class="nav-links">
-      {% if current_user.is_authenticated %}
-        <li><a href="{{ url_for('posts.create_post') }}"><i class="far fa-edit"></i></a></li>
-        <li><a href="{{ url_for('main.home') }}"><i class="far fa-home"></i></a></li>
-        <li><a href="{{ url_for('main.about') }}"><i class="far fa-info-circle"></i></a></li>
-        <li><a href="{{ url_for('users.account') }}"><i class="far fa-user-circle"></i></a></li>
-      {% else %}
-        <li><a href="{{ url_for('main.about') }}">About</a></li>
-        <li><a href="{{ url_for('users.login') }}">Login</a></li>
-        <li><a href="{{ url_for('users.register') }}">Register</a></li>
-      {% endif %}
-    </ul>
-
-    <div id="navbar-toggler">
-      <div class="navbar-toggler-line1"></div>
-      <div class="navbar-toggler-line2"></div>
-      <div class="navbar-toggler-line3"></div>
-    </div>
-  </nav>
-
-  <!-- Main body of the webpage -->
-  <main role="main" class="container">
-    <div class="row">
-      {% block content %}
-      {% endblock content %}
-
-      {% block sidebar %}
-      {% endblock sidebar %}
-    </div>
-  </main>
-
-  <footer class="footer text-center">
-    <div class="row">
-      <div class="social-icon text-center">
-        <a href="https://www.youtube.com/simbashi" target="_blank"><span><i class="fab fa-youtube"></i></span></a>
-        <a href="https://www.instagram.com/shi.simba" target="_blank"><span><i class="fab fa-instagram"></i></span></a>
-        <a href="https://www.twitter.com/simba_shi" target="_blank"><span><i class="fab fa-twitter"></i></span></a>
+  <div id="all-content">
+    <nav>
+      <div class="logo">
+        {% if current_user.is_authenticated %}
+          <a href="{{ url_for('main.home') }}">Etonians</a>
+        {% else %}
+          <a href="{{ url_for('users.login') }}">Etonians</a>
+        {% endif %}
       </div>
 
-      <div class="copy">
-        <h6>Copyright © Simba Shi 2020. All rights reserved.</h6>
+      <ul class="nav-links">
+        {% if current_user.is_authenticated %}
+          <li><a href="{{ url_for('posts.create_post') }}" class="navbar-link-lg"><i class="far fa-edit"></i></a></li>
+          <li><a href="{{ url_for('main.home') }}" class="navbar-link-lg"><i class="far fa-home"></i></a></li>
+          <li><a href="{{ url_for('main.about') }}" class="navbar-link-lg"><i class="far fa-info-circle"></i></a></li>
+          <li><a href="{{ url_for('users.account') }}" class="navbar-link-lg"><i class="far fa-cog"></i></a></li>
+        {% else %}
+          <li><a href="{{ url_for('main.about') }}" class="navbar-link-sm">About</a></li>
+          <li><a href="{{ url_for('users.login') }}" class="navbar-link-sm">Login</a></li>
+          <li><a href="{{ url_for('users.register') }}" class="navbar-link-sm">Register</a></li>
+        {% endif %}
+      </ul>
+
+      <div id="navbar-toggler">
+        <div class="navbar-toggler-line1"></div>
+        <div class="navbar-toggler-line2"></div>
+        <div class="navbar-toggler-line3"></div>
       </div>
-    </div>
-  </footer>
+    </nav>
+
+    <!-- Main body of the webpage -->
+    <main role="main" class="container">
+      <div class="row">
+        {% block content %}
+        {% endblock content %}
+
+        {% block sidebar %}
+        {% endblock sidebar %}
+      </div>
+    </main>
+
+    <footer class="footer text-center">
+      <div class="row">
+        <div class="social-icon text-center">
+          <a href="https://www.youtube.com/simbashi" target="_blank"><span><i class="fab fa-youtube"></i></span></a>
+          <a href="https://www.instagram.com/shi.simba" target="_blank"><span><i class="fab fa-instagram"></i></span></a>
+          <a href="https://www.twitter.com/simba_shi" target="_blank"><span><i class="fab fa-twitter"></i></span></a>
+        </div>
+
+        <div class="copy">
+          <h6>Copyright © Simba Shi 2020. All rights reserved.</h6>
+        </div>
+      </div>
+    </footer>
+  </div>
 
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>

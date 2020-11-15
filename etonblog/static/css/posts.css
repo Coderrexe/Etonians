@@ -15,8 +15,8 @@
   border: 1px solid #ddd; /* 1 pixel of border around the Sidebar */
   border-radius: 3px;
   margin-bottom: 20px;
-  position: sticky;
-  top: 16vh;
+  position: fixed;
+  width: 350px;
 }
 
 .article-metadata .post-author {
@@ -133,6 +133,7 @@ a.article-title:hover {
 .post .bottom-text .button-container p {
   margin-left: 10px;
   margin-right: 10px;
+  color: rgb(85, 85, 85);
 }
 
 /** View post bar CSS **/

@@ -12,8 +12,10 @@ body {
   background-color: #eee;
   font-family: "BlinkMacSystemFont", Arial, sans-serif;
   padding-top: 90px;
+}
+
+body #all-content {
   overflow-x: hidden;
-  overflow-y: auto;
 }
 
 #main, #sidebar {
