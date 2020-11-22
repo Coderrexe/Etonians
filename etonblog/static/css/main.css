@@ -11,7 +11,13 @@ body {
   width: 100%;
   background-color: #eee;
   font-family: "BlinkMacSystemFont", Arial, sans-serif;
-  padding-top: 90px;
+  padding-top: 80px;
+}
+
+@media screen and (max-width: 576px) {
+  body {
+    padding-top: 65px;
+  }
 }
 
 body #all-content {
@@ -22,7 +28,7 @@ body #all-content {
   margin-top: 20px;
 }
 
-@media (max-width: 760px) {
+@media (max-width: 768px) {
   #main {
     width: 100%;
   }

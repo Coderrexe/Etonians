@@ -25,7 +25,7 @@
 
 <body>
   <div id="all-content">
-    <nav>
+    <nav class="top-navbar">
       <div class="logo">
         {% if current_user.is_authenticated %}
           <a href="{{ url_for('main.home') }}">Etonians</a>
@@ -34,7 +34,7 @@
         {% endif %}
       </div>
 
-      <ul class="nav-links">
+      <ul>
         {% if current_user.is_authenticated %}
           <li><a href="{{ url_for('posts.create_post') }}" class="navbar-link-lg"><i class="far fa-edit"></i></a></li>
           <li><a href="{{ url_for('main.home') }}" class="navbar-link-lg"><i class="far fa-home"></i></a></li>
@@ -46,12 +46,12 @@
           <li><a href="{{ url_for('users.register') }}" class="navbar-link-sm">Register</a></li>
         {% endif %}
       </ul>
+    </nav>
 
-      <div id="navbar-toggler">
-        <div class="navbar-toggler-line1"></div>
-        <div class="navbar-toggler-line2"></div>
-        <div class="navbar-toggler-line3"></div>
-      </div>
+    <nav class="bottom-navbar">
+      <a href="{{ url_for('main.home') }}"><i class="fas fa-home"></i></a>
+      <a href="{{ url_for('main.about') }}"><i class="fas fa-info-circle"></i></a>
+      <a href="{{ url_for('users.account') }}"><i class="fas fa-cog"></i></a>
     </nav>
 
     <!-- Main body of the webpage -->

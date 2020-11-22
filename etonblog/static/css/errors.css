@@ -5,6 +5,10 @@
   padding: 0;
 }
 
+body {
+  font-family: "BlinkMacSystemFont", Arial, sans-serif;
+}
+
 /** 404 error page CSS **/
 .error-404 {
   background: linear-gradient(0deg, #fff, #03a9f4);

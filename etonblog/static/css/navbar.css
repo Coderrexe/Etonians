@@ -1,11 +1,11 @@
 @charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap");
 
-nav {
+nav.top-navbar {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  height: 13vh;
+  height: 75px;
   background-color: #fff;
   position: fixed;
   top: 0;
@@ -16,19 +16,23 @@ nav {
   font-family: "Open Sans", sans-serif;
 }
 
-nav .logo {
+nav.bottom-navbar {
+  display: none;
+}
+
+nav.top-navbar .logo {
   text-transform: uppercase;
   letter-spacing: 5px;
   font-size: 25px;
   font-weight: 600;
 }
 
-nav .logo a {
+nav.top-navbar .logo a {
   text-decoration: none;
   color: rgb(95, 95, 95);
 }
 
-nav .nav-links {
+nav.top-navbar ul {
   display: flex;
   width: 50%;
   justify-content: space-around;
@@ -36,101 +40,65 @@ nav .nav-links {
   padding-top: 13px;
 }
 
-nav .nav-links li a.navbar-link-lg {
+nav.top-navbar ul li a.navbar-link-lg {
   color: rgb(95, 95, 95);
   text-decoration: none;
   font-size: 23px;
 }
 
-nav .nav-links li a.navbar-link-sm {
+nav.top-navbar ul li a.navbar-link-sm {
   color: rgb(95, 95, 95);
   text-decoration: none;
   font-size: 16px;
   letter-spacing: 0.5px;
 }
 
-nav .nav-links a:hover {
+nav.top-navbar ul li a:hover {
   color:  #1da1f2 !important;
   transition: all 0.2s ease-out;
 }
 
-nav #navbar-toggler {
-  display: none;
-}
-
-nav #navbar-toggler div {
-  width: 25px;
-  height: 3px;
-  background-color: rgb(95, 95, 95);
-  margin: 5px;
-  transition: all 0.3s ease;
-}
-
-@media screen and (max-width: 1024px) {
-  nav .nav-links {
-    width: 60%;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  body {
-    overflow-x: hidden
+@media screen and (max-width: 576px) {
+  nav.top-navbar {
+    height: 70px;    
   }
 
-  nav .nav-links {
-    position: absolute;
-    right: 0;
-    height: 87vh;
-    top: 13vh;
-    background-color: #e9e9e9;
+  nav.top-navbar .logo {
+    text-align: center;
+    font-size: 22px;
+    font-weight: 400;
+  }
+
+  nav.top-navbar ul {
+    display: none;
+  }
+
+  nav.bottom-navbar {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 65px;
+    background-color: #fff;
     display: flex;
-    flex-direction: column;
+    overflow-x: auto;
+    z-index: 1030;
+    border-top: 1px solid rgb(221, 221, 221);
+    border-color: rgba(221, 221, 221, 0.5);
+  }
+  
+  nav.bottom-navbar a {
+    display: flex;
     align-items: center;
-    width: 50%;
-    transform: translateX(100%);
-    transition: transform 0.3s ease-in;
-  }
-
-  nav .nav-links li {
-    opacity: 0;
-  }
-
-  nav #navbar-toggler {
-    display: block;
-    cursor: pointer;
-  }
-
-  nav .nav-toggled {
-    transform: translateX(0);
-  }
-
-  nav .toggle .navbar-toggler-line1 {
-    transform: rotate(-45deg) translate(-5px, 6px);
+    justify-content: center;
+    flex-grow: 1;
+    min-width: 50px;
+    font-size: 20px;
+    color: rgb(95, 95, 95);
+    text-decoration: none;
+    transition: background-color 0.1s ease-in-out;
   }
   
-  nav .toggle .navbar-toggler-line2 {
-    opacity: 0;
-  }
-  
-  nav .toggle .navbar-toggler-line3 {
-    transform: rotate(45deg) translate(-5px, -6px);
-  }
-
-  .darken {
-    filter: brightness(50%);
-    background-color: rgba(0, 0, 0, 0.5);
-    transition: all 0.2s;
-  }
-}
-
-@keyframes navLinkFade {
-  from {
-    opacity: 0;
-    transform: translateX(50px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateX(0);
+  nav.bottom-navbar a:hover {
+    background-color: #ccc;
   }
 }

@@ -4,7 +4,7 @@ from wtforms.validators import DataRequired, Length
 
 
 class PostForm(FlaskForm):
-    title = StringField(label="Title", validators=[DataRequired(), Length(max=100)])
+    title = StringField(label="Title", validators=[DataRequired(), Length(max=150, message="Title is longer than 150 characters")])
     content = TextAreaField(label="Content", validators=[DataRequired()])
     submit = SubmitField(label="Post")
 

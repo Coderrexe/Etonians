@@ -38,23 +38,23 @@
   margin-left: 20px;
 }
 
-.article-metadata .dropdown {
+.article-metadata .dropleft {
   float: right;
   margin-top: 5px;
 }
 
-.article-metadata .dropdown-menu {
+.article-metadata .dropleft .dropdown-menu {
   box-shadow: -1px 3px 10px 0 rgba(0, 0, 0, 0.2);
 }
 
-.article-metadata .dropdown-menu a span {
+.article-metadata .dropleft .dropdown-menu a span {
   display: inline-block;
   font-size: 1.5em;
   vertical-align: middle;
   padding: 0;
 }
 
-.article-metadata .dropdown-menu a p {
+.article-metadata .dropleft .dropdown-menu a p {
   display: inline-block;
   font-size: 1em;
   vertical-align: middle;
@@ -62,15 +62,15 @@
   padding: 0;
 }
 
-.article-metadata .dropdown .dropdown-btn {
+.article-metadata .dropleft .dropdown-btn {
   color: rgb(122, 122, 122);
 }
 
-.article-metadata .dropdown .dropdown-btn::after {
+.article-metadata .dropleft .dropdown-btn::before {
   content: none;
 }
 
-.article-metadata .dropdown .dropdown-btn .material-icons {
+.article-metadata .dropleft .dropdown-btn .material-icons {
   color: rgb(122, 122, 122);
   font-size: 26px;
 }

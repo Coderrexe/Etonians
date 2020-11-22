@@ -3,6 +3,8 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from flask_mail import Mail
+from flask_admin import Admin
+from flask_admin.contrib.sqla import ModelView
 
 from etonblog.config import Config
 
@@ -17,6 +19,7 @@ login_manager = LoginManager(app)
 login_manager.login_view = "users.login"
 login_manager.login_message_category = "info" # this sets the flash message "Please login to view this page" to be light blue
 mail = Mail(app)
+admin = Admin(app)
 
 from etonblog.users.routes import users
 from etonblog.posts.routes import posts
@@ -29,3 +32,11 @@ app.register_blueprint(posts)
 app.register_blueprint(main)
 app.register_blueprint(comments)
 app.register_blueprint(errors)
+
+from etonblog.models import *
+
+admin.add_view(ModelView(User, db.session))
+admin.add_view(ModelView(Post, db.session))
+admin.add_view(ModelView(Comment, db.session))
+admin.add_view(ModelView(EmailVerificationCode, db.session))
+admin.add_view(ModelView(TemporaryUser, db.session))

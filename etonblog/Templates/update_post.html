@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-  <div class="col-md-8" id="main">
+  <div class="col-md-12" id="main">
     {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
       {% for category, message in messages %}
@@ -11,7 +11,7 @@
     {% endif %}
     {% endwith %}
 
-    <div class="content-section">
+    <div class="content-section reduced-width-form">
       <form method="POST" action="" autocomplete="off">
         {{ form.hidden_tag() }}
         <fieldset class="form-group mt-0">
@@ -57,17 +57,3 @@
     </div>
   </div>
 {% endblock content %}
-
-{% block sidebar %}
-  <div class="col-md-4" id="sidebar">
-    <div class="content-section sidebar">
-      <h3>Latest Info</h3>
-      <p class='text-muted'>
-        <ul class="list-group">
-          <li class="list-group-item list-group-item-light">Updates</li>
-          <li class="list-group-item list-group-item-light">Events</li>
-        </ul>
-      </p>
-    </div>
-  </div>
-{% endblock sidebar %}

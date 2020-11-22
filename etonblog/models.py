@@ -41,11 +41,6 @@ class User(db.Model, UserMixin):
         return f"User('{self.username}', '{self.email}', '{self.image_file}', '{self.year_group}')"
 
 
-class EmailVerificationCode(db.Model):
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    value = db.Column(db.Integer, nullable=False)
-
-
 class TemporaryUser(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     username = db.Column(db.String(20), nullable=False)
@@ -54,9 +49,14 @@ class TemporaryUser(db.Model):
     year_group = db.Column(db.String(1), nullable=False)
 
 
+class EmailVerificationCode(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    value = db.Column(db.Integer, nullable=False)
+
+
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    title = db.Column(db.String(100), nullable=False)
+    title = db.Column(db.String(150), nullable=False)
     date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     content = db.Column(db.Text, nullable=False)
     year_group = db.Column(db.String(1), nullable=False)
