@@ -1,4 +1,5 @@
-from flask import Blueprint, render_template
+from flask import render_template, url_for, Blueprint
+from flask_login import current_user
 
 errors = Blueprint("errors", __name__)
 
@@ -10,9 +11,11 @@ def error_404(error):
 
 @errors.app_errorhandler(403)
 def error_403(error):
-    return render_template("errors/403.html"), 403
+    image_file = url_for("static", filename=f"profile_pictures/{current_user.image_file}")
+    return render_template("errors/403.html", title="Permission denied", image_file=image_file), 403
 
 
 @errors.app_errorhandler(500)
 def error_500(error):
-    return render_template("errors/500.html"), 500
+    image_file = url_for("static", filename=f"profile_pictures/{current_user.image_file}")
+    return render_template("errors/500.html", title="Server error", image_file=image_file), 500

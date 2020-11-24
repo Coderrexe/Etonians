@@ -1,4 +1,5 @@
-const navbar = () => {
+// navbar toggler
+function navbarToggle() {
     const navbarToggler = document.querySelector('.navbar-toggler');
 
     navbarToggler.addEventListener('click', () => {
@@ -6,4 +7,4 @@ const navbar = () => {
     });
 }
 
-navbar();
+navbarToggle();

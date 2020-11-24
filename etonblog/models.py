@@ -37,7 +37,7 @@ class User(db.Model, UserMixin):
             return None
         return User.query.get(user_id)
 
-    def __repr__(self): # __repr__ function shows how the data for a user will be displayed when called
+    def __repr__(self):
         return f"User('{self.username}', '{self.email}', '{self.image_file}', '{self.year_group}')"
 
 
@@ -66,7 +66,7 @@ class Post(db.Model):
     comments = db.relationship("Comment", backref="post", lazy=True)
     upvotes = db.relationship("Upvote", backref="post", lazy=True)
 
-    def __repr__(self): # __repr__ function shows how the data for a post will be displayed when called
+    def __repr__(self):
         return f"Post('{self.title}', '{self.date_posted}', '{self.year_group}', '{self.filter_year_group}')"
 
 

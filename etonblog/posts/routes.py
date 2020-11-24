@@ -31,6 +31,7 @@ def create_post():
             flash("Tick at least one of the year group boxes to proceed.", category="danger")
 
     image_file = url_for("static", filename=f"profile_pictures/{current_user.image_file}")
+
     return render_template("create_post.html", title="New Post", form=form, image_file=image_file)
 
 
@@ -73,6 +74,7 @@ def update_post(post_id):
         form.content.data = post.content
 
     image_file = url_for("static", filename=f"profile_pictures/{current_user.image_file}")
+    
     return render_template("update_post.html", title="Update Post", form=form, image_file=image_file)
 
 

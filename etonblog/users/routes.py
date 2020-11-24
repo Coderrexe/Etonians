@@ -65,7 +65,7 @@ def verify_email(username):
 
         flash("Incorrect verification code.", category="danger")
 
-    return render_template("verify_email.html", form=form)
+    return render_template("verify_email.html", title="Verify email", form=form)
 
 
 @users.route("/login/", methods=["GET", "POST"])
@@ -79,20 +79,22 @@ def login():
         # checks if this user is in the database - returns a boolean value
         user = User.query.filter_by(email=form.email.data).first()
         if user and bcrypt.check_password_hash(user.password, form.password.data): # compares the hashed password stored in the database with the password the user enters
-            login_user(user, remember=form.remember.data)
+            login_user(user, remember=True)
             # if the user wanted to access a page that was @loginrequired before logging in, they will be redirected to that page
             next_page = request.args.get("next")
             return redirect(next_page) if next_page else redirect(url_for("main.home"))
         flash("Login Unsuccessful. Please check username and password.", category="danger")
 
-    return render_template("login.html", title="Login", form=form)
+    return render_template("login.html", title="Log In", form=form)
 
 
 @users.route("/logout/")
-@login_required
 def logout():
-    logout_user()
-    return redirect(url_for("users.login"))
+    if current_user.is_authenticated:
+        logout_user()
+        return redirect(url_for("users.login"))
+    else:
+        return redirect(url_for("users.login"))
 
 
 @users.route("/account/", methods=["POST", "GET"])
@@ -113,6 +115,7 @@ def account():
         form.username.data = current_user.username
 
     image_file = url_for("static", filename=f"profile_pictures/{current_user.image_file}")
+    
     return render_template("account.html", title="Your Account", image_file=image_file, form=form)
 
 

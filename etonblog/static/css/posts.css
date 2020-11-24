@@ -1,18 +1,17 @@
 @charset "UTF-8";
 
-/** Posts CSS **/
 .post, .content-section {
-  background-color: rgb(255, 255, 255); /* the background colour of Block Content and Sidebar is pure white (#fff) */
-  padding: 20px; /* 20 pixels of padding all around the text, in both Block Content and Sidebar */
+  background-color: rgb(255, 255, 255);
+  padding: 20px;
   border: 1px solid #ddd;
   border-radius: 3px;
   margin-bottom: 35px;
 }
 
 .content-section.sidebar {
-  background-color: rgb(236, 236, 236);; /* the background colour of Block Content and Sidebar is pure white (#fff) */
-  padding: 20px; /* 20 pixels of padding all around the text, in both Block Content and Sidebar */
-  border: 1px solid #ddd; /* 1 pixel of border around the Sidebar */
+  background-color: rgb(236, 236, 236);
+  padding: 20px;
+  border: 1px solid #ddd;
   border-radius: 3px;
   margin-bottom: 20px;
   position: fixed;
@@ -50,15 +49,6 @@
 .article-metadata .dropleft .dropdown-menu a span {
   display: inline-block;
   font-size: 1.5em;
-  vertical-align: middle;
-  padding: 0;
-}
-
-.article-metadata .dropleft .dropdown-menu a p {
-  display: inline-block;
-  font-size: 1em;
-  vertical-align: middle;
-  margin-top: 18px;
   padding: 0;
 }
 
@@ -99,11 +89,11 @@ a.article-title:hover {
 .article-metadata {
   padding-bottom: 1px;
   margin-bottom: 4px;
-  border-bottom: 1px solid #e3e3e3; /* 1 pixel of border underneath the author of a post */
+  border-bottom: 1px solid #e3e3e3;
 }
 
 .article-metadata a:hover {
-  color: #333; /* when hovering mouse over the author of a post, the text turns from blue to #333 */
+  color: #333;
   text-decoration: none;
 }
 

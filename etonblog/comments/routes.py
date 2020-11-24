@@ -27,7 +27,8 @@ def edit_comment(comment_id):
         form.content.data = comment.content
 
     image_file = url_for("static", filename=f"profile_pictures/{current_user.image_file}")
-    return render_template("edit_comment.html", form=form, image_file=image_file)
+    
+    return render_template("edit_comment.html", title=comment.title, form=form, image_file=image_file)
 
 
 @comments.route("/comment/id/<int:comment_id>/delete/", methods=["POST", "GET"])

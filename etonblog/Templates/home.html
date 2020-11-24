@@ -27,8 +27,8 @@
 
                 {% if current_user == post.author %}
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <a class="dropdown-item" href="{{ url_for('posts.update_post', post_id=post.id) }}"><span class="material-icons-outlined">edit</span><p>Edit</p></a>
-                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#deleteModal{{ post.id }}"><span class="material-icons-outlined">delete</span><p>Delete</p></a>
+                    <a class="dropdown-item" href="{{ url_for('posts.update_post', post_id=post.id) }}"><span class="material-icons-outlined">edit</span>Edit</a>
+                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#deleteModal{{ post.id }}"><span class="material-icons-outlined">delete</span>Delete</a>
                   </div>
           
                   <!-- Bootstrap Modal -->

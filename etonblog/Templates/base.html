@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/account.css') }}">
 
-  <!-- If given a title in "routes.py" file, then title. Otherwise, just "Etonblog" -->
+  <!-- If given a title in "routes.py" file, then title. Otherwise, just "Etonians" -->
   {% if title %}
     <title>{{ title }} | Etonians</title>
   {% else %}
@@ -39,7 +39,6 @@
           <li><a href="{{ url_for('posts.create_post') }}" class="navbar-link-lg"><i class="far fa-edit"></i></a></li>
           <li><a href="{{ url_for('main.home') }}" class="navbar-link-lg"><i class="far fa-home"></i></a></li>
           <li><a href="{{ url_for('main.about') }}" class="navbar-link-lg"><i class="far fa-info-circle"></i></a></li>
-          <li><a href="{{ url_for('users.account') }}" class="navbar-link-lg"><i class="far fa-cog"></i></a></li>
         {% else %}
           <li><a href="{{ url_for('main.about') }}" class="navbar-link-sm">About</a></li>
           <li><a href="{{ url_for('users.login') }}" class="navbar-link-sm">Login</a></li>
@@ -53,6 +52,22 @@
       <a href="{{ url_for('main.about') }}"><i class="fas fa-info-circle"></i></a>
       <a href="{{ url_for('users.account') }}"><i class="fas fa-cog"></i></a>
     </nav>
+
+    {% if current_user.is_authenticated %}
+      <div class="menu-container">
+        <div class="profile">
+          <img src="{{ image_file }}">
+        </div>
+        <div class="menu">
+          <h3>{{ current_user.username }}<br><span>Student</span></h3>
+          <ul>
+            <li><a href="{{ url_for('users.account') }}"><i class="fas fa-id-card"></i>Profile</a></li>
+            <li><a href="#"><i class="fas fa-cog"></i>Settings</a></li>
+            <li><a href="{{ url_for('users.logout') }}"><i class="fas fa-sign-out-alt"></i>Log Out</a></li>
+          </ul>
+        </div>
+      </div>
+    {% endif %}
 
     <!-- Main body of the webpage -->
     <main role="main" class="container">
