@@ -82,7 +82,9 @@ def login():
             login_user(user, remember=True)
             # if the user wanted to access a page that was @loginrequired before logging in, they will be redirected to that page
             next_page = request.args.get("next")
+            flash("You were successfully logged in!", category="success")
             return redirect(next_page) if next_page else redirect(url_for("main.home"))
+
         flash("Login Unsuccessful. Please check username and password.", category="danger")
 
     return render_template("login.html", title="Log In", form=form)
@@ -92,6 +94,7 @@ def login():
 def logout():
     if current_user.is_authenticated:
         logout_user()
+        flash("You were logged out.", category="danger")
         return redirect(url_for("users.login"))
     else:
         return redirect(url_for("users.login"))

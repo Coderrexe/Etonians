@@ -9,8 +9,7 @@ nav.top-navbar {
   background-color: #fff;
   position: fixed;
   top: 0;
-  right: 0;
-  left: 0;
+  width: 100%;
   z-index: 1030;
   box-shadow: 0 1px 8px 3px rgba(95, 69, 69, 0.15);
   font-family: "Open Sans", sans-serif;
@@ -54,7 +53,7 @@ nav.top-navbar ul li a.navbar-link-sm {
 }
 
 nav.top-navbar ul li a:hover {
-  color:  #1da1f2 !important;
+  color: var(--main-color) !important;
   transition: all 0.2s ease-out;
 }
 
@@ -93,7 +92,7 @@ nav.top-navbar ul li a:hover {
 
 .menu-container .menu {
   position: absolute;
-  top: 110px;
+  top: 90px;
   right: -10px;
   padding: 10px 20px;
   background-color: #fff;
@@ -101,7 +100,7 @@ nav.top-navbar ul li a:hover {
   box-sizing: 0 5px 25px rgba(0, 0, 0, 0.1);
   border: 2px solid #ccc;
   border-radius: 15px;
-  transition: all 0.5s;
+  transition: all 0.4s;
   visibility: hidden;
   opacity: 0;
 }

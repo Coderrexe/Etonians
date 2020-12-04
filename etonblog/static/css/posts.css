@@ -20,13 +20,13 @@
 
 .article-metadata .post-author {
   font-size: 25px;
-  color:  #1da1f2;
+  color: var(--main-color);
   padding: 10px;
   border-radius: 50%;
 }
 
 .article-metadata .post-author:hover {
-  color: #1da1f2;
+  color: var(--main-color);
   background-color: #dceefa;
   transition: all 0.2s ease-out;
 }
@@ -42,6 +42,19 @@
   margin-top: 5px;
 }
 
+.article-metadata .dropleft .dropdown-btn::before {
+  content: none;
+}
+
+.article-metadata .dropleft .dropdown-btn:focus {
+  outline: none;
+}
+
+.article-metadata .dropleft .dropdown-btn .material-icons {
+  color: rgb(122, 122, 122);
+  font-size: 26px;
+}
+
 .article-metadata .dropleft .dropdown-menu {
   box-shadow: -1px 3px 10px 0 rgba(0, 0, 0, 0.2);
 }
@@ -50,19 +63,6 @@
   display: inline-block;
   font-size: 1.5em;
   padding: 0;
-}
-
-.article-metadata .dropleft .dropdown-btn {
-  color: rgb(122, 122, 122);
-}
-
-.article-metadata .dropleft .dropdown-btn::before {
-  content: none;
-}
-
-.article-metadata .dropleft .dropdown-btn .material-icons {
-  color: rgb(122, 122, 122);
-  font-size: 26px;
 }
 
 a.article-title {
@@ -116,14 +116,14 @@ a.article-title:hover {
   display: flex;
 }
 
-.post .bottom-text .button-container label, .post .bottom-text .button-container a {
-  color: rgb(117, 117, 117);
+.post .bottom-text .button-container span {
+  padding-left: 5px;
+  padding-right: 5px;
+  color: rgb(85, 85, 85);
 }
 
-.post .bottom-text .button-container p {
-  margin-left: 10px;
-  margin-right: 10px;
-  color: rgb(85, 85, 85);
+.post .bottom-text .button-container label, .post .bottom-text .button-container a {
+  color: rgb(117, 117, 117);
 }
 
 /** View post bar CSS **/
@@ -134,7 +134,7 @@ a.article-title:hover {
 }
 
 .post-bar a i {
-  color: #1da1f2;
+  color: var(--main-color);
   font-size: 25px;
   padding: 10px;
   border-radius: 50%;
@@ -169,7 +169,7 @@ a.article-title:hover {
 
 .comment-container a {
   font-size: 22px;
-  color: #1da1f2;
+  color: var(--main-color);
   padding: 10px;
   border-radius: 50%;
   text-decoration: none;

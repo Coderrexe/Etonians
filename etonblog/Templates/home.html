@@ -4,8 +4,11 @@
     {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
       {% for category, message in messages %}
-        <div class="alert alert-{{ category }}">
+        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
           <span>{{ message }}</span>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
       {% endfor %}
     {% endif %}
@@ -33,7 +36,7 @@
           
                   <!-- Bootstrap Modal -->
                   <div class="modal fade" id="deleteModal{{ post.id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
+                    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
                       <div class="modal-content">
                         <div class="modal-header">
                           <h5 class="modal-title" id="deleteModalLabel">Delete Post?</h5>
@@ -70,11 +73,11 @@
         <div class="bottom-text">
           <div class="button-container">
             <label><span class="material-icons-outlined">thumb_up</span></label>
-            <p>{{ post.upvotes | count }}</p>
+            <span>{{ post.upvotes | count }}</span>
           </div>
           <div class="button-container">
             <a href="{{ url_for('posts.post', post_id=post.id) }}"><span class="material-icons-outlined">comment</span></a>
-            <p>{{ post.comments | count }}</p>
+            <span>{{ post.comments | count }}</span>
           </div>
         </div>
       </section>

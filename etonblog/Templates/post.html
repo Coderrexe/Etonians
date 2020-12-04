@@ -4,8 +4,11 @@
     {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
       {% for category, message in messages %}
-        <div class="alert alert-{{ category }}">
+        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
           <span>{{ message }}</span>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
       {% endfor %}
     {% endif %}
@@ -36,7 +39,7 @@
         
                 <!-- Bootstrap Modal -->
                 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
-                  <div class="modal-dialog">
+                  <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
                     <div class="modal-content">
                       <div class="modal-header">
                         <h5 class="modal-title" id="deleteModalLabel">Delete Post?</h5>
@@ -71,15 +74,15 @@
       <div class="bottom-text">
         <div class="button-container">
           <label><span class="material-icons-outlined">thumb_up</span></label>
-          <p>{{ post.upvotes | count }}</p>
+          <span>{{ post.upvotes | count }}</span>
         </div>
         <div class="button-container">
           <a href="#" data-toggle="modal" data-target="#commentModal"><span class="material-icons-outlined">comment</span></a>
-          <p>{{ post.comments | count }}</p>
+          <span>{{ post.comments | count }}</span>
         </div>
 
-        <div class="modal fade" id="commentModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="commentModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
+        <div class="modal fade text-field-modal" id="commentModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="commentModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered text-field-modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title" id="commentModalLabel">Reply to {{ post.author.username }}</h5>
@@ -88,7 +91,7 @@
                 </button>
               </div>
               <div class="modal-body">
-                <form action="" method="POST" autocomplete="off">
+                <form action="" method="POST" autocomplete="off" id="create-comment-form">
                   {{ form.hidden_tag() }}
                   <fieldset class="form-group mt-0">
                     <div class="form-group">
@@ -123,14 +126,12 @@
                       {% endif %}
                     </div>
                   </fieldset>
-                  
-                  <div class="form-group">
-                    {{ form.submit(class="btn btn-info") }}
-                  </div>
                 </form>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <form action="" method="POST">
+                  {{ form.submit(class="btn btn-info", form="create-comment-form") }}
+                </form>
               </div>
             </div>
           </div>
@@ -150,7 +151,7 @@
         {% endif %}
 
         <div class="modal fade" id="deleteCommentModal{{ comment.id }}" tabindex="-1" role="dialog" aria-labelledby="deleteCommentModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
+          <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title" id="deleteCommentModalLabel">Delete Reply?</h5>
