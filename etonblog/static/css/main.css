@@ -18,7 +18,7 @@ body {
   height: 100vh;
   width: 100%;
   background-color: #eee;
-  font-family: "BlinkMacSystemFont", Arial, sans-serif;
+  font-family: "BlinkMacSystemFont", "Calibri", sans-serif;
   padding-top: 80px;
   overflow-x: hidden;
   overflow-y: scroll !important;
