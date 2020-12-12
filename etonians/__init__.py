@@ -6,7 +6,7 @@ from flask_mail import Mail
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
 
-from etonblog.config import Config
+from etonians.config import Config
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -21,11 +21,11 @@ login_manager.login_message_category = "info" # this sets the flash message "Ple
 mail = Mail(app)
 admin = Admin(app)
 
-from etonblog.users.routes import users
-from etonblog.posts.routes import posts
-from etonblog.main.routes import main
-from etonblog.comments.routes import comments
-from etonblog.errors.handlers import errors
+from etonians.users.routes import users
+from etonians.posts.routes import posts
+from etonians.main.routes import main
+from etonians.comments.routes import comments
+from etonians.errors.handlers import errors
 
 app.register_blueprint(users)
 app.register_blueprint(posts)
@@ -33,7 +33,7 @@ app.register_blueprint(main)
 app.register_blueprint(comments)
 app.register_blueprint(errors)
 
-from etonblog.models import *
+from etonians.models import *
 
 admin.add_view(ModelView(User, db.session))
 admin.add_view(ModelView(Post, db.session))

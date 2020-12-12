@@ -6,8 +6,8 @@ from flask import url_for
 from flask_mail import Message
 from flask_login import current_user
 
-from etonblog import app, db, mail
-from etonblog.models import EmailVerificationCode
+from etonians import app, db, mail
+from etonians.models import EmailVerificationCode
 
 
 def save_picture(form_picture):

@@ -1,4 +1,4 @@
-from etonblog import db
+from etonians import db
 
 
 def convert_date(current_time, date_posted):

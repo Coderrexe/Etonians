@@ -4,7 +4,7 @@ from wtforms.fields.html5 import EmailField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from flask_login import current_user
 
-from etonblog.models import User
+from etonians.models import User
 
 
 class RegistrationForm(FlaskForm):

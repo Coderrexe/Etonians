@@ -2,10 +2,10 @@ import os
 from flask import render_template, url_for, flash, redirect, request, Blueprint
 from flask_login import login_user, current_user, logout_user, login_required
 
-from etonblog import db, bcrypt
-from etonblog.models import User, Post, EmailVerificationCode, TemporaryUser
-from etonblog.users.forms import RegistrationForm, VerifyEmailForm, LoginForm, UpdateAccountForm, UpdateAccountPasswordForm, RequestResetForm, ResetPasswordForm
-from etonblog.users.utils import save_picture, send_reset_email, send_verify_email
+from etonians import db, bcrypt
+from etonians.models import User, Post, EmailVerificationCode, TemporaryUser
+from etonians.users.forms import RegistrationForm, VerifyEmailForm, LoginForm, UpdateAccountForm, UpdateAccountPasswordForm, RequestResetForm, ResetPasswordForm
+from etonians.users.utils import save_picture, send_reset_email, send_verify_email
 
 users = Blueprint("users", __name__)
 

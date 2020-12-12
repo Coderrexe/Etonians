@@ -1,5 +1,5 @@
-from etonblog import db
-from etonblog.models import Upvote
+from etonians import db
+from etonians.models import Upvote
 
 
 def upvote_post(user_id, post_id):

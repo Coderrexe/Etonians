@@ -2,8 +2,8 @@ from datetime import datetime
 from flask import render_template, url_for, Blueprint
 from flask_login import current_user, login_required
 
-from etonblog.models import Post
-from etonblog.utils import convert_date
+from etonians.models import Post
+from etonians.utils import convert_date
 
 main = Blueprint("main", __name__)
 

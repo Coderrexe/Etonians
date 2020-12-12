@@ -2,7 +2,7 @@ from datetime import datetime
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from flask_login import UserMixin
 
-from etonblog import app, db, login_manager
+from etonians import app, db, login_manager
 
 
 # user_loader function which returns a user with a certain ID
