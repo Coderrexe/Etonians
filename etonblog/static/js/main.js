@@ -1,3 +1,4 @@
+// fixes material icons glitch
 window.addEventListener('load', function() {
     const materialIcons = document.querySelectorAll('.material-icons, .material-icons-outlined');
 
