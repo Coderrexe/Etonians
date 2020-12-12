@@ -31,6 +31,7 @@ function historyBack() {
     }
 }
 
+// fixes popup modal fullscreen glitch
 function modalResponsive() {
     let windowWidth = window.innerWidth;
     const textFieldModals = document.querySelectorAll('.text-field-modal-dialog');
