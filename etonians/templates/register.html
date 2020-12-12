@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="col-12" id="main">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+          <span>{{ message }}</span>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <div class="content-section reduced-width-form">
+      <form method="POST" action="" autocomplete="off">
+        <!-- form.hidden_tag() is another step of password security and encryption -->
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group mt-0">
+          <legend class="border-bottom mb-4">Join Today</legend>
+          <div class="form-group">
+            {{ form.username.label }}
+            {% if form.username.errors %}
+              <!-- is-invalid class creates a red border around the textbox -->
+              {{ form.username(class="form-control form-control-lg is-invalid") }}
+              <!-- invalid-feedback class makes the error message red instead of black -->
+              <div class="invalid-feedback">
+                {% for error in form.username.errors %}
+                  <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+            {% else %}
+              {{ form.username(class="form-control form-control-lg") }}
+              <ul class="ml-4">
+                <li><small class="text-muted">You don't have to use your real name.</small></li>
+                <li><small class="text-muted">Must be between 2 and 20 characters long.</small></li>
+              </ul>
+            {% endif %}
+          </div>
+
+          <div class="form-group pt-2">
+            {{ form.email.label }}
+            {% if form.email.errors %}
+              <!-- is-invalid class creates a red border around the textbox -->
+              {{ form.email(class="form-control form-control-lg is-invalid") }}
+              <!-- invalid-feedback class makes the error message red instead of black -->
+              <div class="invalid-feedback">
+                {% for error in form.email.errors %}
+                  <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+            {% else %}
+                {{ form.email(class="form-control form-control-lg") }}
+                <ul class="ml-4">
+                  <li><small class="text-muted">Your Eton College email.</small></li>
+                </ul>
+            {% endif %}
+          </div>
+
+          <div class="form-group">
+            {{ form.password.label }}
+            {% if form.password.errors %}
+              <!-- is-invalid class creates a red border around the textbox -->
+              {{ form.password(class="form-control form-control-lg is-invalid") }}
+              <!-- invalid-feedback class makes the error message red instead of black -->
+              <div class="invalid-feedback">
+                {% for error in form.password.errors %}
+                  <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+            {% else %}
+              {{ form.password(class="form-control form-control-lg") }}
+              <ul class="ml-4">
+                <li><small class="text-muted">Must be at least 8 characters long.</small></li>
+              </ul>
+            {% endif %}
+          </div>
+
+          <div class="form-group pt-2">
+            {{ form.confirm_password.label }}
+            {% if form.confirm_password.errors %}
+              <!-- is-invalid class creates a red border around the textbox -->
+              {{ form.confirm_password(class="form-control form-control-lg is-invalid") }}
+              <!-- invalid-feedback class makes the error message red instead of black -->
+              <div class="invalid-feedback">
+                {% for error in form.confirm_password.errors %}
+                  <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+            {% else %}
+              {{ form.confirm_password(class="form-control form-control-lg") }}
+            {% endif %}
+          </div>
+
+          <div class="form-group pt-2 year-group-select">
+            <label>Your Block</label>
+            <select class="form-control form-control-lg" name="year-group">
+              <option value="F">F</option>
+              <option value="E">E</option>
+              <option value="D">D</option>
+              <option value="C">C</option>
+              <option value="B">B</option>
+            </select>          
+          </div>
+        </fieldset>
+
+        <!-- "btn-outline-info" class is a button with a light blue outline -->
+        <div class="form-group">
+          {{ form.submit(class="btn btn-outline-info") }}
+        </div>
+      </form>
+      
+      <div class="pt-1">
+        <small class="text-muted">
+          Already Have An Account? <a class="ml-2" href="{{ url_for('users.login') }}">Sign In</a>
+        </small>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

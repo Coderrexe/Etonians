@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="col-md-12" id="main">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+          <span>{{ message }}</span>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      {% endfor %}
+    {% endif %}
+    {% endwith %}
+    
+    <div class="content-section reduced-width-form">
+      <form method="POST" action="" autocomplete="off">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group mt-0">
+          <legend class="border-bottom mb-4">Create a New Post</legend>
+          <div class="form-group">
+            {{ form.title.label }}
+            {% if form.title.errors %}
+              {{ form.title(class="form-control form-control-lg is-invalid") }}
+              <div class="invalid-feedback">
+                {% for error in form.title.errors %}
+                  <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+            {% else %}
+              {{ form.title(class="form-control form-control-lg") }}
+            {% endif %}
+            <ul class="ml-4">
+              <li><small class="text-muted">Must include a title.</small></li>
+              <li><small class="text-muted">Must be less than 100 characters long.</small></li>
+            </ul>
+          </div>
+
+          <div class="form-group">
+            {{ form.content.label }}
+            {% if form.content.errors %}
+              {{ form.content(class="form-control form-control-lg is-invalid", rows="7", cols="100") }}
+              {% for error in errors %}
+                <span>{{ error }}</span>
+              {% endfor %}
+            {% else %}
+              {{ form.content(class="form-control", rows="7", cols="100") }}
+              <ul class="ml-4">
+                <li><small class="text-muted">This field must not be empty.</small></li>
+              </ul>
+            {% endif %}
+          </div>
+
+          <div class="filter_year_group">
+            <h5>Which Blocks can see this post?</h5>
+            <div class="filter_year_group_choice">
+              <input type="checkbox" value="F" name="filter_year_group">
+              <label>F Block</label>
+            </div>
+            <div class="filter_year_group_choice">
+              <input type="checkbox" value="E" name="filter_year_group">
+              <label>E Block</label>
+            </div>
+            <div class="filter_year_group_choice">
+              <input type="checkbox" value="D" name="filter_year_group">
+              <label>D Block</label>
+            </div>
+            <div class="filter_year_group_choice">
+              <input type="checkbox" value="C" name="filter_year_group">
+              <label>C Block</label>
+            </div>
+            <div class="filter_year_group_choice">
+              <input type="checkbox" value="B" name="filter_year_group">
+              <label>B Block</label>
+            </div>
+          </div>
+        </fieldset>
+        
+        <div class="form-group">
+          {{ form.submit(class="btn btn-outline-info") }}
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock content %}

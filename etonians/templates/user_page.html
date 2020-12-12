@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="col-12" id="main">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+          <span>{{ message }}</span>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <article class="media" id="border-around">
+      <img class="article-img" src="{{ url_for('static', filename='profile_pictures/' + user.image_file) }}">
+      <div class="media-body">
+        <h2>{{ user.username }}</h2>
+        <p class="text-secondary" id="user-info">{{ user.email }}</p>
+        <p id="user-info2">Total Posts: {{ posts.total }}</p>
+      </div>
+    </article>
+
+    {% for page_number in posts.iter_pages(left_edge=2, right_edge=2, left_current=2, right_current=3) %}
+      {% if page_number %}
+        {% if posts.page == page_number %}
+          <a class="btn btn-info mb-2 mt-2" href="{{ url_for('users.user_page', username=user.username, page=page_number) }}">{{ page_number }}</a>
+        {% else %}
+          <a class="btn btn-outline-info mb-2 mt-2" href="{{ url_for('main.home', username=user.username, page=page_number) }}">{{ page_number }}</a>
+        {% endif %}
+      {% else %}
+        ...
+      {% endif %}
+    {% endfor %}
+  </div>
+{% endblock content %}
