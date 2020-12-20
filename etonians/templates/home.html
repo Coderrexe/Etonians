@@ -2,16 +2,16 @@
 {% block content %}
   <div class="col-12" id="main">
     {% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-      {% for category, message in messages %}
-        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
-          <span>{{ message }}</span>
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-      {% endfor %}
-    {% endif %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+            <span>{{ message }}</span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        {% endfor %}
+      {% endif %}
     {% endwith %}
 
     <!-- displays the posts -->
@@ -31,11 +31,11 @@
                 {% if current_user == post.author %}
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                     <a class="dropdown-item" href="{{ url_for('posts.update_post', post_id=post.id) }}"><span class="material-icons-outlined">edit</span>Edit</a>
-                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#deleteModal{{ post.id }}"><span class="material-icons-outlined">delete</span>Delete</a>
+                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete-post-modal{{ post.id }}"><span class="material-icons-outlined">delete</span>Delete</a>
                   </div>
           
                   {% call simple_modal(
-                    post.id,
+                    "delete-post-modal" + post.id | string,
                     "Delete Post?",
                     "Are you sure you want to delete your post? You cannot undo this action.",
                   ) %}

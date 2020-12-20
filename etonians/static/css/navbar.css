@@ -1,7 +1,7 @@
 @charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap");
 
-nav.top-navbar {
+.top-navbar {
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -10,28 +10,28 @@ nav.top-navbar {
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 1030;
+  z-index: 1000;
   box-shadow: 0 1px 8px 3px rgba(95, 69, 69, 0.15);
   font-family: "Open Sans", sans-serif;
 }
 
-nav.bottom-navbar {
+.bottom-navbar {
   display: none;
 }
 
-nav.top-navbar .logo {
+.top-navbar .logo {
   text-transform: uppercase;
   letter-spacing: 5px;
   font-size: 25px;
   font-weight: 600;
 }
 
-nav.top-navbar .logo a {
+.top-navbar .logo a {
   text-decoration: none;
   color: rgb(95, 95, 95);
 }
 
-nav.top-navbar ul {
+.top-navbar ul {
   display: flex;
   width: 50%;
   justify-content: space-around;
@@ -39,22 +39,22 @@ nav.top-navbar ul {
   padding-top: 13px;
 }
 
-nav.top-navbar ul li a.navbar-link-lg {
+.top-navbar ul li a.navbar-link-lg {
   color: rgb(95, 95, 95);
   text-decoration: none;
   font-size: 23px;
 }
 
-nav.top-navbar ul li a.navbar-link-sm {
+.top-navbar ul li a.navbar-link-sm {
   color: rgb(95, 95, 95);
   text-decoration: none;
   font-size: 16px;
   letter-spacing: 0.5px;
 }
 
-nav.top-navbar ul li a:hover {
+.top-navbar ul li a:hover {
   color: var(--main-color) !important;
-  transition: all 0.2s ease-out;
+  transition: 0.2s ease-out;
 }
 
 /* Profile picture dropdown CSS */
@@ -62,7 +62,7 @@ nav.top-navbar ul li a:hover {
   position: fixed;
   top: 15px;
   right: 35px;
-  z-index: 1030;
+  z-index: 1000;
 }
 
 .menu-container .profile {
@@ -74,7 +74,7 @@ nav.top-navbar ul li a:hover {
   cursor: pointer;
 }
 
-@media screen and (max-width: 576px) {
+@media (max-width: 576px) {
   .menu-container .profile {
     display: none;
   }
@@ -99,7 +99,7 @@ nav.top-navbar ul li a:hover {
   box-sizing: 0 5px 25px rgba(0, 0, 0, 0.1);
   border: 2px solid #ccc;
   border-radius: 15px;
-  transition: all 0.4s;
+  transition: 0.4s;
   visibility: hidden;
   opacity: 0;
 }
@@ -171,22 +171,22 @@ nav.top-navbar ul li a:hover {
   margin-right: 15px;
 }
 
-@media screen and (max-width: 576px) {
-  nav.top-navbar {
+@media (max-width: 576px) {
+  .top-navbar {
     height: 70px;    
   }
 
-  nav.top-navbar .logo {
+  .top-navbar .logo {
     text-align: center;
     font-size: 22px;
     font-weight: 400;
   }
 
-  nav.top-navbar ul {
+  .top-navbar ul {
     display: none;
   }
 
-  nav.bottom-navbar {
+  .bottom-navbar {
     position: fixed;
     bottom: 0;
     width: 100%;
@@ -194,12 +194,12 @@ nav.top-navbar ul li a:hover {
     background-color: #fff;
     display: flex;
     overflow-x: auto;
-    z-index: 1030;
+    z-index: 1000;
     border-top: 1px solid rgb(221, 221, 221);
     border-color: rgba(221, 221, 221, 0.5);
   }
   
-  nav.bottom-navbar a {
+  .bottom-navbar a {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -211,7 +211,7 @@ nav.top-navbar ul li a:hover {
     transition: background-color 0.1s ease-in-out;
   }
   
-  nav.bottom-navbar a:hover {
+  .bottom-navbar a:hover {
     background-color: #ccc;
   }
 }

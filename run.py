@@ -1,5 +1,5 @@
-# This file is responsible for running the entire Etonians.co.uk application.
-# Copyright © Etonians.co.uk 2020. All rights reserved.
+# This file is responsible for running the entire Etonians application.
+# Copyright © Etonians 2020. All rights reserved.
 # Copyright © Simba Shi 2020. All rights reserved.
 
 from etonians import app

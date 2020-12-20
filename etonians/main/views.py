@@ -8,6 +8,11 @@ from etonians.utils import convert_date
 main = Blueprint("main", __name__)
 
 
+@main.route("/test/")
+def test():
+    return render_template("a.html")
+
+
 @main.route("/home/")
 @login_required
 def home():

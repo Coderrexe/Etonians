@@ -1,6 +1,3 @@
-from etonians import db
-
-
 def convert_date(current_time, date_posted):
     time_delta = current_time - date_posted
 

@@ -2,7 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap");
 
-/** General CSS for the whole of About Page **/
+/* General CSS for the whole of About Page */
 * {
   margin: 0;
   padding: 0;
@@ -36,16 +36,16 @@ p {
 }
 
 span, a {
-  display: inline-block; /* inline-block is basically inline, but also supports margin and padding */
+  display: inline-block;
 }
 
-/** Navbar CSS **/
+/* Navbar CSS */
 .navbar {
   padding: 15px 0;
   background: #2C2F33;
 }
 
-@media screen and (max-width: 575px) {
+@media (max-width: 575px) {
   .navbar .container {
     max-width: 100%;
   }
@@ -103,10 +103,10 @@ span, a {
   letter-spacing: 1px;
   text-transform: uppercase;
   font-size: 14px;
-  transition: all 0.3s;
+  transition: 0.3s;
 }
 
-@media screen and (min-width: 576px) {
+@media (min-width: 576px) {
   .navbar-dark .navbar-nav li a::after {
     content: "";
     display: block;
@@ -139,7 +139,7 @@ span, a {
 .nav-scroll {
   background-color: #fff;
   box-shadow: 0 1px 8px 3px rgba(0, 0, 0, 0.05);
-  transition: all 0.4s;
+  transition: 0.4s;
 }
 
 .nav-scroll .navbar-nav li a {
@@ -152,7 +152,8 @@ span, a {
   border: none;
 }
 
-.navbar .navbar-toggler:focus, .navbar .navbar-toggler:active {
+.navbar .navbar-toggler:focus,
+.navbar .navbar-toggler:active {
   outline: none;
   box-shadow: none;
 }
@@ -162,7 +163,7 @@ span, a {
   height: 3px;
   background-color: #fff;
   margin: 5px;
-  transition: all 0.3s ease;
+  transition: 0.3s ease;
 }
 
 /* navbar toggler animation */
@@ -178,14 +179,14 @@ nav .toggle .navbar-toggler-line3 {
   transform: rotate(45deg) translate(-5px, -6px)
 }
 
-/** CSS for the first stage of About Page **/
+/* CSS for the first stage of About Page */
 .cover-bg {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
-.banner { /* linear-gradient darkens out the background image */
+.banner {
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../images/eton_college.jpg");
   background-attachment: scroll;
   height: 100vh;
@@ -215,7 +216,7 @@ nav .toggle .navbar-toggler-line3 {
   font-family: "Roboto", sans-serif;
 }
 
-@media screen and (max-width: 767px) {
+@media (max-width: 767px) {
   .banner .caption h4 {
     font-size: 21px;
   }
@@ -229,7 +230,7 @@ nav .toggle .navbar-toggler-line3 {
   }
 }
 
-@media screen and (max-width: 575px) {
+@media (max-width: 575px) {
   .banner .caption h4 {
     font-size: 15px;
   }
@@ -258,14 +259,14 @@ nav .toggle .navbar-toggler-line3 {
   font-size: 19px;
   vertical-align: middle;
   padding-top: 11px;
-  transition: all 0.2s;
+  transition: 0.2s;
 }
 
 .banner .caption .social-icon a i:hover {
   color: rgb(185, 185, 185);
 }
 
-/** CSS for the second stage of About Page **/
+/* CSS for the second stage of About Page */
 .section-padding {
   padding: 20px 0;
 }
@@ -323,7 +324,7 @@ nav .toggle .navbar-toggler-line3 {
   box-shadow: inset 0 0 0 0 #fff; /* box-shadow: x-offset y-offset blur effect spread-radius colour */
   letter-spacing: 1px;
   font-size: 14px;
-  transition: all 0.8s;
+  transition: 0.8s;
 }
 
 .btn:hover { /* changing the x-offset, giving the button a nice "swipe" animation */
@@ -333,7 +334,7 @@ nav .toggle .navbar-toggler-line3 {
 
 .features .features-box {
   border: 1px solid #fafafa;
-  transition: all 0.5s;
+  transition: 0.5s;
 }
 
 .features .features-box:hover {
@@ -400,7 +401,7 @@ nav .toggle .navbar-toggler-line3 {
   border-radius: 50%;
   margin-right: 10px;
   background-color: #252525;
-  transition: all 0.5s;
+  transition: 0.5s;
 }
 
 .footer .social-icon a:hover {

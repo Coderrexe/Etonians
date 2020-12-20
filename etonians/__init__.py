@@ -21,10 +21,10 @@ login_manager.login_message_category = "info" # this sets the flash message "Ple
 mail = Mail(app)
 admin = Admin(app)
 
-from etonians.users.routes import users
-from etonians.posts.routes import posts
-from etonians.main.routes import main
-from etonians.comments.routes import comments
+from etonians.users.views import users
+from etonians.posts.views import posts
+from etonians.main.views import main
+from etonians.comments.views import comments
 from etonians.errors.handlers import errors
 
 app.register_blueprint(users)

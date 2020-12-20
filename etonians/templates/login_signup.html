@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous">
+  <link rel="stylesheet" href="../static/css/login_signup.css">
+
+  <title>Sign Up | Etonians</title>
+</head>
+
+<body>
+  <div class="login-signup-container">
+    <div class="forms-container">
+      <div class="login-signup">
+        <form action="{{ url_for('users.login') }}" class="login-form" method="POST">
+          {{ login_form.hidden_tag() }}
+          <h2>Log In</h2>
+
+          <div class="input-field">
+            <i class="fas fa-envelope"></i>
+            {{ login_form.email(class="text-input", placeholder="Email") }}
+          </div>
+
+          <div class="input-field">
+            <i class="fas fa-lock"></i>
+            {{ login_form.password(class="text-input", placeholder="Password") }}
+          </div>
+          
+          <div class="submit-btn">
+            {{ login_form.submit_login(class="btn-solid") }}
+          </div>
+        </form>
+
+        <form action="{{ url_for('users.register') }}" class="signup-form" method="POST">
+          {{ signup_form.hidden_tag() }}
+          <h2>Sign Up</h2>
+
+          <div class="input-container">
+            {% if signup_form.username.errors %}
+              <div class="input-field input-error">
+                <i class="fas fa-user"></i>
+                {{ signup_form.username(class="text-input", placeholder="Username") }}
+              </div>
+              <div class="invalid-feedback">
+                {% for error in signup_form.username.errors %}
+                  <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+            {% else %}
+              <div class="input-field">
+                <i class="fas fa-user"></i>
+                {{ signup_form.username(class="text-input", placeholder="Username") }}
+              </div>
+            {% endif %}
+          </div>
+          
+          <div class="input-container">
+            {% if signup_form.email.errors %}
+              <div class="input-field input-error">
+                <i class="fas fa-envelope"></i>
+                {{ signup_form.email(class="text-input", placeholder="Email") }}
+              </div>
+              <div class="invalid-feedback">
+                {% for error in signup_form.email.errors %}
+                  <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+            {% else %}
+              <div class="input-field">
+                <i class="fas fa-envelope"></i>
+                {{ signup_form.email(class="text-input", placeholder="Email") }}
+              </div>
+            {% endif %}
+          </div>
+
+          <div class="input-container">
+            {% if signup_form.password.errors %}
+              <div class="input-field input-error">
+                <i class="fas fa-lock"></i>
+                {{ signup_form.password(class="text-input", placeholder="Password") }}
+              </div>
+              <div class="invalid-feedback">
+                {% for error in signup_form.password.errors %}
+                  <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+            {% else %}
+              <div class="input-field">
+                <i class="fas fa-lock"></i>
+                {{ signup_form.password(class="text-input", placeholder="Password") }}
+              </div>
+            {% endif %}
+          </div>
+
+          <div class="input-container">
+            {% if signup_form.confirm_password.errors %}
+              <div class="input-field input-error">
+                <i class="fas fa-user-lock"></i>
+                {{ signup_form.confirm_password(class="text-input", placeholder="Confirm password") }}
+              </div>
+              <div class="invalid-feedback">
+                {% for error in signup_form.confirm_password.errors %}
+                  <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+            {% else %}
+              <div class="input-field">
+                <i class="fas fa-user-lock"></i>
+                {{ signup_form.confirm_password(class="text-input", placeholder="Confirm password") }}
+              </div>
+            {% endif %}
+          </div>
+
+          <!-- <label>Your Block</label>
+          <select class="form-control form-control-lg" name="year-group">
+            <option value="F">F</option>
+            <option value="E">E</option>
+            <option value="D">D</option>
+            <option value="C">C</option>
+            <option value="B">B</option>
+          </select> -->
+          
+          <div class="submit-btn">
+            {{ signup_form.submit_register(class="btn-solid") }}
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="panels-container">
+      <div class="panel left-panel">
+        <div class="content">
+          <h3>One of us?</h3>
+          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. At, corporis?</p>
+          <button class="btn-transparent" id="login-btn">Log In</button>
+        </div>
+        <img src="../static/images/teacher_blackboard.svg">
+      </div>
+      <div class="panel right-panel">
+        <div class="content">
+          <h3>New here?</h3>
+          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. At, corporis?</p>
+          <button class="btn-transparent" id="signup-btn">Sign Up</button>
+        </div>
+        <img src="../static/images/teacher.svg">
+      </div>
+    </div>
+  </div>
+
+  <script src="../static/js/login_signup.js"></script>
+</body>
+</html>

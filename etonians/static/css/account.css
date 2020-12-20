@@ -35,7 +35,8 @@
   margin-bottom: 0;
 }
 
-.form-group #file:focus + label, .form-group #file + label:hover {
+.form-group #file:focus + label,
+.form-group #file + label:hover {
   cursor: pointer;
 }
 

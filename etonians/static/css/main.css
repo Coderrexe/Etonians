@@ -8,6 +8,7 @@
 
 :root {
   --main-color: #1da1f2;
+  --default-font: "BlinkMacSystemFont", "Calibri", sans-serif;
 }
 
 .material-icons, .material-icons-outlined {
@@ -18,7 +19,7 @@ body {
   height: 100vh;
   width: 100%;
   background-color: #eee;
-  font-family: "BlinkMacSystemFont", "Calibri", sans-serif;
+  font-family: var(--default-font);
   padding-top: 80px;
   overflow-x: hidden;
   overflow-y: scroll !important;
@@ -28,7 +29,7 @@ body.modal-open {
   overflow: hidden !important;
 }
 
-@media screen and (max-width: 570px) {
+@media (max-width: 570px) {
   .text-field-modal {
     padding: 0 !important;
   }
@@ -48,7 +49,7 @@ body.modal-open {
   }
 }
 
-@media screen and (max-width: 576px) {
+@media (max-width: 576px) {
   body {
     padding-top: 65px;
   }

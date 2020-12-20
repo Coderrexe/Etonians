@@ -28,7 +28,7 @@
 .article-metadata .post-author:hover {
   color: var(--main-color);
   background-color: #dceefa;
-  transition: all 0.2s ease-out;
+  transition: 0.2s ease-out;
 }
 
 .article-metadata p {
@@ -122,11 +122,12 @@ a.article-title:hover {
   color: rgb(85, 85, 85);
 }
 
-.post .bottom-text .button-container label, .post .bottom-text .button-container a {
+.post .bottom-text .button-container label,
+.post .bottom-text .button-container a {
   color: rgb(117, 117, 117);
 }
 
-/** View post bar CSS **/
+/* View post bar CSS */
 .post-bar {
   background-color: #fff;
   border: 1px solid #ddd;
@@ -142,7 +143,7 @@ a.article-title:hover {
 
 .post-bar a i:hover {
   background-color: #dceefa;
-  transition: all 0.1s ease-out;
+  transition: 0.1s ease-out;
 }
 
 .post-bar span {
@@ -154,7 +155,7 @@ a.article-title:hover {
   color: #333;
 }
 
-/** Comment CSS **/
+/* Comment CSS */
 .comment-container {
   border-top: 1px solid #ddd;
   margin-top: 20px;
@@ -177,7 +178,7 @@ a.article-title:hover {
 
 .comment-container a:hover {
   background-color: #dceefa;
-  transition: all 0.2s ease-out;
+  transition: 0.2s ease-out;
 }
 
 .comment-container p.comment-title {
@@ -189,7 +190,7 @@ a.article-title:hover {
   padding-left: 50px;
 }
 
-/** Create post CSS **/
+/* Create post CSS */
 .filter_year_group {
   margin-top: 20px;
 }

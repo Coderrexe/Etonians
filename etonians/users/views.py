@@ -1,4 +1,3 @@
-import os
 from flask import render_template, url_for, flash, redirect, request, Blueprint
 from flask_login import login_user, current_user, logout_user, login_required
 
@@ -10,23 +9,39 @@ from etonians.users.utils import save_picture, send_reset_email, send_verify_ema
 users = Blueprint("users", __name__)
 
 
-@users.route("/", methods=["GET", "POST"])
-@users.route("/register/", methods=["GET", "POST"])
-def register():
+@users.route("/")
+@users.route("/authentication/")
+def user_authentication():
     # if current user is already logged in, they will be automatically redirected to home page
     if current_user.is_authenticated:
         return redirect(url_for("main.home"))
 
-    form = RegistrationForm()
-    if form.validate_on_submit():
-        user_email = form.email.data
+    signup_form = RegistrationForm()
+    login_form = LoginForm()
+
+    return render_template("login_signup.html", signup_form=signup_form, login_form=login_form)
+
+
+@users.route("/90bf30f4f67787b8400f597c3406066d/", methods=["POST", "GET"])
+def register():
+    if current_user.is_authenticated:
+        return redirect(url_for("main.home"))
+
+    if request.method == "GET":
+        return redirect(url_for("users.user_authentication"))
+        
+    signup_form = RegistrationForm()
+    login_form = LoginForm()
+
+    if signup_form.validate_on_submit():
+        user_email = signup_form.email.data
         if "etoncollege.org.uk" not in user_email.split("@", maxsplit=1):
             flash("You must have an Eton College email to register for an account.", "danger")
             return redirect(url_for("users.register"))
         
-        hashed_password = bcrypt.generate_password_hash(form.password.data).decode("UTF-8")
+        hashed_password = bcrypt.generate_password_hash(signup_form.password.data).decode("UTF-8")
         year_group = request.form["year-group"]
-        user = TemporaryUser(username=form.username.data, email=form.email.data, password=hashed_password, year_group=year_group)
+        user = TemporaryUser(username=signup_form.username.data, email=signup_form.email.data, password=hashed_password, year_group=year_group)
 
         db.session.add(user)
         db.session.commit()
@@ -35,8 +50,34 @@ def register():
 
         flash("An email has been sent to you, containing a verification code.", category="info")
         return redirect(url_for("users.verify_email", username=user.username))
+    
+    return render_template("login_signup.html", signup_form=signup_form, login_form=login_form)
 
-    return render_template("register.html", title="Register", form=form)
+
+@users.route("/6db120f1af1291b61dcfc3cc63fbab05/", methods=["POST", "GET"])
+def login():
+    if current_user.is_authenticated:
+        return redirect(url_for("main.home"))
+
+    if request.method == "GET":
+        return redirect(url_for("users.user_authentication"))
+
+    signup_form = RegistrationForm()
+    login_form = LoginForm()
+
+    if login_form.validate_on_submit():
+        # checks if this user is in the database - returns a boolean value
+        user = User.query.filter_by(email=login_form.email.data).first()
+        if user and bcrypt.check_password_hash(user.password, login_form.password.data): # compares the hashed password stored in the database with the password the user enters
+            login_user(user, remember=True)
+            # if the user wanted to access a page that was @loginrequired before logging in, they will be redirected to that page
+            next_page = request.args.get("next")
+            flash("You were successfully logged in!", category="success")
+            return redirect(next_page) if next_page else redirect(url_for("main.home"))
+
+        flash("Login Unsuccessful. Please check username and password.", category="danger")
+    
+    return render_template("login_signup.html", signup_form=signup_form, login_form=login_form)
 
 
 @users.route("/register/verify/user/<string:username>/", methods=["POST", "GET"])
@@ -68,36 +109,13 @@ def verify_email(username):
     return render_template("verify_email.html", title="Verify email", form=form)
 
 
-@users.route("/login/", methods=["GET", "POST"])
-def login():
-    # if user is already logged in, they will be redirected back to the home page
-    if current_user.is_authenticated:
-        return redirect(url_for("main.home"))
-    
-    form = LoginForm()
-    if form.validate_on_submit():
-        # checks if this user is in the database - returns a boolean value
-        user = User.query.filter_by(email=form.email.data).first()
-        if user and bcrypt.check_password_hash(user.password, form.password.data): # compares the hashed password stored in the database with the password the user enters
-            login_user(user, remember=True)
-            # if the user wanted to access a page that was @loginrequired before logging in, they will be redirected to that page
-            next_page = request.args.get("next")
-            flash("You were successfully logged in!", category="success")
-            return redirect(next_page) if next_page else redirect(url_for("main.home"))
-
-        flash("Login Unsuccessful. Please check username and password.", category="danger")
-
-    return render_template("login.html", title="Log In", form=form)
-
-
 @users.route("/logout/")
 def logout():
     if current_user.is_authenticated:
         logout_user()
-        flash("You were logged out.", category="danger")
-        return redirect(url_for("users.login"))
+        return redirect(url_for("users.user_authentication"))
     else:
-        return redirect(url_for("users.login"))
+        return redirect(url_for("users.user_authentication"))
 
 
 @users.route("/account/", methods=["POST", "GET"])

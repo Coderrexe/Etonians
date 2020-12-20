@@ -19,7 +19,7 @@
   border-radius: 50%;
   margin-right: 10px;
   background-color: #252525;
-  transition: all 0.5s;
+  transition: 0.5s;
 }
 
 .footer .social-icon a:hover {

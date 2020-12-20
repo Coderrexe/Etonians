@@ -12,7 +12,7 @@ class RegistrationForm(FlaskForm):
     email = EmailField(label="Email", validators=[DataRequired(), Email(message="Email is not valid.")])
     password = PasswordField(label="Password", validators=[DataRequired(), Length(min=8, message="Must be at least 8 characters long.")])
     confirm_password = PasswordField(label="Confirm Password", validators=[DataRequired(), EqualTo("password", message="Passwords must match.")])
-    submit = SubmitField(label="Sign Up")
+    submit_register = SubmitField(label="Sign Up")
 
     # validate_username and validate_email functions will be automatically called
     def validate_username(self, username):
@@ -34,7 +34,7 @@ class VerifyEmailForm(FlaskForm):
 class LoginForm(FlaskForm):
     email = EmailField(label="Email", validators=[DataRequired()])
     password = PasswordField(label="Password", validators=[DataRequired()])
-    submit = SubmitField(label="Log In")
+    submit_login = SubmitField(label="Log In")
 
 
 class UpdateAccountForm(FlaskForm):
