@@ -1,0 +1,100 @@
+@charset "UTF-8";
+
+* {
+  font-family: "BlinkMacSystemFont", Arial, Helvetica, sans-serif;
+}
+  
+.flashed-message {
+  user-select: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  max-width: 400px;
+  padding: 15px 30px;
+  border-radius: 4px;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.5s, top 0.5s, visibility 0.5s;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1000;
+}
+  
+.flashed-message.show {
+  top: 20px;
+  opacity: 1;
+  visibility: visible;
+}
+
+.flashed-message .message-icon {
+  display: flex;
+  justify-content: flex-start;
+  flex: 1;
+}
+
+.flashed-message .message-icon span {
+  font-size: 20px;
+}
+
+.flashed-message .message {
+  max-width: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.flashed-message .message span {
+  font-size: 15px;
+}
+
+.flashed-message .close-button {
+  cursor: pointer;
+  flex: 1;
+  text-align: right;
+}
+
+.flashed-message .close-button span {
+  font-size: 15px;
+}
+
+/* flashed message categories */
+
+.flashed-message.warning {
+  background-color: #ffdb9b;
+  border-left: 8px solid #ffa502;
+}
+
+.flashed-message.warning span {
+  color: #ce8500;
+}
+
+.flashed-message.danger {
+  background-color: #ecc8c5;
+  border-left: 8px solid #b32f2d;
+}
+
+.flashed-message.danger span {
+  color: #b32f2d;
+}
+
+.flashed-message.info {
+  background-color: #cde8f5;
+  border-left: 8px solid #4480ae;
+}
+
+.flashed-message.info span {
+  color: #4480ae;
+}
+
+.flashed-message.success {
+  background-color: #d1e7dd;
+  border-left: 8px solid #0f5132;
+}
+
+.flashed-message.success span {
+  color: #0f5132;
+}

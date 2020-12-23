@@ -1,11 +1,23 @@
-// fixes material icons glitch
-window.addEventListener('load', function() {
+const flashedMessage = document.querySelector('.flashed-message');
+const closeButton = document.querySelector('.close-button');
+
+// fixes material icons glitch, also initialises flashed messages
+window.onload = function() {
     const materialIcons = document.querySelectorAll('.material-icons, .material-icons-outlined');
 
     materialIcons.forEach((icon) => {
         icon.style.opacity = 1;
     });
-});
+
+    if (flashedMessage.classList.contains('active')) {
+        flashedMessage.classList.remove('active');
+        flashedMessage.classList.add('show');
+    }
+
+    closeButton.addEventListener('click', function() {
+        flashedMessage.classList.remove('show');
+    });
+};
 
 // user profile picture dropdown menu
 const menuToggler = document.querySelector('.profile');

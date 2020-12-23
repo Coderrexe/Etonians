@@ -74,8 +74,9 @@ def login():
             next_page = request.args.get("next")
             flash("You were successfully logged in!", category="success")
             return redirect(next_page) if next_page else redirect(url_for("main.home"))
-
-        flash("Login Unsuccessful. Please check username and password.", category="danger")
+        else:
+            flash("Login Unsuccessful. Please check username and password.", category="danger")
+            return render_template("login_signup.html", signup_form=signup_form, login_form=login_form, is_login_page="true")
     
     return render_template("login_signup.html", signup_form=signup_form, login_form=login_form)
 

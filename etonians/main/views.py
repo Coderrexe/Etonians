@@ -8,6 +8,12 @@ from etonians.utils import convert_date
 main = Blueprint("main", __name__)
 
 
+# TEST - DELETE WHEN COMMITING TO GIT
+@main.route("/test/")
+def test():
+    return render_template("index.html")
+
+
 @main.route("/home/")
 @login_required
 def home():

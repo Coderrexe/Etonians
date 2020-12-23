@@ -13,9 +13,9 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/posts.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/register_login.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/account.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/flashed_message.css') }}">
 
   <!-- If given a title in "views.py" file, then title. Otherwise, just "Etonians" -->
   {% if title %}
@@ -26,6 +26,32 @@
 </head>
 
 <body>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="flashed-message active {{ category }}">
+          <div class="message-icon">
+            {% if category == "danger" %}
+              <span class="fas fa-exclamation-circle"></span>
+            {% elif category == "warning" %}
+              <span class="fas fa-exclamation-triangle"></span>
+            {% elif category == "success" %}
+              <span class="fas fa-check-circle"></span>
+            {% else %}
+              <span class="fas fa-info-circle"></span>
+            {% endif %}
+          </div>
+          <div class="message">
+            <span>{{ message }}</span>
+          </div>
+          <div class="close-button">
+            <span><i class="fas fa-times"></i></span>
+          </div>
+        </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
   <div id="all-content">
     <nav class="top-navbar">
       <div class="logo">

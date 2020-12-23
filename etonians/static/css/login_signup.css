@@ -11,6 +11,10 @@ body {
   font-family: "Poppins", sans-serif;
 }
 
+#is-login-page {
+  display: none;
+}
+
 .login-signup-container {
   position: relative;
   width: 100%;
