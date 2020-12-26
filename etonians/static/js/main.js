@@ -9,14 +9,18 @@ window.onload = function() {
         icon.style.opacity = 1;
     });
 
-    if (flashedMessage.classList.contains('active')) {
-        flashedMessage.classList.remove('active');
-        flashedMessage.classList.add('show');
-    }
+    try {
+        if (flashedMessage.classList.contains('active')) {
+            flashedMessage.classList.remove('active');
+            flashedMessage.classList.add('show');
+        }
 
-    closeButton.addEventListener('click', function() {
-        flashedMessage.classList.remove('show');
-    });
+        closeButton.addEventListener('click', function() {
+            flashedMessage.classList.remove('show');
+        });
+    } catch(e) {
+        return;
+    }
 };
 
 // user profile picture dropdown menu

@@ -53,35 +53,31 @@
   {% endwith %}
 
   <div id="all-content">
-    <nav class="top-navbar">
-      <div class="logo">
-        {% if current_user.is_authenticated %}
-          <a href="{{ url_for('main.home') }}">Etonians</a>
-        {% else %}
-          <a href="{{ url_for('users.login') }}">Etonians</a>
-        {% endif %}
+    <header class="top-navbar">
+      <a href="{{ url_for('main.home') }}" class="logo">
+        <img src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_RGB_Green.png">
+      </a>
+      
+      <ul class="nav-links">
+        <li><a class="btn-solid" href="{{ url_for('posts.create_post') }}">
+            <i class="fas fa-pencil-alt"></i>
+            <span>New Post</span>
+        </a></li>
+        <li class="background-darken"><a href="{{ url_for('main.home') }}">
+          <i class="far fa-home"></i>
+          <span>Home</span>
+        </a></li>
+      </ul>
+
+      <div class="input-field">
+        <i class="fas fa-search"></i>
+        <input type="text" class="text-input" placeholder="Search posts...">
       </div>
 
-      <ul>
-        {% if current_user.is_authenticated %}
-          <li><a href="{{ url_for('posts.create_post') }}" class="navbar-link-lg"><i class="far fa-edit"></i></a></li>
-          <li><a href="{{ url_for('main.home') }}" class="navbar-link-lg"><i class="far fa-home"></i></a></li>
-          <li><a href="{{ url_for('main.about') }}" class="navbar-link-lg"><i class="far fa-info-circle"></i></a></li>
-        {% else %}
-          <li><a href="{{ url_for('main.about') }}" class="navbar-link-sm">About</a></li>
-          <li><a href="{{ url_for('users.login') }}" class="navbar-link-sm">Login</a></li>
-          <li><a href="{{ url_for('users.register') }}" class="navbar-link-sm">Register</a></li>
-        {% endif %}
-      </ul>
-    </nav>
+      <div class="sized-box">
+        <div class="circle"></div>
+      </div>
 
-    <nav class="bottom-navbar">
-      <a href="{{ url_for('main.home') }}"><i class="fas fa-home"></i></a>
-      <a href="{{ url_for('main.about') }}"><i class="fas fa-info-circle"></i></a>
-      <a href="{{ url_for('users.account') }}"><i class="fas fa-cog"></i></a>
-    </nav>
-
-    {% if current_user.is_authenticated %}
       <div class="menu-container">
         <div class="profile">
           <img src="{{ image_file }}">
@@ -95,7 +91,13 @@
           </ul>
         </div>
       </div>
-    {% endif %}
+    </header>
+
+    <nav class="bottom-navbar">
+      <a href="{{ url_for('main.home') }}"><i class="far fa-home"></i></a>
+      <a href="{{ url_for('users.account') }}"><i class="far fa-user"></i></a>
+      <a href="{{ url_for('users.account') }}"><i class="far fa-cog"></i></a>
+    </nav>
 
     <main role="main" class="container">
       <div class="row">

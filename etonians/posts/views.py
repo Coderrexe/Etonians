@@ -1,5 +1,5 @@
 from datetime import datetime
-from flask import render_template, url_for, flash, redirect, request, abort, Blueprint
+from flask import render_template, url_for, flash, redirect, request, Blueprint
 from flask_login import current_user, login_required
 
 from etonians import db
@@ -59,8 +59,10 @@ def post(post_id): # every post has a unique ID
 @login_required
 def update_post(post_id):
     post = Post.query.get_or_404(post_id)
+    
     if post.author != current_user: # if a user is trying to update someone else's post, then 403 error
-        abort(403)
+        flash("You can only edit your own posts!", category="danger")
+        return redirect(url_for("main.home"))
 
     form = PostForm()
     if form.validate_on_submit():
@@ -82,8 +84,10 @@ def update_post(post_id):
 @login_required
 def delete_post(post_id):
     post = Post.query.get_or_404(post_id)
+
     if current_user != post.author: # if the user tries to delete someone else's post, then 403 error
-        abort(403)
+        flash("You can only delete your own posts!", category="danger")
+        return redirect(url_for("main.home"))
 
     for comment in Comment.query.filter_by(post_id=post.id):
         db.session.delete(comment)

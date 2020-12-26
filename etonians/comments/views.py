@@ -1,4 +1,4 @@
-from flask import render_template, url_for, redirect, request, flash, abort, Blueprint
+from flask import render_template, url_for, redirect, request, flash, Blueprint
 from flask_login import current_user, login_required
 
 from etonians import db
@@ -12,8 +12,10 @@ comments = Blueprint("comments", __name__)
 @login_required
 def edit_comment(comment_id):
     comment = Comment.query.get_or_404(comment_id)
+
     if current_user != comment.author:
-        abort(403)
+        flash("You can only edit your own replies!", category="danger")
+        return redirect(url_for("main.home"))
     
     form = CommentForm()
     if form.validate_on_submit():
@@ -38,7 +40,8 @@ def delete_comment(comment_id):
     post_id = comment.post.id
 
     if current_user != comment.author:
-        abort(403)
+        flash("You can only delete your own replies!", category="danger")
+        return redirect(url_for("main.home"))
 
     db.session.delete(comment)
     db.session.commit()

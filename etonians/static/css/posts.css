@@ -20,14 +20,14 @@
 
 .article-metadata .post-author {
   font-size: 25px;
-  color: var(--main-color);
+  color: var(--primary-colour);
   padding: 10px;
   border-radius: 50%;
 }
 
 .article-metadata .post-author:hover {
-  color: var(--main-color);
-  background-color: #dceefa;
+  color: var(--primary-colour);
+  background-color: var(--secondary-colour);
   transition: 0.2s ease-out;
 }
 
@@ -135,14 +135,14 @@ a.article-title:hover {
 }
 
 .post-bar a i {
-  color: var(--main-color);
+  color: var(--primary-colour);
   font-size: 25px;
   padding: 10px;
   border-radius: 50%;
 }
 
 .post-bar a i:hover {
-  background-color: #dceefa;
+  background-color: var(--secondary-colour);
   transition: 0.1s ease-out;
 }
 
@@ -170,7 +170,7 @@ a.article-title:hover {
 
 .comment-container a {
   font-size: 22px;
-  color: var(--main-color);
+  color: var(--primary-colour);
   padding: 10px;
   border-radius: 50%;
   text-decoration: none;

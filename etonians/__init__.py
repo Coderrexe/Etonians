@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, config
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
@@ -14,7 +14,8 @@ bcrypt = Bcrypt()
 login_manager = LoginManager()
 # if a user tries to go to a page that is @login_required, they will be directed to the login_view, which I set to be the login page
 login_manager.login_view = "users.login"
-login_manager.login_message_category = "info" # this sets the flash message "Please login to view this page" to be light blue
+login_manager.login_message = "You must log in first to view this page."
+login_manager.login_message_category = "warning"
 mail = Mail()
 admin = Admin()
 
@@ -23,7 +24,7 @@ from etonians.models import *
 
 def create_app(config_class):
     app = Flask(__name__)
-    app.config.from_object(Config)
+    app.config.from_object(config_class)
 
     db.init_app(app)
     bcrypt.init_app(app)

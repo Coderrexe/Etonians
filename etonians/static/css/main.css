@@ -7,8 +7,9 @@
 }
 
 :root {
-  --main-color: #1da1f2;
-  --default-font: "BlinkMacSystemFont", "Calibri", sans-serif;
+  --primary-colour: #02af98;
+  --secondary-colour: #d3fff9;
+  --default-font: "BlinkMacSystemFont", Arial, Helvetica, sans-serif;
 }
 
 .material-icons, .material-icons-outlined {

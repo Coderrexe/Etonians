@@ -151,7 +151,7 @@ form h2 {
   border-radius: 49px;
   cursor: pointer;
   font-weight: 600;
-  background-color: #5995fd;
+  background-color: #02af98;
   color: #fff;
   margin: 10px 0;
   transition: 0.5s;
@@ -161,7 +161,7 @@ form h2 {
 }
 
 .btn-solid:hover {
-  background-color: #4d84e2;
+  background-color: #119482;
 }
 
 .btn-transparent {
