@@ -8,7 +8,7 @@
 
     <section class="post">
       <article class="media">
-        <img class="article-img" src="{{ url_for('static', filename='profile_pictures/' + post.author.image_file) }}">
+        <img class="article-img" src="{{ url_for('static', filename='user_images/' + post.author.image_file) }}">
         <div class="media-body">
           <div class="article-metadata">
             <a class="mr-2 post-author" href="{{ url_for('users.user_page', username=post.author.username) }}">{{ post.author.username }}</a>
@@ -115,7 +115,7 @@
 
       {% for comment in comments %}
         <div class="comment-container">
-          <img src="{{ url_for('static', filename='profile_pictures/' + comment.author.image_file) }}">
+          <img src="{{ url_for('static', filename='user_images/' + comment.author.image_file) }}">
           <a href="{{ url_for('users.user_page', username=comment.author.username) }}">{{ comment.author.username }}</a>
           <p class="comment-title">{{ comment.title }}</p>
           <p class="comment-content">{{ comment.content }}</p>

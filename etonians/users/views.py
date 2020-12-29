@@ -138,7 +138,7 @@ def account():
     elif request.method == "GET": # if the user simply loaded the page
         form.username.data = current_user.username
 
-    image_file = url_for("static", filename=f"profile_pictures/{current_user.image_file}")
+    image_file = url_for("static", filename=f"user_images/{current_user.image_file}")
     
     return render_template("account.html", title="Your Account", image_file=image_file, form=form)
 
@@ -167,7 +167,7 @@ def user_page(username):
     # filters posts by username and orders them by date posted
     posts = Post.query.filter_by(author=user).order_by(Post.date_posted.desc()).paginate(page=page, per_page=4)
 
-    image_file = url_for("static", filename=f"profile_pictures/{current_user.image_file}")
+    image_file = url_for("static", filename=f"user_images/{current_user.image_file}")
     return render_template("user_page.html", posts=posts, user=user, image_file=image_file)
 
 

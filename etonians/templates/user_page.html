@@ -2,7 +2,7 @@
 {% block content %}
   <div class="col-12" id="main">
     <article class="media" id="border-around">
-      <img class="article-img" src="{{ url_for('static', filename='profile_pictures/' + user.image_file) }}">
+      <img class="article-img" src="{{ url_for('static', filename='user_images/' + user.image_file) }}">
       <div class="media-body">
         <h2>{{ user.username }}</h2>
         <p class="text-secondary" id="user-info">{{ user.email }}</p>

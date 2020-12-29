@@ -5,6 +5,7 @@ from flask_login import LoginManager
 from flask_mail import Mail
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
+from flask_migrate import Migrate
 
 # configurations
 db = SQLAlchemy()
@@ -16,6 +17,7 @@ login_manager.login_message = "You must log in first to view this page."
 login_manager.login_message_category = "warning"
 mail = Mail()
 admin = Admin()
+migrate = Migrate()
 
 from etonians.models import *
 
@@ -29,6 +31,7 @@ def create_app(config_class):
     login_manager.init_app(app)
     mail.init_app(app)
     admin.init_app(app)
+    migrate.init_app(app, db=db)
 
     from etonians.users.views import users
     from etonians.posts.views import posts

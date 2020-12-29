@@ -8,8 +8,8 @@
 Thumbs.db
 
 # Images
-images/
-profile_pictures/
+**/assets
+**/user_images
 *.jpg
 *.jpeg
 *.png
@@ -130,5 +130,9 @@ venv.bak/
 .dmypy.json
 dmypy.json
 
-# Database
+# database
 *.db
+*.sqlite3
+
+# database migration
+migrations/versions

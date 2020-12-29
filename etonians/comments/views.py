@@ -28,7 +28,7 @@ def edit_comment(comment_id):
         form.title.data = comment.title
         form.content.data = comment.content
 
-    image_file = url_for("static", filename=f"profile_pictures/{current_user.image_file}")
+    image_file = url_for("static", filename=f"user_images/{current_user.image_file}")
     
     return render_template("edit_comment.html", title=comment.title, form=form, image_file=image_file)
 

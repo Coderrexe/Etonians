@@ -7,8 +7,8 @@
         "**/__pycache__": true,
         "**/site.db": false,
         "**/venv": true,
-        "**/profile_pictures": false,
-        "**/images/": false,
+        "**/user_images": false,
+        "**/assets/": false,
         "**/dist/": true
     },
     "python.linting.pylintEnabled": false,

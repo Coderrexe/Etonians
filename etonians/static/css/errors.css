@@ -52,7 +52,7 @@ body {
   bottom: 0;
   width: 100%;
   height: 20px;
-  background: url("../images/grass.png");
+  background: url("../assets/green_grass.png");
   background-position: bottom;
   animation: animateGrass 0.2s linear infinite;
 }

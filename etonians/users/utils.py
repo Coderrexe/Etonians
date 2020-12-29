@@ -15,8 +15,8 @@ def save_picture(form_picture):
     random_hex = secrets.token_hex(8) 
     _, file_extension = os.path.splitext(form_picture.filename) # "_" is used for throwaway variables
     picture_file_name = random_hex + file_extension
-    # stores the picture to the profile_pictures folder
-    picture_path = os.path.join(current_app.root_path, "static", "profile_pictures", picture_file_name)
+    # stores the picture to the user_images folder
+    picture_path = os.path.join(current_app.root_path, "static", "user_images", picture_file_name)
 
     # resize the profile picture to 200 pixels by 200 pixels
     output_size = (200, 200)
@@ -24,8 +24,8 @@ def save_picture(form_picture):
     i.thumbnail(output_size)
     i.save(picture_path)
     
-    old_picture = os.path.join(current_app.root_path, "static", "profile_pictures", current_user.image_file)
-    if os.path.exists(old_picture) and old_picture != os.path.join(current_app.root_path, "static", "profile_pictures", "default.jpg"):
+    old_picture = os.path.join(current_app.root_path, "static", "user_images", current_user.image_file)
+    if os.path.exists(old_picture) and old_picture != os.path.join(current_app.root_path, "static", "user_images", "default.jpg"):
         os.remove(old_picture)
 
     return picture_file_name

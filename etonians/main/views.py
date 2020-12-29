@@ -1,5 +1,5 @@
 from datetime import datetime
-from flask import render_template, url_for, Blueprint, request
+from flask import render_template, url_for, Blueprint
 from flask_login import current_user, login_required
 
 from etonians.models import Post
@@ -20,7 +20,7 @@ def home():
     posts = posts[::-1]
     
     current_time = datetime.utcnow()
-    image_file = url_for("static", filename=f"profile_pictures/{current_user.image_file}")
+    image_file = url_for("static", filename=f"user_images/{current_user.image_file}")
 
     return render_template("home.html", title="Home", posts=posts, image_file=image_file, current_time=current_time, convert_date=convert_date)
 
@@ -28,7 +28,7 @@ def home():
 @main.route("/about/")
 def about():
     if current_user.is_authenticated:
-        image_file = url_for("static", filename=f"profile_pictures/{current_user.image_file}")
+        image_file = url_for("static", filename=f"user_images/{current_user.image_file}")
     else:
         image_file = None
 
