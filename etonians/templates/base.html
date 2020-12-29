@@ -59,14 +59,33 @@
       </a>
       
       <ul class="nav-links">
-        <li><a class="btn-solid" href="{{ url_for('posts.create_post') }}">
+        <li class="search-bar-container"><a>
+          <span><i class="far fa-search"></i></span>
+        </a></li>
+        <li>
+          <div class="search-bar">
+            <span class="back"><i class="fas fa-chevron-left"></i></span>
+            <input type="text" class="text-input" placeholder="Search posts...">
+            <span><i class="fas fa-search"></i></span>
+          </div>
+        </li>
+        <li>
+          <a class="btn-solid" href="{{ url_for('posts.create_post') }}">
             <i class="fas fa-pencil-alt"></i>
             <span>New Post</span>
-        </a></li>
-        <li class="background-darken"><a href="{{ url_for('main.home') }}">
-          <i class="far fa-home"></i>
-          <span>Home</span>
-        </a></li>
+          </a>
+        </li>
+        <li class="background-darken">
+          <a href="{{ url_for('main.home') }}">
+            {% if request.path == "/home/" %}
+              <i class="fas fa-home active"></i>
+              <span class="active">Home</span>
+            {% else %}
+              <i class="far fa-home"></i>
+              <span>Home</span>
+            {% endif %}
+          </a>
+        </li>
       </ul>
 
       <div class="input-field">
@@ -94,9 +113,41 @@
     </header>
 
     <nav class="bottom-navbar">
-      <a href="{{ url_for('main.home') }}"><i class="far fa-home"></i></a>
-      <a href="{{ url_for('users.account') }}"><i class="far fa-user"></i></a>
-      <a href="{{ url_for('users.account') }}"><i class="far fa-cog"></i></a>
+      {% if request.path == "/home/" %}
+        <a class="active">
+          <i class="fas fa-home"></i>
+          <span>Home</span>
+        </a>
+      {% else %}
+        <a href="{{ url_for('main.home') }}">
+          <i class="far fa-home"></i>
+          <span>Home</span>
+        </a>
+      {% endif %}
+
+      {% if request.path == "/account/" %}
+        <a class="active">
+          <i class="fas fa-user"></i>
+          <span>Account</span>
+        </a>
+      {% else %}
+        <a href="{{ url_for('users.account') }}">
+          <i class="far fa-user"></i>
+          <span>Account</span>
+        </a>
+      {% endif %}
+
+      {% if request.path == "/account/" %}
+        <a class="active">
+          <i class="fas fa-cog"></i>
+          <span>Settings</span>
+        </a>
+      {% else %}
+        <a href="{{ url_for('users.account') }}">
+          <i class="far fa-cog"></i>
+          <span>Settings</span>
+        </a>
+      {% endif %}
     </nav>
 
     <main role="main" class="container">
@@ -130,5 +181,6 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   
   <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/navbar.js') }}"></script>
 </body>
 </html>

@@ -1,12 +1,10 @@
-from flask import Flask, config
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from flask_mail import Mail
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
-
-from etonians.config import Config
 
 # configurations
 db = SQLAlchemy()

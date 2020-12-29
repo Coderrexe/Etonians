@@ -1,5 +1,5 @@
 from datetime import datetime
-from flask import render_template, url_for, Blueprint
+from flask import render_template, url_for, Blueprint, request
 from flask_login import current_user, login_required
 
 from etonians.models import Post
