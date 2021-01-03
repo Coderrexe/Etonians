@@ -1,11 +1,19 @@
-from flask import render_template, url_for, redirect, request, flash, Blueprint
+from flask import render_template, url_for, redirect, request, flash, Blueprint, g
 from flask_login import current_user, login_required
 
 from etonians import db
 from etonians.models import Comment
 from etonians.comments.forms import CommentForm
+from etonians.main.forms import SearchForm
 
 comments = Blueprint("comments", __name__)
+
+
+@comments.before_app_request
+def before_request():
+    if current_user.is_authenticated:
+        g.image_file = url_for("static", filename=f"user_images/{current_user.image_file}")
+        g.search_form = SearchForm()
 
 
 @comments.route("/comment/id/<int:comment_id>/edit/", methods=["POST", "GET"])
@@ -27,10 +35,12 @@ def edit_comment(comment_id):
     elif request.method == "GET":
         form.title.data = comment.title
         form.content.data = comment.content
-
-    image_file = url_for("static", filename=f"user_images/{current_user.image_file}")
     
-    return render_template("edit_comment.html", title=comment.title, form=form, image_file=image_file)
+    return render_template(
+        "edit_comment.html",
+        title=comment.title,
+        form=form
+    )
 
 
 @comments.route("/comment/id/<int:comment_id>/delete/", methods=["POST", "GET"])

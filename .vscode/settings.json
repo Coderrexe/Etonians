@@ -1,17 +1,17 @@
 {
-    "python.pythonPath": "/Library/Frameworks/Python.framework/Versions/3.9/bin/python3",
+    "python.pythonPath": "venv/bin/python",
     "git.decorations.enabled": true,
     "files.exclude": {
         "**/.DS_Store": true,
         "**/.pyc": {"when": "$(basename).py"},
         "**/__pycache__": true,
         "**/site.db": false,
-        "**/venv": true,
+        "**/venv": false,
         "**/user_images": false,
         "**/assets/": false,
         "**/dist/": true
     },
     "python.linting.pylintEnabled": false,
     "editor.showUnused": true,
-    "compile-hero.disable-compile-files-on-did-save-code": false,
+    "typescript.suggest.paths": false
 }

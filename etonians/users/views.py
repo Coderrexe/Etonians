@@ -1,12 +1,20 @@
-from flask import render_template, url_for, flash, redirect, request, Blueprint
+from flask import render_template, url_for, flash, redirect, request, Blueprint, g
 from flask_login import login_user, current_user, logout_user, login_required
 
 from etonians import db, bcrypt
 from etonians.models import User, Post, EmailVerificationCode, TemporaryUser
 from etonians.users.forms import RegistrationForm, VerifyEmailForm, LoginForm, UpdateAccountForm, UpdateAccountPasswordForm, RequestResetForm, ResetPasswordForm
 from etonians.users.utils import save_picture, send_reset_email, send_verify_email
+from etonians.main.forms import SearchForm
 
 users = Blueprint("users", __name__)
+
+
+@users.before_app_request
+def before_request():
+    if current_user.is_authenticated:
+        g.image_file = url_for("static", filename=f"user_images/{current_user.image_file}")
+        g.search_form = SearchForm()
 
 
 @users.route("/")
@@ -19,7 +27,11 @@ def user_authentication():
     signup_form = RegistrationForm()
     login_form = LoginForm()
 
-    return render_template("login_signup.html", signup_form=signup_form, login_form=login_form)
+    return render_template(
+        "login_signup.html",
+        signup_form=signup_form,
+        login_form=login_form
+    )
 
 
 @users.route("/90bf30f4f67787b8400f597c3406066d/", methods=["POST", "GET"])
@@ -51,7 +63,11 @@ def register():
         flash("An email has been sent to you, containing a verification code.", category="info")
         return redirect(url_for("users.verify_email", username=user.username))
     
-    return render_template("login_signup.html", signup_form=signup_form, login_form=login_form)
+    return render_template(
+        "login_signup.html",
+        signup_form=signup_form,
+        login_form=login_form
+    )
 
 
 @users.route("/6db120f1af1291b61dcfc3cc63fbab05/", methods=["POST", "GET"])
@@ -78,7 +94,11 @@ def login():
             flash("Login unsuccessful. Please check your username and password.", category="danger")
             return render_template("login_signup.html", signup_form=signup_form, login_form=login_form, is_login_page="true")
     
-    return render_template("login_signup.html", signup_form=signup_form, login_form=login_form)
+    return render_template(
+        "login_signup.html",
+        signup_form=signup_form,
+        login_form=login_form
+    )
 
 
 @users.route("/register/verify/user/<string:username>/", methods=["POST", "GET"])
@@ -107,7 +127,11 @@ def verify_email(username):
 
         flash("Incorrect verification code.", category="danger")
 
-    return render_template("verify_email.html", title="Verify email", form=form)
+    return render_template(
+        "verify_email.html",
+        title="Verify email",
+        form=form
+    )
 
 
 @users.route("/logout/")
@@ -137,10 +161,12 @@ def account():
         return redirect(url_for("users.account"))
     elif request.method == "GET": # if the user simply loaded the page
         form.username.data = current_user.username
-
-    image_file = url_for("static", filename=f"user_images/{current_user.image_file}")
     
-    return render_template("account.html", title="Your Account", image_file=image_file, form=form)
+    return render_template(
+        "account.html",
+        title="Your Account",
+        form=form
+    )
 
 
 @users.route("/account/update_password/", methods=["POST", "GET"])
@@ -157,7 +183,11 @@ def update_password():
         else:
             flash("Your old password is incorrect.", category="danger")
     
-    return render_template("update_password.html", title="Update Password", form=form)
+    return render_template(
+        "update_password.html",
+        title="Update Password",
+        form=form
+    )
 
 
 @users.route("/user/<string:username>/")
@@ -167,8 +197,11 @@ def user_page(username):
     # filters posts by username and orders them by date posted
     posts = Post.query.filter_by(author=user).order_by(Post.date_posted.desc()).paginate(page=page, per_page=4)
 
-    image_file = url_for("static", filename=f"user_images/{current_user.image_file}")
-    return render_template("user_page.html", posts=posts, user=user, image_file=image_file)
+    return render_template(
+        "user_page.html",
+        posts=posts,
+        user=user,
+    )
 
 
 @users.route("/reset_password/", methods=["POST", "GET"])
@@ -185,7 +218,11 @@ def reset_request():
         flash("An email has been sent to you, with instructions to reset your password.", category="info")
         return redirect(url_for("users.login"))
 
-    return render_template("reset_request.html", title="Reset Password", form=form)
+    return render_template(
+        "reset_request.html", 
+        title="Reset Password", 
+        form=form
+    )
 
 
 @users.route("/reset_password/<token>/", methods=["POST", "GET"])
@@ -208,4 +245,8 @@ def reset_token(token):
         next_page = request.args.get("next")
         return redirect(next_page) if next_page else redirect(url_for("main.home")) # otherwise the user will just be redirected to the home page
 
-    return render_template("reset_token.html", title="Reset Password", form=form)
+    return render_template(
+        "reset_token.html",
+        title="Reset Password",
+        form=form
+    )

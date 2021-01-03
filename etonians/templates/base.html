@@ -65,7 +65,9 @@
         <li>
           <div class="search-bar">
             <span class="back"><i class="fas fa-chevron-left"></i></span>
-            <input type="text" class="text-input" placeholder="Search posts...">
+            <form action="{{ url_for('posts.search_posts') }}" method="GET" autocomplete="off">
+              {{ g.search_form.q(class="text-input", placeholder="Search posts...", autocomplete="off") }}
+            </form>
             <span><i class="fas fa-search"></i></span>
           </div>
         </li>
@@ -90,7 +92,9 @@
 
       <div class="input-field">
         <i class="fas fa-search"></i>
-        <input type="text" class="text-input" placeholder="Search posts...">
+        <form action="{{ url_for('posts.search_posts') }}" method="GET">
+          {{ g.search_form.q(class="text-input", placeholder="Search posts...", autocomplete="off") }}
+        </form>
       </div>
 
       <div class="sized-box">
@@ -99,7 +103,7 @@
 
       <div class="menu-container">
         <div class="profile">
-          <img src="{{ image_file }}">
+          <img src="{{ g.image_file }}">
         </div>
         <div class="menu">
           <h3>{{ current_user.username }}<br><span>Student</span></h3>
@@ -151,6 +155,9 @@
     </nav>
 
     <main role="main" class="container">
+      {% if total != None %}
+        {{ total }}
+      {% endif %}
       <div class="row">
         {% block content %}
         {% endblock content %}

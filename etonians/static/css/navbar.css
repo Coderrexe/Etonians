@@ -157,22 +157,23 @@
   line-height: 60px;
   color: #acacac;
   transition: 0.5s;
-  font-size: 1.1rem;
+  font-size: 1.em;
   cursor: pointer;
 }
 
-.top-navbar .search-bar.active > .text-input {
+.top-navbar .search-bar.active > form > .text-input {
   background: none;
   outline: none;
   border: none;
-  line-height: 1;
+  line-height: 60px;
   font-weight: 500;
   font-size: 1.1rem;
   color: #333;
   padding-bottom: 3px;
+  width: 100%;
 }
 
-.top-navbar .search-bar.active > .text-input::placeholder {
+.top-navbar .search-bar.active > form > .text-input::placeholder {
   color: #aaa;
   font-weight: 500;
 }
@@ -229,10 +230,11 @@
   background: none;
   outline: none;
   border: none;
-  line-height: 1;
+  line-height: 45px;
   font-weight: 500;
   font-size: 1.1rem;
   color: #333;
+  width: 100%;
 }
 
 .top-navbar .input-field .text-input::placeholder {

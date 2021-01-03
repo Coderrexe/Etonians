@@ -1,7 +1,9 @@
 import os
 import secrets
 import random
+
 from PIL import Image
+
 from flask import url_for, current_app
 from flask_mail import Message
 from flask_login import current_user
