@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
-from elasticsearch.exceptions import ConnectionError
+import elasticsearch
 
 from flask import current_app
 from flask_login import UserMixin
@@ -17,7 +17,7 @@ class SearchableMixin:
 
         if total == 0:
             return cls.query.filter_by(id=0), 0
-        
+
         when = []
         for i in range(len(ids)):
             when.append((ids[i], i))
@@ -32,7 +32,7 @@ class SearchableMixin:
                 "update": list(session.dirty),
                 "delete": list(session.deleted)
             }
-        except ConnectionError:
+        except elasticsearch.exceptions.ConnectionError:
             pass
 
     @staticmethod
@@ -41,17 +41,17 @@ class SearchableMixin:
             for obj in session._changes["add"]:
                 if isinstance(obj, SearchableMixin):
                     add_to_index(obj.__tablename__, obj)
-            
+
             for obj in session._changes["update"]:
                 if isinstance(obj, SearchableMixin):
                     add_to_index(obj.__tablename__, obj)
-            
+
             for obj in session._changes["delete"]:
                 if isinstance(obj, SearchableMixin):
                     remove_from_index(obj.__tablename__, obj)
 
             session._changes = None
-        except ConnectionError:
+        except elasticsearch.exceptions.ConnectionError:
             pass
 
     @classmethod
@@ -59,7 +59,7 @@ class SearchableMixin:
         try:
             for obj in cls.query:
                 add_to_index(cls.__tablename__, obj)
-        except ConnectionError:
+        except elasticsearch.exceptions.ConnectionError:
             pass
 
 
@@ -118,7 +118,7 @@ class EmailVerificationCode(db.Model):
 
 class Post(db.Model, SearchableMixin):
     __searchable__ = ["title", "content"]
-    
+
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     title = db.Column(db.String(150), nullable=False)
     date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)

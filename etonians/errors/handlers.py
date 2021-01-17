@@ -1,5 +1,7 @@
-from flask import render_template, url_for, Blueprint
+from flask import render_template, url_for, Blueprint, g
 from flask_login import current_user
+
+from etonians.main.forms import SearchForm
 
 errors = Blueprint("errors", __name__)
 

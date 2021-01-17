@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from flask import render_template, url_for, Blueprint, g
+from flask import render_template, url_for, redirect, Blueprint, g, current_app
 from flask_login import current_user, login_required
 
 from etonians.models import Post
@@ -16,6 +16,14 @@ def before_request():
         g.image_file = url_for("static", filename=f"user_images/{current_user.image_file}")
         g.search_form = SearchForm()
         g.current_time = datetime.utcnow()
+
+
+@main.route("/")
+def landing_page():
+    if current_user.is_authenticated:
+        return redirect(url_for("main.home"))
+    else:
+        return redirect(url_for("users.user_authentication"))
 
 
 @main.route("/home/")
@@ -35,6 +43,16 @@ def home():
         posts=posts,
         convert_date=convert_date
     )
+
+
+@main.route("/sw.js")
+def service_worker():
+    return current_app.send_static_file("js/sw.js")
+
+
+@main.route("/no-internet")
+def offline():
+    return current_app.send_static_file("offline.html")
 
 
 @main.route("/about/")

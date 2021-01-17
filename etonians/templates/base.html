@@ -1,21 +1,27 @@
-{% from "components/modal.html" import simple_modal %}
-
 <!DOCTYPE html>
+{% from "components/modal.html" import simple_modal %}
 <html>
 <head lang="en-GB">
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no, viewport-fit=cover, user-scalable=no">
+  <meta name="theme-color" content="#02AD98">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
-  
+
   <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/posts.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/account.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/flashed_message.css') }}">
+
+  <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+  <link rel="apple-touch-icon" href="{{ url_for('static', filename='assets/logo_square.png') }}">
+  <link rel="shortcut icon" href="#">
 
   <!-- If given a title in "views.py" file, then title. Otherwise, just "Etonians" -->
   {% if title %}
@@ -25,7 +31,7 @@
   {% endif %}
 </head>
 
-<body>
+<body ontouchstart>
   {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
       {% for category, message in messages %}
@@ -55,7 +61,7 @@
   <div id="all-content">
     <header class="top-navbar">
       <a href="{{ url_for('main.home') }}" class="logo">
-        <img src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_RGB_Green.png">
+        <img src="{{ url_for('static', filename='assets/logo.png') }}">
       </a>
       
       <ul class="nav-links">
@@ -65,10 +71,12 @@
         <li>
           <div class="search-bar">
             <span class="back"><i class="fas fa-chevron-left"></i></span>
-            <form action="{{ url_for('posts.search_posts') }}" method="GET" autocomplete="off">
-              {{ g.search_form.q(class="text-input", placeholder="Search posts...", autocomplete="off") }}
+            <form action="{{ url_for('posts.search_posts') }}" method="GET" autocomplete="off" id="search-form">
+              {{ g.search_form.q(class="text-input", placeholder="Search for keywords...", autocomplete="off") }}
             </form>
-            <span><i class="fas fa-search"></i></span>
+            <button type="submit" form="search-form">
+              <span><i class="fas fa-search"></i></span>
+            </button>
           </div>
         </li>
         <li>
@@ -93,7 +101,7 @@
       <div class="input-field">
         <i class="fas fa-search"></i>
         <form action="{{ url_for('posts.search_posts') }}" method="GET">
-          {{ g.search_form.q(class="text-input", placeholder="Search posts...", autocomplete="off") }}
+          {{ g.search_form.q(class="text-input", placeholder="Search for keywords...", autocomplete="off") }}
         </form>
       </div>
 
@@ -187,6 +195,8 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/flashed_message.js') }}"></script>
   <script src="{{ url_for('static', filename='js/main.js') }}"></script>
   <script src="{{ url_for('static', filename='js/navbar.js') }}"></script>
 </body>

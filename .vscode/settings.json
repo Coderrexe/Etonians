@@ -3,7 +3,9 @@
     "git.decorations.enabled": true,
     "files.exclude": {
         "**/.DS_Store": true,
-        "**/.pyc": {"when": "$(basename).py"},
+        "**/.pyc": {
+            "when": "$(basename).py"
+        },
         "**/__pycache__": true,
         "**/site.db": false,
         "**/venv": false,
@@ -11,7 +13,6 @@
         "**/assets/": false,
         "**/dist/": true
     },
-    "python.linting.pylintEnabled": false,
     "editor.showUnused": true,
-    "typescript.suggest.paths": false
+    "typescript.suggest.paths": false,
 }

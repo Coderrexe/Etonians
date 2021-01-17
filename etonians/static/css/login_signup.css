@@ -103,12 +103,21 @@ form h2 {
   position: relative;
 }
 
+.password-field {
+  grid-template-columns: 15% 70% 15%;
+}
+
 .input-field i {
   text-align: center;
   line-height: 55px;
   color: #acacac;
   transition: 0.5s;
   font-size: 1.1rem;
+}
+
+.input-field.password-field i.show-password {
+  font-size: 1.2rem;
+  cursor: pointer;
 }
 
 .input-field .text-input {

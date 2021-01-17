@@ -5,7 +5,6 @@
 }
   
 .flashed-message {
-  user-select: none;
   position: fixed;
   top: 0;
   left: 0;
@@ -21,6 +20,12 @@
   align-items: center;
   justify-content: space-between;
   z-index: 100;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
   
 .flashed-message.show {

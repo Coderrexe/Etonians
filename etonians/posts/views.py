@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from elasticsearch.exceptions import ConnectionError
+import elasticsearch
 
 from flask import render_template, url_for, flash, redirect, request, Blueprint, g
 from flask_login import current_user, login_required
@@ -34,7 +34,15 @@ def create_post():
         if filter_year_group_list:
             for year_group in filter_year_group_list:
                 filter_year_group += year_group
-            post = Post(title=form.title.data, content=form.content.data, author=current_user, year_group=current_user.year_group, filter_year_group=filter_year_group)
+
+            post = Post(
+                title=form.title.data,
+                content=form.content.data, 
+                author=current_user,
+                year_group=current_user.year_group,
+                filter_year_group=filter_year_group
+            )
+            
             db.session.add(post)
             db.session.commit()
             flash("New post successfully created!", category="success")
@@ -126,8 +134,10 @@ def search_posts():
         query = request.args.get("q")
         if not query:
             return redirect(url_for("main.home"))
+            
+        g.search_form.q.data = query
         posts, total = Post.search(query)
-    except ConnectionError:
+    except elasticsearch.exceptions.ConnectionError:
         flash("Sorry, the search functionality is currently under maintenance.", category="danger")
         return redirect(url_for("main.home"))
 

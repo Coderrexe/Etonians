@@ -14,8 +14,8 @@ from etonians.models import EmailVerificationCode
 
 def save_picture(form_picture):
     # picture files will be turned into random_hexes in order to prevent pictures of the same name
-    random_hex = secrets.token_hex(8) 
-    _, file_extension = os.path.splitext(form_picture.filename) # "_" is used for throwaway variables
+    random_hex = secrets.token_hex(8)
+    _, file_extension = os.path.splitext(form_picture.filename)  # "_" is used for throwaway variables
     picture_file_name = random_hex + file_extension
     # stores the picture to the user_images folder
     picture_path = os.path.join(current_app.root_path, "static", "user_images", picture_file_name)
@@ -25,9 +25,10 @@ def save_picture(form_picture):
     i = Image.open(form_picture)
     i.thumbnail(output_size)
     i.save(picture_path)
-    
+
     old_picture = os.path.join(current_app.root_path, "static", "user_images", current_user.image_file)
-    if os.path.exists(old_picture) and old_picture != os.path.join(current_app.root_path, "static", "user_images", "default.jpg"):
+    if (os.path.exists(old_picture) and
+            old_picture != os.path.join(current_app.root_path, "static", "user_images", "default.jpg")):
         os.remove(old_picture)
 
     return picture_file_name

@@ -1,0 +1,17 @@
+{
+    "name": "Etonians",
+    "short_name": "Etonians",
+    "start_url": "/",
+    "description": "An anonymous Q&A forum, for the use of Eton College.",
+    "background_color": "#FFF",
+    "theme_color": "#02AD98",
+    "display": "standalone",
+    "orientation": "portrait",
+    "icons": [
+        {
+            "src": "assets/logo_square.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        }
+    ]
+}
